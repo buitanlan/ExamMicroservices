@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
        options.UseSqlServer(connectionString,
        sqlServerOptionsAction: sqlOptions =>
        {
@@ -38,7 +38,7 @@ builder.Services.AddIdentityServer(x =>
     .AddAspNetIdentity<ApplicationUser>()
     .AddConfigurationStore(options =>
     {
-        options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString,
+        options.ConfigureDbContext = optionsBuilder => optionsBuilder.UseSqlServer(connectionString,
             sqlServerOptionsAction: sqlOptions =>
             {
                 sqlOptions.MigrationsAssembly(migrationsAssembly);
@@ -50,7 +50,7 @@ builder.Services.AddIdentityServer(x =>
     })
     .AddOperationalStore(options =>
     {
-        options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString,
+        options.ConfigureDbContext = optionsBuilder => optionsBuilder.UseSqlServer(connectionString,
             sqlServerOptionsAction: sqlOptions =>
             {
                 sqlOptions.MigrationsAssembly(migrationsAssembly);

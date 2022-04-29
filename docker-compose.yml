@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  examination.api:
+    image: ${DOCKER_REGISTRY-}examinationapi
+    build:
+      context: .
+      dockerfile: Services/Examination/Examination.API/Dockerfile
+  mongodb:
+    image: mongo:latest
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+      
+networks:
+  exam:
+    driver: bridge
+volumes:
+  mongo-data:
+  sqlserver-data:

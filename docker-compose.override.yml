@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+#  examination.api:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ASPNETCORE_URLS=https://+:443;http://+:80
+#    ports:
+#      - "80"
+#      - "443"
+#    volumes:
+#      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  
+  mongodb:
+    container_name: mongo.db
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/var/lib/monogodb/data
+    networks:
+      - exam
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: Admin@1234
+  
+  sqlserver:
+    container_name: sqlserver.db
+    ports:
+      - '1433:1433'
+    volumes:
+      - sqlserver-data:/var/lib/sqlserver/data
+    networks:
+      - exam
+    restart: always
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Admin@1234
+
+networks:
+  exam:
+    driver: bridge
+volumes:
+  mongo-data:
+  sqlserver-data:
