@@ -1,9 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Identity.API.Models;
-using IdentityModel;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
+using Identity.API.Models;
+using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace Identity.API.Services;
