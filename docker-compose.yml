@@ -10,6 +10,9 @@ services:
     image: mongo:latest
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    
+  postgres:
+    image: postgres
       
 networks:
   exam:
@@ -17,3 +20,4 @@ networks:
 volumes:
   mongo-data:
   sqlserver-data:
+  postgres_data:

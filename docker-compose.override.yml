@@ -35,11 +35,17 @@ services:
     restart: always
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Admin@1234
-
-networks:
-  exam:
-    driver: bridge
-volumes:
-  mongo-data:
-  sqlserver-data:
+      SA_PASSWORD: Pa$$w0rd!
+      
+  postgres:
+    container_name: postgres.db
+    environment:
+      - POSTGRES_USER=tanlan
+      - POSTGRES_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - exam
