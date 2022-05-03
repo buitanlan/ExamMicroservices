@@ -14,7 +14,7 @@ public class BaseRepository<T> : IRepositoryBase<T> where T : Entity, IAggregate
     private readonly ExamSettings _settings;
     private readonly IMediator _mediator;
 
-    public BaseRepository(
+    protected BaseRepository(
         IMongoClient mongoClient,
         IClientSessionHandle clientSessionHandle,
         IOptions<ExamSettings> settings,
