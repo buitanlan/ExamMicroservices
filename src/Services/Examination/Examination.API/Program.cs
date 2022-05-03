@@ -1,4 +1,4 @@
-using Examination.Application.Commands.StartExam;
+using Examination.Application.Commands.V1.StartExam;
 using Examination.Application.Mapping;
 using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Domain.AggregateModels.ExamResultAggregate;
@@ -30,7 +30,23 @@ builder.Services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); })
 builder.Services.AddMediatR(typeof(StartExamCommandHandler).Assembly);
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API V1", Version = "v1" });
+    c.SwaggerDoc("v2", new OpenApiInfo { Title = "Examination.API V2", Version = "v2" });
+    
+});
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+});
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+    // note: the specified format code will format the version as "'v'major[.minor][-status]"
+    options.GroupNameFormat = "'v'VVV";
+
+    // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+    // can also be used to control the format of the API version in route templates
+    options.SubstituteApiVersionInUrl = true;
 });
 builder.Services.Configure<ExamSettings>(builder.Configuration);
 builder.Services.AddCors(options =>
@@ -53,7 +69,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity.API v1"));
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Examination.API v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
+    });
 }
 app.UseSerilogRequestLogging();
 
