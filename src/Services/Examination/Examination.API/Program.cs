@@ -5,12 +5,14 @@ using Examination.Application.Mapping;
 using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Domain.AggregateModels.ExamResultAggregate;
 using Examination.Domain.AggregateModels.UserAggregate;
+using Examination.Infrastructure;
 using Examination.Infrastructure.Repositories;
 using Examination.Infrastructure.SeedWork;
 using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Serilog;
@@ -81,6 +83,14 @@ builder.Services.AddHealthChecksUI(opt =>
 })
 .AddInMemoryStorage();
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var settings = services.GetRequiredService<IOptions<ExamSettings>>();
+    var mongoClient = services.GetRequiredService<IMongoClient>();
+    await ExamMongoDbSeeding.SeedAsync(mongoClient, settings);
+}
 
 app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
