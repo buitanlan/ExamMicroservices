@@ -16,4 +16,9 @@
       <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Commands\V1" />
+      <Folder Include="Queries\V1" />
+    </ItemGroup>
+
 </Project>

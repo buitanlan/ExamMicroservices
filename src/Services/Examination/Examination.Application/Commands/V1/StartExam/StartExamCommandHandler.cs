@@ -1,7 +1,7 @@
 ﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
 using MediatR;
 
-namespace Examination.Application.Commands.StartExam;
+namespace Examination.Application.Commands.V1.StartExam;
 
 public class StartExamCommandHandler : IRequestHandler<StartExam.StartExamCommand, bool>
 {
@@ -10,7 +10,7 @@ public class StartExamCommandHandler : IRequestHandler<StartExam.StartExamComman
     {
         _examResultRepository = examResultRepository;
     }
-    public async Task<bool> Handle(Commands.StartExam.StartExam.StartExamCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(StartExam.StartExamCommand request, CancellationToken cancellationToken)
     {
         var examResult = await _examResultRepository.GetDetails(request.UserId, request.ExamId);
         _examResultRepository.StartTransaction();

@@ -1,12 +1,11 @@
-﻿using Examination.Application.Queries.GetHomeExamList;
+﻿using Examination.Application.Queries.V1.GetHomeExamList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Examination.API.Controllers;
+namespace Examination.API.Controllers.V1;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ExamsController : ControllerBase
+[ApiVersion("1.0")]
+public class ExamsController : BaseController
 {
     private readonly IMediator _mediator;
 
