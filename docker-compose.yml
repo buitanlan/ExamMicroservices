@@ -8,16 +8,17 @@ services:
       dockerfile: Services/Examination/Examination.API/Dockerfile
   mongodb:
     image: mongo:latest
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
     
   postgres:
-    image: postgres
+    image: postgres:latest
+    
+  seq:
+    image: datalust/seq:latest
       
 networks:
   exam:
     driver: bridge
 volumes:
   mongo-data:
-  sqlserver-data:
   postgres_data:
+  seq_data:

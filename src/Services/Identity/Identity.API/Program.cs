@@ -103,40 +103,37 @@ builder.Services.AddHealthChecksUI(opt =>
 
 
 var app = builder.Build();
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        Log.Information("Configuring web host");
+        Log.Information("Applying migrations");
+        var applicationDbContext = services.GetRequiredService<ApplicationDbContext>();
+        await applicationDbContext.Database.MigrateAsync();
+        await ApplicationDbContextSeed.SeedAsync(applicationDbContext, 10);
+        var configurationDbContext = services.GetRequiredService<ConfigurationDbContext>();
+        await configurationDbContext.Database.MigrateAsync();
+        await ConfigurationDbContextSeed.SeedAsync(configurationDbContext, app.Configuration);
+        
+        var persistedGrantDbContext = services.GetRequiredService<PersistedGrantDbContext>();
+        await persistedGrantDbContext.Database.MigrateAsync();
+        Log.Information("Starting web host ");
 
-try
-{
-    Log.Information("Configuring web host");
-    Log.Information("Applying migrations");
-    var applicationDbContext = services.GetRequiredService<ApplicationDbContext>();
-    await applicationDbContext.Database.MigrateAsync();
-    await ApplicationDbContextSeed.SeedAsync(applicationDbContext, 10);
-    var configurationDbContext = services.GetRequiredService<ConfigurationDbContext>();
-    await configurationDbContext.Database.MigrateAsync();
-    await ConfigurationDbContextSeed.SeedAsync(configurationDbContext, app.Configuration);
-    
-    var persistedGrantDbContext = services.GetRequiredService<PersistedGrantDbContext>();
-    await persistedGrantDbContext.Database.MigrateAsync();
-    Log.Information("Starting web host ");
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "Program terminated unexpectedly");
+    }
+}
 
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "Program terminated unexpectedly");
-}
-finally
-{
-    Log.CloseAndFlush();
-}
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity.API v1"));
 }
-app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
@@ -148,16 +145,21 @@ app.UseIdentityServer();
 
 app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapHealthChecks("/hc", new HealthCheckOptions()
 {
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
+
 app.MapHealthChecksUI(options => options.UIPath = "/hc-ui");
+
 app.MapHealthChecks("/liveness", new HealthCheckOptions
 {
     Predicate = r => r.Name.Contains("self")
 });
+
 app.MapHealthChecks("/hc-details",
     new HealthCheckOptions
     {
@@ -175,6 +177,8 @@ app.MapHealthChecks("/hc-details",
     }
 );
 
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
+
+app.MapRazorPages().RequireAuthorization();
 
 app.Run();

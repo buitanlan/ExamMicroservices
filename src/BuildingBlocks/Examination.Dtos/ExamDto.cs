@@ -1,4 +1,6 @@
-﻿namespace Examination.Dtos;
+﻿using Examination.Dtos.Enums;
+
+namespace Examination.Dtos;
 
 public class ExamDto
 {
@@ -11,7 +13,7 @@ public class ExamDto
 
     public TimeSpan? Duration { get; set; }
 
-    public Enums.Level Level { get; set; }
+    public Level Level { get; set; }
 
     public DateTime DateCreated { get; set; }
 }

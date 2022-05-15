@@ -3,7 +3,6 @@ using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Dtos.Enums;
 using Examination.Infrastructure.SeedWork;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -30,7 +29,7 @@ public static class ExamMongoDbSeeding
                 0)
             {
                 await database.GetCollection<Category>(Constants.Collections.Category)
-                    .InsertManyAsync(new List<Category>()
+                    .InsertManyAsync(new List<Category>
                     {
                         new(categoryId1, "Category 1", "category-1"),
                         new(categoryId2, "Category 2", "category-1"),
@@ -57,7 +56,7 @@ public static class ExamMongoDbSeeding
 
     private static List<Exam> GetPredefinedExams(string categoryId1)
     {
-        return new List<Exam>()
+        return new List<Exam>
         {
             new("Exam 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                 "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>",
@@ -82,10 +81,10 @@ public static class ExamMongoDbSeeding
 
     private static List<Question> GetPredefinedQuestions(string categoryId1)
     {
-        return new List<Question>()
+        return new List<Question>
         {
             new("608cd754ef63d3914679ea5b", "Question 1", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df4a7fe65c8efb4470544", "Answer 1", true),
                     new("608df5376a9d681574657cc2", "Answer 2"),
@@ -94,7 +93,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea60", "Question 2", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df543c68c39b8f35a5045", "Answer 1"),
                     new("608df54665f59b22462d175c", "Answer 2", true),
@@ -103,7 +102,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea65", "Question 3", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df55272c30e7832703226", "Answer 1", true),
                     new("608df556bd2b451e6b2f40db", "Answer 2"),
@@ -112,7 +111,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea6a", "Question 4", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df560ac4ca31f8cd6af13", "Answer 1"),
                     new("608df564e6d559052dd221db", "Answer 2", true),
@@ -121,7 +120,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea6f", "Question 5", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df570521ffdebd9aa0e57", "Answer 1", true),
                     new("608df574690bbf32f92dc286", "Answer 2"),
@@ -130,7 +129,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea74", "Question 6", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df585790fb419be6bb1d4", "Answer 1"),
                     new("608df58b6c77aedda3ebc00f", "Answer 2", true),
@@ -139,7 +138,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea79", "Question 7", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df59789452139c8f92c75", "Answer 1"),
                     new("608df59ad8cb53e423462e36", "Answer 2"),
@@ -148,7 +147,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea7e", "Question 8", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df5a476d72c977b4fe1ac", "Answer 1"),
                     new("608df5a875887b4fecd2445b", "Answer 2"),
@@ -157,7 +156,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea83", "Question 9", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df5b3cf787a7520d0965e", "Answer 1"),
                     new("608df5b73e6d19ad3a033670", "Answer 2"),
@@ -166,7 +165,7 @@ public static class ExamMongoDbSeeding
                 },
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."),
             new("608cd754ef63d3914679ea88", "Question 10", QuestionType.SingleSelection, Level.Easy, categoryId1,
-                new List<Answer>()
+                new List<Answer>
                 {
                     new("608df5c1ec2dee54bc500cf3", "Answer 1", true),
                     new("608df5c419a81be17ade4f5d", "Answer 2"),
@@ -181,8 +180,8 @@ public static class ExamMongoDbSeeding
     {
         return Policy.Handle<MongoException>().WaitAndRetryAsync(
             retryCount: retries,
-            sleepDurationProvider: retry => TimeSpan.FromSeconds(5),
-            onRetry: (exception, timeSpan, retry, ctx) =>
+            sleepDurationProvider: _ => TimeSpan.FromSeconds(5),
+            onRetry: (exception, _, retry, _) =>
             {
                 Log.Warning(exception,
                     "[{prefix}] Exception {ExceptionType} with message {Message} detected on attempt {retry} of {retries}",

@@ -9,7 +9,7 @@ public class ExamResultDetail : Entity
     public ExamResultDetail(Question question, IEnumerable<Answer> selectedAnswers, string explain)
     {
         (Question, SelectedAnswers) = (question, selectedAnswers);
-        IsCorrect = this.SelectedAnswers.Select(x => x.Id).Except(question.Answers.Select(x => x.Id)).ToList().Count == 0;
+        IsCorrect = SelectedAnswers.Select(x => x.Id).Except(question.Answers.Select(x => x.Id)).ToList().Count == 0;
     }
 
     [BsonElement("question")]

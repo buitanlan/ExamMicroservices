@@ -92,7 +92,6 @@ using (var scope = app.Services.CreateScope())
     await ExamMongoDbSeeding.SeedAsync(mongoClient, settings);
 }
 
-app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -103,7 +102,6 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
     });
 }
-app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
