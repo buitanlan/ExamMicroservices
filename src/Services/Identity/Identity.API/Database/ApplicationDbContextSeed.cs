@@ -39,8 +39,7 @@ public static class ApplicationDbContextSeed
     }
     private static IEnumerable<ApplicationUser> GetDefaultUser()
     {
-        var user =
-            new ApplicationUser
+        var user = new ApplicationUser
             {
                 Email = "admin@demo.com",
                 Id = Guid.NewGuid().ToString(),

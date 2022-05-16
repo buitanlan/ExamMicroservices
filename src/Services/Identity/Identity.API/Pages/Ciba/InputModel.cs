@@ -2,9 +2,7 @@
 // See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
-
-namespace IdentityServerHost.Pages.Ciba;
+namespace Identity.API.Pages.Ciba;
 
 public class InputModel
 {

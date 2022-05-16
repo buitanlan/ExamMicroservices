@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-namespace IdentityServerHost.Pages.Grants;
+namespace Identity.API.Pages.Grants;
 
 public class ViewModel
 {
