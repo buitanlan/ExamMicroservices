@@ -3,26 +3,18 @@
 
 using System.Collections.Generic;
 
-namespace IdentityServer.Admin.Api.Dtos.ApiResources
+namespace IdentityServer.Admin.Api.Dtos.ApiResources;
+
+public class ApiSecretsApiDto
 {
-    public class ApiSecretsApiDto
+    public ApiSecretsApiDto()
     {
-        public ApiSecretsApiDto()
-        {
-            ApiSecrets = new List<ApiSecretApiDto>();
-        }
-
-        public int TotalCount { get; set; }
-
-        public int PageSize { get; set; }
-
-        public List<ApiSecretApiDto> ApiSecrets { get; set; }
+        ApiSecrets = new List<ApiSecretApiDto>();
     }
+
+    public int TotalCount { get; set; }
+
+    public int PageSize { get; set; }
+
+    public List<ApiSecretApiDto> ApiSecrets { get; set; }
 }
-
-
-
-
-
-
-

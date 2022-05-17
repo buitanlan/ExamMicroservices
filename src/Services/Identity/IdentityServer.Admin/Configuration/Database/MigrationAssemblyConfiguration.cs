@@ -6,26 +6,18 @@ using System;
 using System.Reflection;
 using PostgreSQLMigrationAssembly = IdentityServer.Admin.EntityFramework.PostgreSQL.Helpers.MigrationAssembly;
 
-namespace IdentityServer.Admin.Configuration.Database
+namespace IdentityServer.Admin.Configuration.Database;
+
+public static class MigrationAssemblyConfiguration
 {
-    public static class MigrationAssemblyConfiguration
+    public static string GetMigrationAssemblyByProvider(DatabaseProviderConfiguration databaseProvider)
     {
-        public static string GetMigrationAssemblyByProvider(DatabaseProviderConfiguration databaseProvider)
+        return databaseProvider.ProviderType switch
         {
-            return databaseProvider.ProviderType switch
-            {
-                DatabaseProviderType.PostgreSQL => typeof(PostgreSQLMigrationAssembly).GetTypeInfo()
-                    .Assembly.GetName()
-                    .Name,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
+            DatabaseProviderType.PostgreSQL => typeof(PostgreSQLMigrationAssembly).GetTypeInfo()
+                .Assembly.GetName()
+                .Name,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }
-
-
-
-
-
-
-

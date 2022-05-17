@@ -6,37 +6,29 @@ using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.ApplicationBuilder;
 using System.IO;
 using System.Reflection;
 
-namespace IdentityServer.Admin.Helpers
+namespace IdentityServer.Admin.Helpers;
+
+public static class StartupHelpers
 {
-    public static class StartupHelpers
+    public static void AddAdminUIRazorRuntimeCompilation(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
     {
-        public static void AddAdminUIRazorRuntimeCompilation(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
+        if (hostingEnvironment.IsDevelopment())
         {
-            if (hostingEnvironment.IsDevelopment())
+            var builder = services.AddControllersWithViews();
+
+            var adminAssembly = typeof(AdminUIApplicationBuilderExtensions).GetTypeInfo().Assembly.GetName().Name;
+
+            builder.AddRazorRuntimeCompilation(options =>
             {
-                var builder = services.AddControllersWithViews();
+                if (adminAssembly == null) return;
 
-                var adminAssembly = typeof(AdminUIApplicationBuilderExtensions).GetTypeInfo().Assembly.GetName().Name;
+                var libraryPath = Path.GetFullPath(Path.Combine(hostingEnvironment.ContentRootPath, "..", adminAssembly));
 
-                builder.AddRazorRuntimeCompilation(options =>
+                if (Directory.Exists(libraryPath))
                 {
-                    if (adminAssembly == null) return;
-
-                    var libraryPath = Path.GetFullPath(Path.Combine(hostingEnvironment.ContentRootPath, "..", adminAssembly));
-
-                    if (Directory.Exists(libraryPath))
-                    {
-                        options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
-                    }
-                });
-            }
+                    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+                }
+            });
         }
     }
 }
-
-
-
-
-
-
-

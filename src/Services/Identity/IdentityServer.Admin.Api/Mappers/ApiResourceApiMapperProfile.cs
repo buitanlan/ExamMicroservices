@@ -5,41 +5,33 @@ using AutoMapper;
 using IdentityServer.Admin.Api.Dtos.ApiResources;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.Configuration;
 
-namespace IdentityServer.Admin.Api.Mappers
+namespace IdentityServer.Admin.Api.Mappers;
+
+public class ApiResourceApiMapperProfile : Profile
 {
-    public class ApiResourceApiMapperProfile : Profile
+    public ApiResourceApiMapperProfile()
     {
-        public ApiResourceApiMapperProfile()
-        {
-            // Api Resources
-            CreateMap<ApiResourcesDto, ApiResourcesApiDto>(MemberList.Destination)
-                .ReverseMap();
+        // Api Resources
+        CreateMap<ApiResourcesDto, ApiResourcesApiDto>(MemberList.Destination)
+            .ReverseMap();
 
-            CreateMap<ApiResourceDto, ApiResourceApiDto>(MemberList.Destination)
-                .ReverseMap();
+        CreateMap<ApiResourceDto, ApiResourceApiDto>(MemberList.Destination)
+            .ReverseMap();
 
-            // Api Secrets
-            CreateMap<ApiSecretsDto, ApiSecretApiDto>(MemberList.Destination)
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApiSecretId))
-                .ReverseMap();
+        // Api Secrets
+        CreateMap<ApiSecretsDto, ApiSecretApiDto>(MemberList.Destination)
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApiSecretId))
+            .ReverseMap();
 
-            CreateMap<ApiSecretDto, ApiSecretApiDto>(MemberList.Destination);
-            CreateMap<ApiSecretsDto, ApiSecretsApiDto>(MemberList.Destination);
+        CreateMap<ApiSecretDto, ApiSecretApiDto>(MemberList.Destination);
+        CreateMap<ApiSecretsDto, ApiSecretsApiDto>(MemberList.Destination);
 
-            // Api Properties
-            CreateMap<ApiResourcePropertiesDto, ApiResourcePropertyApiDto>(MemberList.Destination)
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApiResourcePropertyId))
-                .ReverseMap();
+        // Api Properties
+        CreateMap<ApiResourcePropertiesDto, ApiResourcePropertyApiDto>(MemberList.Destination)
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApiResourcePropertyId))
+            .ReverseMap();
 
-            CreateMap<ApiResourcePropertyDto, ApiResourcePropertyApiDto>(MemberList.Destination);
-            CreateMap<ApiResourcePropertiesDto, ApiResourcePropertiesApiDto>(MemberList.Destination);
-        }
+        CreateMap<ApiResourcePropertyDto, ApiResourcePropertyApiDto>(MemberList.Destination);
+        CreateMap<ApiResourcePropertiesDto, ApiResourcePropertiesApiDto>(MemberList.Destination);
     }
 }
-
-
-
-
-
-
-

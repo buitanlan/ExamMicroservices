@@ -3,24 +3,16 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.Admin.Api.Dtos.Users
+namespace IdentityServer.Admin.Api.Dtos.Users;
+
+public class UserChangePasswordApiDto<TKey>
 {
-    public class UserChangePasswordApiDto<TKey>
-    {
-        public TKey UserId { get; set; }
+    public TKey UserId { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+    [Required]
+    public string Password { get; set; }
 
-        [Required]
-        [Compare(nameof(Password))]
-        public string ConfirmPassword { get; set; }
-    }
+    [Required]
+    [Compare(nameof(Password))]
+    public string ConfirmPassword { get; set; }
 }
-
-
-
-
-
-
-

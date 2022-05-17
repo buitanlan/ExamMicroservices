@@ -1,21 +1,12 @@
-﻿namespace IdentityServer.STS.Identity.ViewModels.Manage
+﻿namespace IdentityServer.STS.Identity.ViewModels.Manage;
+
+public class TwoFactorAuthenticationViewModel
 {
-    public class TwoFactorAuthenticationViewModel
-    {
-        public bool HasAuthenticator { get; set; }
+    public bool HasAuthenticator { get; set; }
 
-        public int RecoveryCodesLeft { get; set; }
+    public int RecoveryCodesLeft { get; set; }
 
-        public bool Is2faEnabled { get; set; }
+    public bool Is2faEnabled { get; set; }
 
-        public bool IsMachineRemembered { get; set; }
-    }
+    public bool IsMachineRemembered { get; set; }
 }
-
-
-
-
-
-
-
-

@@ -3,22 +3,14 @@
 
 using System.Collections.Generic;
 
-namespace IdentityServer.Admin.Api.Dtos.Users
+namespace IdentityServer.Admin.Api.Dtos.Users;
+
+public class UserProvidersApiDto<TKey>
 {
-    public class UserProvidersApiDto<TKey>
+    public UserProvidersApiDto()
     {
-        public UserProvidersApiDto()
-        {
-            Providers = new List<UserProviderApiDto<TKey>>();
-        }
-
-        public List<UserProviderApiDto<TKey>> Providers { get; set; }
+        Providers = new List<UserProviderApiDto<TKey>>();
     }
+
+    public List<UserProviderApiDto<TKey>> Providers { get; set; }
 }
-
-
-
-
-
-
-

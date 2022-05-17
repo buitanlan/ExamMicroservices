@@ -4,18 +4,9 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
-namespace IdentityServer.STS.Identity.ViewModels.Account
+namespace IdentityServer.STS.Identity.ViewModels.Account;
+
+public class LogoutInputModel
 {
-    public class LogoutInputModel
-    {
-        public string LogoutId { get; set; }
-    }
+    public string LogoutId { get; set; }
 }
-
-
-
-
-
-
-
-

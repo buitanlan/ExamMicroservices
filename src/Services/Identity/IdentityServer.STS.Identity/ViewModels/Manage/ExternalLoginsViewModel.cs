@@ -2,24 +2,15 @@
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace IdentityServer.STS.Identity.ViewModels.Manage
+namespace IdentityServer.STS.Identity.ViewModels.Manage;
+
+public class ExternalLoginsViewModel
 {
-    public class ExternalLoginsViewModel
-    {
-        public IList<UserLoginInfo> CurrentLogins { get; set; }
+    public IList<UserLoginInfo> CurrentLogins { get; set; }
 
-        public IList<AuthenticationScheme> OtherLogins { get; set; }
+    public IList<AuthenticationScheme> OtherLogins { get; set; }
 
-        public bool ShowRemoveButton { get; set; }
+    public bool ShowRemoveButton { get; set; }
 
-        public string StatusMessage { get; set; }
-    }
+    public string StatusMessage { get; set; }
 }
-
-
-
-
-
-
-
-

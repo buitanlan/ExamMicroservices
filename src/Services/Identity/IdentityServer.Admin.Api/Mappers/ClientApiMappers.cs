@@ -3,28 +3,20 @@
 
 using AutoMapper;
 
-namespace IdentityServer.Admin.Api.Mappers
+namespace IdentityServer.Admin.Api.Mappers;
+
+public static class ClientApiMappers
 {
-    public static class ClientApiMappers
+    static ClientApiMappers()
     {
-        static ClientApiMappers()
-        {
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<ClientApiMapperProfile>())
-                .CreateMapper();
-        }
+        Mapper = new MapperConfiguration(cfg => cfg.AddProfile<ClientApiMapperProfile>())
+            .CreateMapper();
+    }
 
-        internal static IMapper Mapper { get; }
+    internal static IMapper Mapper { get; }
 
-        public static T ToClientApiModel<T>(this object source)
-        {
-            return Mapper.Map<T>(source);
-        }
+    public static T ToClientApiModel<T>(this object source)
+    {
+        return Mapper.Map<T>(source);
     }
 }
-
-
-
-
-
-
-

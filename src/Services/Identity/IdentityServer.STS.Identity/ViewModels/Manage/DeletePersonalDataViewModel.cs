@@ -1,21 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.STS.Identity.ViewModels.Manage
+namespace IdentityServer.STS.Identity.ViewModels.Manage;
+
+public class DeletePersonalDataViewModel
 {
-    public class DeletePersonalDataViewModel
-    {
-        public bool RequirePassword { get; set; }
+    public bool RequirePassword { get; set; }
 
-        [DataType(DataType.Password)]
-        [Required]
-        public string Password { get; set; }
-    }
+    [DataType(DataType.Password)]
+    [Required]
+    public string Password { get; set; }
 }
-
-
-
-
-
-
-
-

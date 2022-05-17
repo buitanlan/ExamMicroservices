@@ -3,19 +3,11 @@
 
 using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
 
-namespace IdentityServer.STS.Identity.Configuration.Interfaces
+namespace IdentityServer.STS.Identity.Configuration.Interfaces;
+
+public interface IRootConfiguration
 {
-    public interface IRootConfiguration
-    {
-        AdminConfiguration AdminConfiguration { get; }
+    AdminConfiguration AdminConfiguration { get; }
 
-        RegisterConfiguration RegisterConfiguration { get; }
-    }
+    RegisterConfiguration RegisterConfiguration { get; }
 }
-
-
-
-
-
-
-

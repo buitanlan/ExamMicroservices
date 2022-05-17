@@ -1,24 +1,15 @@
 ﻿using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.STS.Identity.ViewModels.Account
+namespace IdentityServer.STS.Identity.ViewModels.Account;
+
+public class ForgotPasswordViewModel
 {
-    public class ForgotPasswordViewModel
-    {
-        [Required]
-        public LoginResolutionPolicy? Policy { get; set; }
+    [Required]
+    public LoginResolutionPolicy? Policy { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
+    [EmailAddress]
+    public string Email { get; set; }
 
-        public string Username { get; set; }
-    }
+    public string Username { get; set; }
 }
-
-
-
-
-
-
-
-

@@ -3,17 +3,9 @@
 
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
 
-namespace IdentityServer.Shared.Dtos.Identity
+namespace IdentityServer.Shared.Dtos.Identity;
+
+public class IdentityUserDto : UserDto<string>
 {
-    public class IdentityUserDto : UserDto<string>
-    {
 
-    }
 }
-
-
-
-
-
-
-

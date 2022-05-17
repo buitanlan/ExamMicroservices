@@ -1,14 +1,6 @@
-﻿namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Helpers
+﻿namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Helpers;
+
+public class MigrationAssembly
 {
-    public class MigrationAssembly
-    {
 
-    }
 }
-
-
-
-
-
-
-

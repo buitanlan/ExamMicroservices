@@ -1,27 +1,19 @@
 ﻿using AutoMapper;
 
-namespace IdentityServer.Admin.Api.Mappers
+namespace IdentityServer.Admin.Api.Mappers;
+
+public static class KeyApiMappers
 {
-    public static class KeyApiMappers
+    static KeyApiMappers()
     {
-        static KeyApiMappers()
-        {
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<KeyApiMapperProfile>())
-                .CreateMapper();
-        }
+        Mapper = new MapperConfiguration(cfg => cfg.AddProfile<KeyApiMapperProfile>())
+            .CreateMapper();
+    }
 
-        internal static IMapper Mapper { get; }
+    internal static IMapper Mapper { get; }
 
-        public static T ToKeyApiModel<T>(this object source)
-        {
-            return Mapper.Map<T>(source);
-        }
+    public static T ToKeyApiModel<T>(this object source)
+    {
+        return Mapper.Map<T>(source);
     }
 }
-
-
-
-
-
-
-

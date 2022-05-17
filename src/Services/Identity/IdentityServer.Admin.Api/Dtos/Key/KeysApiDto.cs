@@ -3,26 +3,18 @@
 
 using System.Collections.Generic;
 
-namespace IdentityServer.Admin.Api.Dtos.Key
+namespace IdentityServer.Admin.Api.Dtos.Key;
+
+public class KeysApiDto
 {
-    public class KeysApiDto
+    public KeysApiDto()
     {
-        public KeysApiDto()
-        {
-            Keys = new List<KeyApiDto>();
-        }
-
-        public List<KeyApiDto> Keys { get; set; }
-
-        public int TotalCount { get; set; }
-
-        public int PageSize { get; set; }
+        Keys = new List<KeyApiDto>();
     }
+
+    public List<KeyApiDto> Keys { get; set; }
+
+    public int TotalCount { get; set; }
+
+    public int PageSize { get; set; }
 }
-
-
-
-
-
-
-

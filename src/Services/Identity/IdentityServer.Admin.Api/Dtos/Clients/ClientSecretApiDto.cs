@@ -4,29 +4,21 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.Admin.Api.Dtos.Clients
+namespace IdentityServer.Admin.Api.Dtos.Clients;
+
+public class ClientSecretApiDto
 {
-    public class ClientSecretApiDto
-    {
-        [Required]
-        public string Type { get; set; } = "SharedSecret";
+    [Required]
+    public string Type { get; set; } = "SharedSecret";
 
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string Description { get; set; }
+    public string Description { get; set; }
 
-        [Required]
-        public string Value { get; set; }
+    [Required]
+    public string Value { get; set; }
 
-        public string HashType { get; set; }
+    public string HashType { get; set; }
 
-        public DateTime? Expiration { get; set; }
-    }
+    public DateTime? Expiration { get; set; }
 }
-
-
-
-
-
-
-

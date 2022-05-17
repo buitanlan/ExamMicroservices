@@ -1,21 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.STS.Identity.ViewModels.Account
+namespace IdentityServer.STS.Identity.ViewModels.Account;
+
+public class LoginWithRecoveryCodeViewModel
 {
-    public class LoginWithRecoveryCodeViewModel
-    {
-        [Required]
-        [DataType(DataType.Text)]
-        public string RecoveryCode { get; set; }
+    [Required]
+    [DataType(DataType.Text)]
+    public string RecoveryCode { get; set; }
 
-        public string ReturnUrl { get; set; }
-    }
+    public string ReturnUrl { get; set; }
 }
-
-
-
-
-
-
-
-

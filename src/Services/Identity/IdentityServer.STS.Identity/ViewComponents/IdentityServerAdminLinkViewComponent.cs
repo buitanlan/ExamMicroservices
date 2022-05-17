@@ -4,29 +4,21 @@
 using IdentityServer.STS.Identity.Configuration.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer.STS.Identity.ViewComponents
+namespace IdentityServer.STS.Identity.ViewComponents;
+
+public class IdentityServerAdminLinkViewComponent : ViewComponent
 {
-    public class IdentityServerAdminLinkViewComponent : ViewComponent
+    private readonly IRootConfiguration _configuration;
+
+    public IdentityServerAdminLinkViewComponent(IRootConfiguration configuration)
     {
-        private readonly IRootConfiguration _configuration;
+        _configuration = configuration;
+    }
 
-        public IdentityServerAdminLinkViewComponent(IRootConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+    public IViewComponentResult Invoke()
+    {
+        var identityAdminUrl = _configuration.AdminConfiguration.IdentityAdminBaseUrl;
 
-        public IViewComponentResult Invoke()
-        {
-            var identityAdminUrl = _configuration.AdminConfiguration.IdentityAdminBaseUrl;
-
-            return View(model: identityAdminUrl);
-        }
+        return View(model: identityAdminUrl);
     }
 }
-
-
-
-
-
-
-
