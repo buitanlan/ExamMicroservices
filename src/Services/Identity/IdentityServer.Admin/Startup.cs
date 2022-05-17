@@ -1,8 +1,12 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System.IdentityModel.Tokens.Jwt;
 using IdentityServer.Admin.Configuration.Database;
+using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
+using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
+using IdentityServer.Admin.Helpers;
+using IdentityServer.Shared.Dtos;
+using IdentityServer.Shared.Dtos.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,14 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Skoruba.AuditLogging.EntityFramework.Entities;
-using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
-using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
-using IdentityServer.Admin.Helpers;
-using IdentityServer.Admin.UI.Helpers.ApplicationBuilder;
-using IdentityServer.Admin.UI.Helpers.DependencyInjection;
-using IdentityServer.Shared.Configuration.Helpers;
-using IdentityServer.Shared.Dtos;
-using IdentityServer.Shared.Dtos.Identity;
+using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.ApplicationBuilder;
+using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.DependencyInjection;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace IdentityServer.Admin
 {
@@ -87,3 +87,10 @@ namespace IdentityServer.Admin
         }
     }
 }
+
+
+
+
+
+
+

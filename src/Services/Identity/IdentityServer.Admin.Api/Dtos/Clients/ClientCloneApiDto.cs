@@ -41,3 +41,10 @@ namespace IdentityServer.Admin.Api.Dtos.Clients
         public bool CloneClientProperties { get; set; }
     }
 }
+
+
+
+
+
+
+

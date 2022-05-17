@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using System;
 
 namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.AuditLogging
 {
@@ -38,3 +38,11 @@ namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.AuditLoggin
         }
     }
 }
+
+
+
+
+
+
+
+

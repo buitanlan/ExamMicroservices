@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace IdentityServer.STS.Identity.ViewModels.Manage
 {
@@ -15,3 +15,11 @@ namespace IdentityServer.STS.Identity.ViewModels.Manage
         public string StatusMessage { get; set; }
     }
 }
+
+
+
+
+
+
+
+

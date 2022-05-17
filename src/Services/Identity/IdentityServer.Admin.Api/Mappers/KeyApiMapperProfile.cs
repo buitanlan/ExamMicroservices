@@ -3,7 +3,7 @@
 
 using AutoMapper;
 using IdentityServer.Admin.Api.Dtos.Key;
-using IdentityServer.Admin.BusinessLogic.Dtos.Key;
+using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.Key;
 
 namespace IdentityServer.Admin.Api.Mappers
 {
@@ -19,3 +19,10 @@ namespace IdentityServer.Admin.Api.Mappers
         }
     }
 }
+
+
+
+
+
+
+

@@ -10,3 +10,10 @@ namespace IdentityServer.Admin.Api.Dtos.ApiResources
         public string Value { get; set; }
     }
 }
+
+
+
+
+
+
+

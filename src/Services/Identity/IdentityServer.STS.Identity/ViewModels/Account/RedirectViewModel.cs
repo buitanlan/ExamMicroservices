@@ -11,3 +11,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
         public string RedirectUrl { get; set; }
     }
 }
+
+
+
+
+
+
+

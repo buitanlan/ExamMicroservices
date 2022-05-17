@@ -17,3 +17,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
         public string ConfirmPassword { get; set; }
     }
 }
+
+
+
+
+
+
+

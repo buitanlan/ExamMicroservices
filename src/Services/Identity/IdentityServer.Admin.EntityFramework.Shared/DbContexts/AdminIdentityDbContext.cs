@@ -12,7 +12,7 @@ namespace IdentityServer.Admin.EntityFramework.Shared.DbContexts
     {
         public AdminIdentityDbContext(DbContextOptions<AdminIdentityDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -35,3 +35,10 @@ namespace IdentityServer.Admin.EntityFramework.Shared.DbContexts
         }
     }
 }
+
+
+
+
+
+
+

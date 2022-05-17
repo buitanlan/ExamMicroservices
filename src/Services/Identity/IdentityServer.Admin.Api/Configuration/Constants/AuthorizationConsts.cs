@@ -8,3 +8,10 @@ namespace IdentityServer.Admin.Api.Configuration.Constants
         public const string AdministrationPolicy = "RequireAdministratorRole";
     }
 }
+
+
+
+
+
+
+

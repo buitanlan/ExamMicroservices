@@ -1,18 +1,18 @@
-using System;
-using HealthChecks.UI.Client;
+﻿using HealthChecks.UI.Client;
+using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
+using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
 using IdentityServer.STS.Identity.Configuration;
 using IdentityServer.STS.Identity.Configuration.Constants;
 using IdentityServer.STS.Identity.Configuration.Interfaces;
+using IdentityServer.STS.Identity.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
-using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
-using IdentityServer.Shared.Configuration.Helpers;
-using IdentityServer.STS.Identity.Helpers;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers;
+using System;
 
 namespace IdentityServer.STS.Identity
 {
@@ -134,3 +134,11 @@ namespace IdentityServer.STS.Identity
         }
     }
 }
+
+
+
+
+
+
+
+

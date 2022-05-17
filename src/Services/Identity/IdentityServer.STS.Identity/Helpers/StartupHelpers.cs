@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.EntityFramework.Storage;
 using IdentityServer.STS.Identity.Configuration;
@@ -26,14 +22,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
-using IdentityServer.Admin.EntityFramework.Configuration.Configuration;
-using IdentityServer.Admin.EntityFramework.Configuration.MySql;
-using IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
-using IdentityServer.Admin.EntityFramework.Configuration.SqlServer;
-using IdentityServer.Admin.EntityFramework.Helpers;
-using IdentityServer.Admin.EntityFramework.Interfaces;
-using IdentityServer.Shared.Configuration.Authentication;
-using IdentityServer.Shared.Configuration.Configuration.Identity;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.MySql;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.SqlServer;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Helpers;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Interfaces;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Authentication;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace IdentityServer.STS.Identity.Helpers
 {
@@ -503,3 +503,11 @@ namespace IdentityServer.STS.Identity.Helpers
         }
     }
 }
+
+
+
+
+
+
+
+

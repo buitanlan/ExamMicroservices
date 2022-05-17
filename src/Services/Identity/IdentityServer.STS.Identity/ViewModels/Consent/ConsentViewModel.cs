@@ -19,3 +19,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Consent
         public IEnumerable<ScopeViewModel> ApiScopes { get; set; }
     }
 }
+
+
+
+
+
+
+

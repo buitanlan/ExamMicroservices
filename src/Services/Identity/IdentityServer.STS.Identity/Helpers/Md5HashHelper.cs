@@ -6,7 +6,6 @@ using System.Text;
 
 namespace IdentityServer.STS.Identity.Helpers
 {
-
     /// <summary>
     /// Helper-class to create Md5hashes from strings
     /// </summary>
@@ -35,3 +34,11 @@ namespace IdentityServer.STS.Identity.Helpers
         }
     }
 }
+
+
+
+
+
+
+
+

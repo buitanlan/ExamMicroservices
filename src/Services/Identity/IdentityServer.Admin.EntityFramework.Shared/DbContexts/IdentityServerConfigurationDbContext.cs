@@ -4,7 +4,7 @@
 using Duende.IdentityServer.EntityFramework.DbContexts;
 using Duende.IdentityServer.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
-using IdentityServer.Admin.EntityFramework.Interfaces;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Interfaces;
 
 namespace IdentityServer.Admin.EntityFramework.Shared.DbContexts
 {
@@ -48,3 +48,10 @@ namespace IdentityServer.Admin.EntityFramework.Shared.DbContexts
         public DbSet<ApiResourceScope> ApiResourceScopes { get; set; }
     }
 }
+
+
+
+
+
+
+

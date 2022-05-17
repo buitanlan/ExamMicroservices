@@ -23,3 +23,10 @@ namespace IdentityServer.Admin.Api.Dtos.Clients
         public DateTime? Expiration { get; set; }
     }
 }
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-﻿@using IdentityServer.Shared.Configuration.Helpers
+﻿@using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers
 @using IdentityServer.STS.Identity.Configuration.Interfaces
 @inject IRootConfiguration RootConfiguration
 
@@ -10,3 +10,10 @@ else if (!string.IsNullOrEmpty(RootConfiguration.AdminConfiguration.Theme))
 {
     <link href="@UrlHelper.Content(string.Concat("~/dist/css/themes/",RootConfiguration.AdminConfiguration.Theme,"/bootstrap.min.css"))" asp-append-version="true" rel="stylesheet" />
 }
+
+
+
+
+
+
+

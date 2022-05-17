@@ -15,3 +15,10 @@ namespace IdentityServer.Admin.Api.Dtos.Users
         public List<UserProviderApiDto<TKey>> Providers { get; set; }
     }
 }
+
+
+
+
+
+
+

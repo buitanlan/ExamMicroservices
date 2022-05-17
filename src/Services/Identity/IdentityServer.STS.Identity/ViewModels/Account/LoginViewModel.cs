@@ -4,10 +4,10 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IdentityServer.Shared.Configuration.Configuration.Identity;
 
 namespace IdentityServer.STS.Identity.ViewModels.Account
 {
@@ -24,3 +24,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
         public string ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
     }
 }
+
+
+
+
+
+
+

@@ -11,3 +11,11 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
         public bool ShowLogoutPrompt { get; set; } = true;
     }
 }
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using IdentityServer.Shared.Configuration.Configuration.Identity;
+﻿using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.STS.Identity.ViewModels.Account
 {
@@ -7,10 +7,18 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
     {
         [Required]
         public LoginResolutionPolicy? Policy { get; set; }
-        
+
         [EmailAddress]
         public string Email { get; set; }
 
         public string Username { get; set; }
     }
 }
+
+
+
+
+
+
+
+

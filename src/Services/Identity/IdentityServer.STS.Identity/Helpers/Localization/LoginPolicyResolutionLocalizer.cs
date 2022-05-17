@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using IdentityServer.Shared.Configuration.Configuration.Identity;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
 
 namespace IdentityServer.STS.Identity.Helpers.Localization
 {
@@ -21,3 +21,11 @@ namespace IdentityServer.STS.Identity.Helpers.Localization
         }
     }
 }
+
+
+
+
+
+
+
+

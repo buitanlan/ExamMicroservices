@@ -22,3 +22,10 @@ namespace IdentityServer.Admin.Api.Configuration.AuditLogging
         public object Action { get; set; }
     }
 }
+
+
+
+
+
+
+

@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System.Threading.Tasks;
 using IdentityServer.Admin.Api.Configuration.Constants;
 using IdentityServer.Admin.Api.Dtos.IdentityResources;
 using IdentityServer.Admin.Api.ExceptionHandling;
+using IdentityServer.Admin.Api.Mappers;
 using IdentityServer.Admin.Api.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using IdentityServer.Admin.Api.Mappers;
-using IdentityServer.Admin.BusinessLogic.Dtos.Configuration;
-using IdentityServer.Admin.BusinessLogic.Services.Interfaces;
+using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.Configuration;
+using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace IdentityServer.Admin.Api.Controllers
 {
@@ -51,7 +51,7 @@ namespace IdentityServer.Admin.Api.Controllers
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Post([FromBody]IdentityResourceApiDto identityResourceApi)
+        public async Task<IActionResult> Post([FromBody] IdentityResourceApiDto identityResourceApi)
         {
             var identityResourceDto = identityResourceApi.ToIdentityResourceApiModel<IdentityResourceDto>();
 
@@ -67,7 +67,7 @@ namespace IdentityServer.Admin.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]IdentityResourceApiDto identityResourceApi)
+        public async Task<IActionResult> Put([FromBody] IdentityResourceApiDto identityResourceApi)
         {
             var identityResource = identityResourceApi.ToIdentityResourceApiModel<IdentityResourceDto>();
 
@@ -109,7 +109,7 @@ namespace IdentityServer.Admin.Api.Controllers
         [HttpPost("{id}/Properties")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> PostProperty(int id, [FromBody]IdentityResourcePropertyApiDto identityResourcePropertyApi)
+        public async Task<IActionResult> PostProperty(int id, [FromBody] IdentityResourcePropertyApiDto identityResourcePropertyApi)
         {
             var identityResourcePropertiesDto = identityResourcePropertyApi.ToIdentityResourceApiModel<IdentityResourcePropertiesDto>();
             identityResourcePropertiesDto.IdentityResourceId = id;
@@ -137,3 +137,10 @@ namespace IdentityServer.Admin.Api.Controllers
         }
     }
 }
+
+
+
+
+
+
+

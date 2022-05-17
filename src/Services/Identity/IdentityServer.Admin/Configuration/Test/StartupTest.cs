@@ -3,11 +3,11 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using IdentityServer.Admin.UI.Helpers.DependencyInjection;
+using Skoruba.Duende.IdentityServer.Admin.UI.Helpers.DependencyInjection;
 
 namespace IdentityServer.Admin.Configuration.Test
 {
-	public class StartupTest : Startup
+    public class StartupTest : Startup
     {
         public StartupTest(IWebHostEnvironment env, IConfiguration configuration) : base(env, configuration)
         {
@@ -22,3 +22,11 @@ namespace IdentityServer.Admin.Configuration.Test
         }
     }
 }
+
+
+
+
+
+
+
+

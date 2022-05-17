@@ -14,3 +14,11 @@ namespace IdentityServer.STS.Identity.Configuration
         public string DefaultCulture { get; set; } = DefaultRequestCulture;
     }
 }
+
+
+
+
+
+
+
+

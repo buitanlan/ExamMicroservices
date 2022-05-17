@@ -17,3 +17,10 @@ namespace IdentityServer.Admin.Api.Dtos.Users
         public string ConfirmPassword { get; set; }
     }
 }
+
+
+
+
+
+
+

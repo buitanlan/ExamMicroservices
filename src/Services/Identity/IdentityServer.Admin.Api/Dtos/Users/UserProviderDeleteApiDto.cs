@@ -12,3 +12,10 @@ namespace IdentityServer.Admin.Api.Dtos.Users
         public string LoginProvider { get; set; }
     }
 }
+
+
+
+
+
+
+

@@ -19,3 +19,10 @@ namespace IdentityServer.Admin.Api.Dtos.ApiScopes
         public List<ApiScopeApiDto> Scopes { get; set; }
     }
 }
+
+
+
+
+
+
+

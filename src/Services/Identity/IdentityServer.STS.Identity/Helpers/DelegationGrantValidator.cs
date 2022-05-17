@@ -1,7 +1,7 @@
+﻿using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Validation;
 using System.Linq;
 using System.Threading.Tasks;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Validation;
 
 namespace IdentityServer.STS.Identity.Helpers
 {
@@ -41,3 +41,10 @@ namespace IdentityServer.STS.Identity.Helpers
         }
     }
 }
+
+
+
+
+
+
+

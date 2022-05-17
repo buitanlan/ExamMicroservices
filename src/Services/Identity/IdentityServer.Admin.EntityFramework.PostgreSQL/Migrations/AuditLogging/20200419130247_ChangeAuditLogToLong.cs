@@ -39,3 +39,11 @@ namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.AuditLoggin
         }
     }
 }
+
+
+
+
+
+
+
+

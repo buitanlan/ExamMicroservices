@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace IdentityServer.STS.Identity.Services
 {
@@ -20,3 +20,10 @@ namespace IdentityServer.STS.Identity.Services
         }
     }
 }
+
+
+
+
+
+
+

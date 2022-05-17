@@ -14,3 +14,11 @@ namespace IdentityServer.Admin.Api.Configuration.AuditLogging
         public string ClientIdClaim { get; set; }
     }
 }
+
+
+
+
+
+
+
+

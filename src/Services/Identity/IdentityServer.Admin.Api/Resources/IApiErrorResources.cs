@@ -10,3 +10,10 @@ namespace IdentityServer.Admin.Api.Resources
         ApiError CannotSetId();
     }
 }
+
+
+
+
+
+
+

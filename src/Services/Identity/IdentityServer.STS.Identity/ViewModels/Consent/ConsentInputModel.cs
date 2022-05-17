@@ -17,3 +17,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Consent
         public string Description { get; set; }
     }
 }
+
+
+
+
+
+
+

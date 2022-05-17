@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.STS.Identity.ViewModels.Manage
 {
@@ -18,3 +18,11 @@ namespace IdentityServer.STS.Identity.ViewModels.Manage
         public string AuthenticatorUri { get; set; }
     }
 }
+
+
+
+
+
+
+
+

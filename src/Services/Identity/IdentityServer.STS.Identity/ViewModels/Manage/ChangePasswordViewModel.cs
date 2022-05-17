@@ -19,3 +19,11 @@ namespace IdentityServer.STS.Identity.ViewModels.Manage
         public string StatusMessage { get; set; }
     }
 }
+
+
+
+
+
+
+
+

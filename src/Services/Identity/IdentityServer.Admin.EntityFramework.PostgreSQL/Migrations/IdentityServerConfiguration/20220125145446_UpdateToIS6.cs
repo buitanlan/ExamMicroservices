@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 #nullable disable
 
@@ -453,3 +453,11 @@ namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.IdentitySer
         }
     }
 }
+
+
+
+
+
+
+
+

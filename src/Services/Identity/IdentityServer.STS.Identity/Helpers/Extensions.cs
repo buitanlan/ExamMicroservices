@@ -4,10 +4,10 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
-using System;
 using Duende.IdentityServer.Models;
 using IdentityServer.STS.Identity.ViewModels.Account;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace IdentityServer.STS.Identity.Helpers
 {
@@ -32,3 +32,11 @@ namespace IdentityServer.STS.Identity.Helpers
         }
     }
 }
+
+
+
+
+
+
+
+

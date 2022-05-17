@@ -16,3 +16,10 @@ namespace IdentityServer.STS.Identity.Configuration
         public string CustomThemeCss { get; set; }
     }
 }
+
+
+
+
+
+
+

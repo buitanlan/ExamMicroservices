@@ -109,3 +109,10 @@ namespace IdentityServer.Admin.Api.Dtos.Clients
         public bool NonEditable { get; set; }
     }
 }
+
+
+
+
+
+
+

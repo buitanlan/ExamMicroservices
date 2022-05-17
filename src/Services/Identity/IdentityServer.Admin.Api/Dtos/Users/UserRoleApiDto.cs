@@ -10,3 +10,10 @@ namespace IdentityServer.Admin.Api.Dtos.Users
         public TKey RoleId { get; set; }
     }
 }
+
+
+
+
+
+
+

@@ -26,3 +26,10 @@ namespace IdentityServer.Admin.Api.Configuration
         public string[] CorsAllowOrigins { get; set; }
     }
 }
+
+
+
+
+
+
+

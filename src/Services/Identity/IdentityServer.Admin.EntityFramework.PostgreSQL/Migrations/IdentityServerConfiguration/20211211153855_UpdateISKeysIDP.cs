@@ -32,3 +32,11 @@ namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.IdentitySer
         }
     }
 }
+
+
+
+
+
+
+
+

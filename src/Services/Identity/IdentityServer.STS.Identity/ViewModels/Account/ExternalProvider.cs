@@ -12,3 +12,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Account
         public string AuthenticationScheme { get; set; }
     }
 }
+
+
+
+
+
+
+

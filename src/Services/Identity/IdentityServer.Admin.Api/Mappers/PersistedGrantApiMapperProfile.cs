@@ -3,7 +3,7 @@
 
 using AutoMapper;
 using IdentityServer.Admin.Api.Dtos.PersistedGrants;
-using IdentityServer.Admin.BusinessLogic.Dtos.Grant;
+using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.Grant;
 
 namespace IdentityServer.Admin.Api.Mappers
 {
@@ -18,3 +18,10 @@ namespace IdentityServer.Admin.Api.Mappers
         }
     }
 }
+
+
+
+
+
+
+

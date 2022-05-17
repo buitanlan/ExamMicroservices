@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using IdentityServer.Shared.Configuration.Helpers;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers;
+using System;
+using System.IO;
 
 namespace IdentityServer.STS.Identity
 {
@@ -95,3 +95,10 @@ namespace IdentityServer.STS.Identity
                 });
     }
 }
+
+
+
+
+
+
+

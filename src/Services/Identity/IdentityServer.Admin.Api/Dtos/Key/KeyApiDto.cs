@@ -15,3 +15,10 @@ namespace IdentityServer.Admin.Api.Dtos.Key
         public bool IsX509Certificate { get; set; }
     }
 }
+
+
+
+
+
+
+

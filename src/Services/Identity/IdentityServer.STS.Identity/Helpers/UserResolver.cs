@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using IdentityServer.Shared.Configuration.Configuration.Identity;
+using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
+using System.Threading.Tasks;
 
 namespace IdentityServer.STS.Identity.Helpers
 {
@@ -32,3 +32,11 @@ namespace IdentityServer.STS.Identity.Helpers
         }
     }
 }
+
+
+
+
+
+
+
+

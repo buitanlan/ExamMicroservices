@@ -10,3 +10,10 @@ namespace IdentityServer.Admin.Api.Dtos.ApiScopes
         public string Value { get; set; }
     }
 }
+
+
+
+
+
+
+

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using IdentityServer.STS.Identity.Helpers;
+﻿using IdentityServer.STS.Identity.Helpers;
 using IdentityServer.STS.Identity.Helpers.Localization;
 using IdentityServer.STS.Identity.ViewModels.Manage;
 using Microsoft.AspNetCore.Authentication;
@@ -14,9 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace IdentityServer.STS.Identity.Controllers
-{    
+{
     [Authorize]
     public class ManageController<TUser, TKey> : Controller
         where TUser : IdentityUser<TKey>, new()
@@ -59,7 +59,7 @@ namespace IdentityServer.STS.Identity.Controllers
 
             return View(model);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
@@ -94,21 +94,22 @@ namespace IdentityServer.STS.Identity.Controllers
                     throw new ApplicationException(_localizer["ErrorSettingPhone", user.Id]);
                 }
             }
-            
+
             await UpdateUserClaimsAsync(model, user);
 
             StatusMessage = _localizer["ProfileUpdated"];
 
             return RedirectToAction(nameof(Index));
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                // return View(model);
+                return BadRequest();
             }
 
             var user = await _userManager.GetUserAsync(User);
@@ -720,3 +721,10 @@ namespace IdentityServer.STS.Identity.Controllers
         }
     }
 }
+
+
+
+
+
+
+

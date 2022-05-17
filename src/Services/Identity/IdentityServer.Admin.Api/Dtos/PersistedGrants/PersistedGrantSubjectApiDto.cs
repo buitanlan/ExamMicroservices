@@ -20,3 +20,10 @@ namespace IdentityServer.Admin.Api.Dtos.PersistedGrants
         public string Description { get; set; }
     }
 }
+
+
+
+
+
+
+

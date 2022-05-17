@@ -10,7 +10,7 @@ namespace IdentityServer.Admin.Api.Dtos.PersistedGrants
         public PersistedGrantSubjectsApiDto()
         {
             PersistedGrants = new List<PersistedGrantSubjectApiDto>();
-        }        
+        }
 
         public int TotalCount { get; set; }
 
@@ -19,3 +19,10 @@ namespace IdentityServer.Admin.Api.Dtos.PersistedGrants
         public List<PersistedGrantSubjectApiDto> PersistedGrants { get; set; }
     }
 }
+
+
+
+
+
+
+

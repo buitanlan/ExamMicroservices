@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using System;
 using Duende.IdentityServer.EntityFramework.Options;
 using IdentityModel;
 using IdentityServer.Admin.Api.Configuration;
@@ -24,13 +23,14 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.AuditLogging.EntityFramework.Extensions;
 using Skoruba.AuditLogging.EntityFramework.Repositories;
 using Skoruba.AuditLogging.EntityFramework.Services;
-using IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
-using IdentityServer.Admin.EntityFramework.Configuration.Configuration;
-using IdentityServer.Admin.EntityFramework.Configuration.MySql;
-using IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
-using IdentityServer.Admin.EntityFramework.Configuration.SqlServer;
-using IdentityServer.Admin.EntityFramework.Helpers;
-using IdentityServer.Admin.EntityFramework.Interfaces;
+using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.MySql;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.SqlServer;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Helpers;
+using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Interfaces;
+using System;
 
 namespace IdentityServer.Admin.Api.Helpers
 {
@@ -354,3 +354,11 @@ namespace IdentityServer.Admin.Api.Helpers
         }
     }
 }
+
+
+
+
+
+
+
+

@@ -19,3 +19,10 @@ namespace IdentityServer.Admin.Api.Dtos.ApiScopes
         public int PageSize { get; set; }
     }
 }
+
+
+
+
+
+
+

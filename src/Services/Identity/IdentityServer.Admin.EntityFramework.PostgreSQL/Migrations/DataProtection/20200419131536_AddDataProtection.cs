@@ -29,3 +29,11 @@ namespace IdentityServer.Admin.EntityFramework.PostgreSQL.Migrations.DataProtect
         }
     }
 }
+
+
+
+
+
+
+
+

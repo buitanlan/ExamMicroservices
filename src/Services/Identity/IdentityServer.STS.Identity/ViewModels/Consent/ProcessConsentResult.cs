@@ -21,3 +21,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Consent
         public string ValidationError { get; set; }
     }
 }
+
+
+
+
+
+
+

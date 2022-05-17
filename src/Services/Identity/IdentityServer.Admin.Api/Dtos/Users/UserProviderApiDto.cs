@@ -16,3 +16,10 @@ namespace IdentityServer.Admin.Api.Dtos.Users
         public string ProviderDisplayName { get; set; }
     }
 }
+
+
+
+
+
+
+

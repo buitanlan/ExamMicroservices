@@ -14,3 +14,10 @@ namespace IdentityServer.STS.Identity.ViewModels.Device
         public bool ConfirmUserCode { get; set; }
     }
 }
+
+
+
+
+
+
+
