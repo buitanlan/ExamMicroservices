@@ -63,8 +63,8 @@
         ],
         "ApiScopes": [
             {
-                "Name": "skoruba_identity_admin_api",
-                "DisplayName": "skoruba_identity_admin_api",
+                "Name": "exam_api",
+                "DisplayName": "exam_api",
                 "Required": true,
                 "UserClaims": [
                     "role",
@@ -74,35 +74,36 @@
         ],
         "ApiResources": [
             {
-                "Name": "skoruba_identity_admin_api",
+                "Name": "exam_api",
                 "Scopes": [
-                    "skoruba_identity_admin_api"
+                    "exam_api"
                 ]
             }
         ],
         "Clients": [
             {
-                "ClientId": "skoruba_identity_admin",
-                "ClientName": "skoruba_identity_admin",
-                "ClientUri": "https://localhost:44303",
+                "ClientId": "identity_admin",
+                "ClientName": "identity_admin",
+                "ClientUri": "https://localhost:6003",
                 "AllowedGrantTypes": [
                     "authorization_code"
                 ],
+                "AllowAccessTokensViaBrowser": true,
                 "RequirePkce": true,
                 "ClientSecrets": [
                     {
-                        "Value": "skoruba_admin_client_secret"
+                        "Value": "secret"
                     }
                 ],
                 "RedirectUris": [
-                    "https://localhost:44303/signin-oidc"
+                    "https://localhost:6003/signin-oidc"
                 ],
-                "FrontChannelLogoutUri": "https://localhost:44303/signout-oidc",
+                "FrontChannelLogoutUri": "https://localhost:6003/signout-oidc",
                 "PostLogoutRedirectUris": [
-                    "https://localhost:44303/signout-callback-oidc"
+                    "https://localhost:6003/signout-callback-oidc"
                 ],
                 "AllowedCorsOrigins": [
-                    "https://localhost:44303"
+                    "https://localhost:6003"
                 ],
                 "AllowedScopes": [
                     "openid",
@@ -112,22 +113,52 @@
                 ]
             },
             {
-                "ClientId": "skoruba_identity_admin_api_swaggerui",
-                "ClientName": "skoruba_identity_admin_api_swaggerui",
-                "AllowedGrantTypes": [
-                    "authorization_code"
+                "ClientId": "exam_web_app",
+                "ClientName": "Exam Web App Client",
+                "ClientUri": "https://localhost:6002",
+                "AllowedGrantTypes": ["authorization_code"],
+                "RequirePkce": true,
+                "ClientSecrets": [
+                    {
+                        "Value": "secret"
+                    }
                 ],
+                "RedirectUris": ["https://localhost:6002/signin-oidc"],
+                "FrontChannelLogoutUri": "https://localhost:6003/signout-oidc",
+                "PostLogoutRedirectUris": [
+                    "https://localhost:6002/signout-callback-oidc"
+                ],
+                "AllowedCorsOrigins": ["https://localhost:6002"],
+                "AllowedScopes": ["openid", "email", "profile", "roles"]
+            },
+            {
+                "ClientId": "exam_web_admin",
+                "ClientName": "Exam Web Admin Client",
+                "ClientUri": "https://localhost:6001",
+                "AllowedGrantTypes": ["authorization_code"],
+                "RequirePkce": true,
+                "ClientSecrets": [
+                    {
+                        "Value": "secret"
+                    }
+                ],
+                "RedirectUris": ["https://localhost:6001/signin-oidc"],
+                "FrontChannelLogoutUri": "https://localhost:6001/signout-oidc",
+                "PostLogoutRedirectUris": [
+                    "https://localhost:6001/signout-callback-oidc"
+                ],
+                "AllowedCorsOrigins": ["https://localhost:6001"],
+                "AllowedScopes": ["openid", "email", "profile", "roles"]
+            },
+            {
+                "ClientId": "exam_api_swaggerui",
+                "ClientName": "Exam API Swagger UI",
+                "AllowedGrantTypes": ["authorization_code"],
                 "RequireClientSecret": false,
                 "RequirePkce": true,
-                "RedirectUris": [
-                    "https://localhost:44302/swagger/oauth2-redirect.html"
-                ],
-                "AllowedScopes": [
-                    "skoruba_identity_admin_api"
-                ],
-                "AllowedCorsOrigins": [
-                    "https://localhost:44302"
-                ]
+                "RedirectUris": ["https://localhost:5002/swagger/oauth2-redirect.html"],
+                "AllowedScopes": ["exam_api"],
+                "AllowedCorsOrigins": ["https://localhost:5002"]
             }
         ]
     }
