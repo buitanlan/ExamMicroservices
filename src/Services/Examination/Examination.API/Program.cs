@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using System.Text.Json;
+using Examination.API.Filters;
 using Examination.Application.Commands.V1.StartExam;
 using Examination.Application.Mapping;
 using Examination.Domain.AggregateModels.ExamAggregate;
@@ -36,7 +37,43 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API V1", Version = "v1" });
     c.SwaggerDoc("v2", new OpenApiInfo { Title = "Examination.API V2", Version = "v2" });
-    
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows()
+        {
+            Implicit = new OpenApiOAuthFlow()
+            {
+                AuthorizationUrl = new Uri($"{builder.Configuration.GetValue<string>("IdentityUrl")}/connect/authorize"),
+                TokenUrl = new Uri($"{builder.Configuration.GetValue<string>("IdentityUrl")}/connect/token"),
+                Scopes = new Dictionary<string, string>()
+                {
+                    {"full_access", "Full Access"},
+                }
+            }
+        }
+    });
+    c.OperationFilter<AuthorizeCheckOperationFilter>();
+
+});
+var identityUrl = builder.Configuration.GetValue<string>("IdentityUrl");
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+        .AuthenticationScheme;
+    options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+        .AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = identityUrl;
+    options.RequireHttpsMetadata = false;
+    options.Audience = "exam_api";
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
 });
 builder.Services.AddApiVersioning(options =>
 {
@@ -92,7 +129,6 @@ using (var scope = app.Services.CreateScope())
     await ExamMongoDbSeeding.SeedAsync(mongoClient, settings);
 }
 
-app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -103,7 +139,6 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
     });
 }
-app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

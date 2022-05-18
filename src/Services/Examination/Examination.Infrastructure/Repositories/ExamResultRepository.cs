@@ -1,5 +1,4 @@
-﻿using Examination.Domain.AggregateModels.ExamAggregate;
-using Examination.Domain.AggregateModels.ExamResultAggregate;
+﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
 using Examination.Infrastructure.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Options;

@@ -25,7 +25,7 @@ public class Exam : Entity, IAggregateRoot
             (Name, ShortDesc, Content, NumberOfQuestions,
                     Duration, Questions, Level, DateCreated, OwnerUserId, NumberOfQuestionCorrectForPass,
                     IsTimeRestricted)
-                = (name, shortDesc, content, numberOfQuestions, duration, questions: enumerable, level, DateTime.UtcNow,
+                = (name, shortDesc, content, numberOfQuestions, duration, enumerable, level, DateTime.UtcNow,
                     ownerUserId,
                     numberOfQuestionCorrectForPass, isTimeRestricted);
         }

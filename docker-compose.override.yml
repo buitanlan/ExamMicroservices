@@ -1,16 +1,6 @@
 version: '3.9'
 
 services:
-#  examination.api:
-#    environment:
-#      - ASPNETCORE_ENVIRONMENT=Development
-#      - ASPNETCORE_URLS=https://+:443;http://+:80
-#    ports:
-#      - "80"
-#      - "443"
-#    volumes:
-#      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-  
   mongodb:
     container_name: mongo.db
     ports:
@@ -24,19 +14,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: tanlan
       MONGO_INITDB_ROOT_PASSWORD: admin1234
   
-  sqlserver:
-    container_name: sqlserver.db
-    ports:
-      - '1433:1433'
-    volumes:
-      - sqlserver-data:/var/lib/sqlserver/data
-    networks:
-      - exam
-    restart: always
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: Pa$$w0rd!
-      
   postgres:
     container_name: postgres.db
     environment:
@@ -49,3 +26,16 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     networks:
       - exam
+  seq:
+    container_name: seq
+    ports:
+      - "5341:80"
+    networks:
+      - exam
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINUSERNAME=tanlan
+      - SEQ_FIRSTRUN_ADMINPASSWORD=admin1234
+    restart: unless-stopped
+    volumes:
+      - seq_data:/var/lib/seq/data/

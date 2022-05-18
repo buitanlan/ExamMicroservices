@@ -63,16 +63,15 @@ public class Entity
 
             return _requestedHashCode.Value;
         }
-        else
-            return base.GetHashCode();
+
+        return base.GetHashCode();
 
     }
     public static bool operator==(Entity left, Entity right)
     {
-        if (Object.Equals(left, null))
-            return (Object.Equals(right, null)) ? true : false;
-        else
-            return left.Equals(right);
+        if (Equals(left, null))
+            return (Equals(right, null)) ? true : false;
+        return left.Equals(right);
     }
 
     public static bool operator !=(Entity left, Entity right)
