@@ -117,6 +117,7 @@
                 "ClientName": "Exam Web App Client",
                 "ClientUri": "https://localhost:6002",
                 "AllowedGrantTypes": ["authorization_code"],
+                "AllowAccessTokensViaBrowser": true,
                 "RequirePkce": true,
                 "ClientSecrets": [
                     {
@@ -136,6 +137,8 @@
                 "ClientName": "Exam Web Admin Client",
                 "ClientUri": "https://localhost:6001",
                 "AllowedGrantTypes": ["authorization_code"],
+                "AllowAccessTokensViaBrowser": true,
+                "AllowOfflineAccess": true,
                 "RequirePkce": true,
                 "ClientSecrets": [
                     {
@@ -153,7 +156,8 @@
             {
                 "ClientId": "exam_api_swaggerui",
                 "ClientName": "Exam API Swagger UI",
-                "AllowedGrantTypes": ["authorization_code"],
+                "AllowedGrantTypes": ["implicit"],
+                "AllowAccessTokensViaBrowser": true,
                 "RequireClientSecret": false,
                 "RequirePkce": true,
                 "RedirectUris": ["https://localhost:5002/swagger/oauth2-redirect.html"],
