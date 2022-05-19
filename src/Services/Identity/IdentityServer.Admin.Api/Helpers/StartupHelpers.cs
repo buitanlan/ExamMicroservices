@@ -310,7 +310,7 @@ public static class StartupHelpers
 
     public static void AddForwardHeaders(this IApplicationBuilder app)
     {
-        var forwardingOptions = new ForwardedHeadersOptions()
+        var forwardingOptions = new ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.All
         };

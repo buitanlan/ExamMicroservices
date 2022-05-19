@@ -11,9 +11,11 @@ using Examination.Infrastructure.Repositories;
 using Examination.Infrastructure.SeedWork;
 using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Serilog;
@@ -29,6 +31,8 @@ var password = builder.Configuration.GetValue<string>("DatabaseSettings:Password
 var server = builder.Configuration.GetValue<string>("DatabaseSettings:Server");
 var databaseName = builder.Configuration.GetValue<string>("DatabaseSettings:DatabaseName");
 var mongodbConnectionString = $@"mongodb://{user}:{password}@{server}/{databaseName}?authSource=admin";
+var identityUrl = builder.Configuration.GetValue<string>("IdentityUrl");
+
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongodbConnectionString));
 builder.Services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
 builder.Services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); });
@@ -40,15 +44,15 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.OAuth2,
-        Flows = new OpenApiOAuthFlows()
+        Flows = new OpenApiOAuthFlows
         {
-            Implicit = new OpenApiOAuthFlow()
+            Implicit = new OpenApiOAuthFlow
             {
-                AuthorizationUrl = new Uri($"{builder.Configuration.GetValue<string>("IdentityUrl")}/connect/authorize"),
-                TokenUrl = new Uri($"{builder.Configuration.GetValue<string>("IdentityUrl")}/connect/token"),
-                Scopes = new Dictionary<string, string>()
+                AuthorizationUrl = new Uri($"{identityUrl}/connect/authorize"),
+                TokenUrl = new Uri($"{identityUrl}/connect/token"),
+                Scopes = new Dictionary<string, string>
                 {
-                    {"full_access", "Full Access"},
+                    {"exam_api", "exam_api"},
                 }
             }
         }
@@ -56,19 +60,18 @@ builder.Services.AddSwaggerGen(c =>
     c.OperationFilter<AuthorizeCheckOperationFilter>();
 
 });
-var identityUrl = builder.Configuration.GetValue<string>("IdentityUrl");
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+    options.DefaultAuthenticateScheme = JwtBearerDefaults
         .AuthenticationScheme;
-    options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+    options.DefaultChallengeScheme = JwtBearerDefaults
         .AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     options.Authority = identityUrl;
     options.RequireHttpsMetadata = false;
     options.Audience = "exam_api";
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         ValidateIssuer = false,
@@ -135,6 +138,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
+        c.OAuthClientId("exam_api_swaggerui");
+        c.OAuthAppName("exam_api_swaggerui");
+        c.OAuthUsePkce();
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Examination.API v1");
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
     });
@@ -150,7 +156,7 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
-app.MapHealthChecks("/hc", new HealthCheckOptions()
+app.MapHealthChecks("/hc", new HealthCheckOptions
 {
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

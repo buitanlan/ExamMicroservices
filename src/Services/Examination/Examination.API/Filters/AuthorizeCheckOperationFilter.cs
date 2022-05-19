@@ -24,7 +24,7 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 
         operation.Security = new List<OpenApiSecurityRequirement>
         {
-            new OpenApiSecurityRequirement
+            new()
             {
                 [ oAuthScheme ] = new [] { "exam_api" }
             }
