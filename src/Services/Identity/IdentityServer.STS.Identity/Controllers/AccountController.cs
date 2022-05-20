@@ -485,7 +485,7 @@ public class AccountController<TUser, TKey> : Controller
             throw new InvalidOperationException(_localizer["Unable2FA"]);
         }
 
-        var model = new LoginWithRecoveryCodeViewModel()
+        var model = new LoginWithRecoveryCodeViewModel
         {
             ReturnUrl = returnUrl
         };
@@ -539,7 +539,7 @@ public class AccountController<TUser, TKey> : Controller
             throw new InvalidOperationException(_localizer["Unable2FA"]);
         }
 
-        var model = new LoginWith2faViewModel()
+        var model = new LoginWith2faViewModel
         {
             ReturnUrl = returnUrl,
             RememberMe = rememberMe

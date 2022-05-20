@@ -97,7 +97,7 @@ public static class StartupHelpers
     /// <param name="configuration"></param>
     public static void UseSecurityHeaders(this IApplicationBuilder app, IConfiguration configuration)
     {
-        var forwardingOptions = new ForwardedHeadersOptions()
+        var forwardingOptions = new ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.All
         };
