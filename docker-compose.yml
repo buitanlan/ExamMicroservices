@@ -3,13 +3,13 @@ version: '3.9'
 services:
   mongodb:
     image: mongo:latest
-    
+  
   postgres:
     image: postgres:latest
-    
+  
   seq:
     image: datalust/seq:latest
-      
+
 networks:
   exam:
     driver: bridge
