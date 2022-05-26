@@ -1,25 +1,25 @@
 ﻿{
-  "IdentityData": {
-    "Roles": [
-      {
-        "Name": "Administrator"
-      }
-    ],
-    "Users": [
-      {
-        "Username": "admin",
-        "Password": "Pa$$w0rd",
-        "Email": "admin@gmail.com",
-        "Roles": [
-          "Administrator"
-        ],
-        "Claims": [
-          {
-            "Type": "name",
-            "Value": "admin"
-          }
-        ]
-      }
-    ]
-  }
+	"IdentityData": {
+		"Roles": [
+			{
+				"Name": "Administrator"
+			}
+		],
+		"Users": [
+			{
+				"Username": "admin",
+				"Password": "Pa$$w0rd",
+				"Email": "admin@gmail.com",
+				"Roles": [
+					"Administrator"
+				],
+				"Claims": [
+					{
+						"Type": "name",
+						"Value": "admin"
+					}
+				]
+			}
+		]
+	}
 }
