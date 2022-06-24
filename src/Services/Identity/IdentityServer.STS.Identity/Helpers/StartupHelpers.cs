@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using IdentityServer.STS.Identity.Services;
 
 namespace IdentityServer.STS.Identity.Helpers;
 
@@ -365,6 +366,7 @@ public static class StartupHelpers
         }
 
         builder.AddExtensionGrantValidator<DelegationGrantValidator>();
+        builder.AddCustomUserStore();
 
         return builder;
     }

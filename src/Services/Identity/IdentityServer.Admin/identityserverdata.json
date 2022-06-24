@@ -147,9 +147,7 @@
 				"ClientId": "exam_web_admin",
 				"ClientName": "Exam Web Admin Client",
 				"ClientUri": "https://localhost:6001",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
+				"AllowedGrantTypes": ["password"],
 				"AllowAccessTokensViaBrowser": true,
 				"AllowOfflineAccess": true,
 				"RequirePkce": true,
@@ -168,12 +166,7 @@
 				"AllowedCorsOrigins": [
 					"https://localhost:6001"
 				],
-				"AllowedScopes": [
-					"openid",
-					"email",
-					"profile",
-					"roles"
-				]
+				"AllowedScopes": ["openid", "email", "profile", "roles", "offline_access"]
 			},
 			{
 				"ClientId": "exam_api_swaggerui",

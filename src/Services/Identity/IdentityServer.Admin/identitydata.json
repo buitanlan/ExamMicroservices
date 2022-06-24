@@ -17,6 +17,14 @@
 					{
 						"Type": "name",
 						"Value": "admin"
+					},
+					{
+						"Type": "given_name",
+						"Value": "Lan"
+					},
+					{
+						"Type": "family_name",
+						"Value": "Bui"
 					}
 				]
 			}
