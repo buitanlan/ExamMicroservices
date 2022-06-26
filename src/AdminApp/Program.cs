@@ -17,7 +17,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 
-builder.Services.AddScoped(sp => new HttpClient
+builder.Services.AddScoped(_ => new HttpClient
 {
     BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])
 });

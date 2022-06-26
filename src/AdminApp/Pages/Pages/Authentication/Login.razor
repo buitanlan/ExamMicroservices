@@ -1,8 +1,5 @@
 ﻿@page "/"
 @page "/pages/authentication/login"
-@using Microsoft.AspNetCore.Components
-@using AdminApp.Models
-@using AdminApp.Services.Interfaces
 @layout LoginLayout
 @inject NavigationManager NavigationManager;
 @inject IAuthService AuthService;
@@ -30,7 +27,7 @@
 </EditForm>
 @code {
 
-    LoginRequest model = new();
+    LoginRequest model = new LoginRequest();
     string errorMsg = string.Empty;
 
     string Password { get; set; } = "BMWvBPJXZu";
