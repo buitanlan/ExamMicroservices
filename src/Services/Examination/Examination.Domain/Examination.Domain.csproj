@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="10.0.1"/>
-        <PackageReference Include="MongoDB.Bson" Version="2.15.1"/>
+        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="MongoDB.Bson" Version="2.16.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\BuildingBlocks\Examination.Dtos\Examination.Dtos.csproj"/>
+        <ProjectReference Include="..\..\..\BuildingBlocks\Examination.Dtos\Examination.Dtos.csproj" />
     </ItemGroup>
 
 </Project>
