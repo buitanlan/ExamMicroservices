@@ -1,6 +1,6 @@
 ﻿using Examination.Dtos.Enums;
 
-namespace Examination.Dtos;
+namespace Examination.Dtos.Exams;
 
 public class ExamDto
 {

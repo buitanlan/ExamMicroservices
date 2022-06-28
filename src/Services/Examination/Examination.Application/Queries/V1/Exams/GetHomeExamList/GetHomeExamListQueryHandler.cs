@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.ExamAggregate;
-using Examination.Dtos;
+using Examination.Dtos.Exams;
 using MediatR;
 using MongoDB.Driver;
 
-namespace Examination.Application.Queries.V1.GetHomeExamList;
+namespace Examination.Application.Queries.V1.Exams.GetHomeExamList;
 
 public class GetHomeExamListQueryHandler: IRequestHandler<GetHomeExamListQuery, IEnumerable<ExamDto>>
 {

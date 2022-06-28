@@ -1,7 +1,7 @@
 ﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
 using MediatR;
 
-namespace Examination.Application.Commands.V1.StartExam;
+namespace Examination.Application.Commands.V1.Exams.StartExam;
 
 public class StartExamCommandHandler : IRequestHandler<StartExam.StartExamCommand, bool>
 {
