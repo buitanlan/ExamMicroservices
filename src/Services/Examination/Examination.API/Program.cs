@@ -1,8 +1,9 @@
 using System.Net.Mime;
 using System.Text.Json;
 using Examination.API.Filters;
-using Examination.Application.Commands.V1.StartExam;
+using Examination.Application.Commands.V1.Exams.StartExam;
 using Examination.Application.Mapping;
+using Examination.Domain.AggregateModels.CategoryAggregate;
 using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Domain.AggregateModels.ExamResultAggregate;
 using Examination.Domain.AggregateModels.UserAggregate;
@@ -106,6 +107,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddTransient<IExamRepository, ExamRepository>();
 builder.Services.AddTransient<IExamResultRepository, ExamResultRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddHealthChecks()
     .AddCheck("self", () => HealthCheckResult.Healthy())

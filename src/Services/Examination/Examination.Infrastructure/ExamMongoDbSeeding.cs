@@ -1,8 +1,8 @@
 ﻿using Examination.Domain.AggregateModels.CategoryAggregate;
 using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Domain.AggregateModels.QuestionAggregate;
-using Examination.Dtos.Enums;
 using Examination.Infrastructure.SeedWork;
+using Examination.Shared.Enums;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;

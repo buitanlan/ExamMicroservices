@@ -1,6 +1,6 @@
 ﻿using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Domain.SeedWord;
-using Examination.Dtos.Enums;
+using Examination.Shared.Enums;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Examination.Domain.AggregateModels.ExamAggregate;
