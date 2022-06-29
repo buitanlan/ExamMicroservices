@@ -1,5 +1,5 @@
 ﻿using Examination.Dtos.Categories;
-using Examination.Dtos.SeekWork;
+using Examination.Dtos.SeedWork;
 using MediatR;
 
 namespace Examination.Application.Queries.V1.Categories.GetCategoriesPaging;

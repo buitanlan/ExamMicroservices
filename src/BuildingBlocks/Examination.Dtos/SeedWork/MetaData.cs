@@ -1,4 +1,4 @@
-﻿namespace Examination.Dtos.SeekWork;
+﻿namespace Examination.Dtos.SeedWork;
 
 public class MetaData
 {

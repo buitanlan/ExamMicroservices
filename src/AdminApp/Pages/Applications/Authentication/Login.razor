@@ -38,7 +38,7 @@
 
     async Task HandleLogin()
     {
-        var result = await AuthService.Login(model);
+        var result = await AuthService.LoginAsync(model);
         if (result.IsError == false)
         {
             NavigationManager.NavigateTo("/personal/dashboard");

@@ -1,4 +1,4 @@
-﻿using Examination.Dtos.SeekWork;
+﻿using Examination.Dtos.SeedWork;
 
 namespace Examination.Dtos.Categories;
 
