@@ -1,4 +1,4 @@
-﻿namespace Examination.Dtos.Categories;
+﻿namespace Examination.Shared.Categories;
 
 public class CategoryDto
 {

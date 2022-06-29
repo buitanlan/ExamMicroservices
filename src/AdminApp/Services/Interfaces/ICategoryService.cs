@@ -1,5 +1,5 @@
-﻿using Examination.Dtos.Categories;
-using Examination.Dtos.SeedWork;
+﻿using Examination.Shared.Categories;
+using Examination.Shared.SeedWork;
 
 namespace AdminApp.Services.Interfaces;
 

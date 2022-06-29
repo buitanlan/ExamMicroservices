@@ -4,7 +4,6 @@
 using HealthChecks.UI.Client;
 using IdentityServer.Admin.Api.Configuration;
 using IdentityServer.Admin.Api.Configuration.Authorization;
-using IdentityServer.Admin.Api.Configuration.Constants;
 using IdentityServer.Admin.Api.ExceptionHandling;
 using IdentityServer.Admin.Api.Helpers;
 using IdentityServer.Admin.Api.Mappers;

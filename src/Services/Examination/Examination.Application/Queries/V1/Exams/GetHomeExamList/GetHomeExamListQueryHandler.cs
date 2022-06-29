@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.ExamAggregate;
-using Examination.Dtos.Exams;
+using Examination.Shared.Exams;
 using MediatR;
 using MongoDB.Driver;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.CategoryAggregate;
-using Examination.Dtos.Categories;
+using Examination.Shared.Categories;
 using MediatR;
 using MongoDB.Bson;
 using Serilog;

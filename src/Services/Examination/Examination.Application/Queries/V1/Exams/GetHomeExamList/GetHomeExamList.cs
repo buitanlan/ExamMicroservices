@@ -1,4 +1,4 @@
-﻿using Examination.Dtos.Exams;
+﻿using Examination.Shared.Exams;
 using MediatR;
 
 namespace Examination.Application.Queries.V1.Exams.GetHomeExamList;

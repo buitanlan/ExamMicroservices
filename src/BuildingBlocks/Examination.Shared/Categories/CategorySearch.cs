@@ -1,6 +1,6 @@
-﻿using Examination.Dtos.SeedWork;
+﻿using Examination.Shared.SeedWork;
 
-namespace Examination.Dtos.Categories;
+namespace Examination.Shared.Categories;
 
 public class CategorySearch : PagingParameters
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.CategoryAggregate;
-using Examination.Dtos.Categories;
-using Examination.Dtos.SeedWork;
+using Examination.Shared.Categories;
+using Examination.Shared.SeedWork;
 using MediatR;
 using MongoDB.Driver;
 using Serilog;

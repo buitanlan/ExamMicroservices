@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.CategoryAggregate;
 using Examination.Domain.AggregateModels.ExamAggregate;
-using Examination.Dtos;
-using Examination.Dtos.Categories;
-using Examination.Dtos.Exams;
+using Examination.Shared.Categories;
+using Examination.Shared.Exams;
 
 namespace Examination.Application.Mapping;
 

@@ -1,4 +1,4 @@
-﻿using Examination.Dtos.Categories;
+﻿using Examination.Shared.Categories;
 using MediatR;
 
 namespace Examination.Application.Queries.V1.Categories.GetCategoryById;

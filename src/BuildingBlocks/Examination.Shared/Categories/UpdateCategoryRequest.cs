@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Examination.Dtos.Categories;
+namespace Examination.Shared.Categories;
 
-public class CreateCategoryRequest
+public class UpdateCategoryRequest
 {
     [Required]
+    public string Id { set; get; }
+
+    [Required]
     public string Name { get; set; }
+
     [Required]
     public string UrlPath { get; set; }
 }

@@ -4,8 +4,8 @@ using Examination.Application.Commands.V1.Categories.DeleteCategory;
 using Examination.Application.Commands.V1.Categories.UpdateCategory;
 using Examination.Application.Queries.V1.Categories.GetCategoriesPaging;
 using Examination.Application.Queries.V1.Categories.GetCategoryById;
-using Examination.Dtos.Categories;
-using Examination.Dtos.SeedWork;
+using Examination.Shared.Categories;
+using Examination.Shared.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
-﻿using Examination.Dtos.Enums;
+﻿using Examination.Shared.Enums;
 
-namespace Examination.Dtos.Exams;
+namespace Examination.Shared.Exams;
 
 public class ExamDto
 {

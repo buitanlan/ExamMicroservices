@@ -19,7 +19,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{285AFCDA-5824-4F94-9EA5-CB0AFC3EBB3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examination.Dtos", "src\BuildingBlocks\Examination.Dtos\Examination.Dtos.csproj", "{7D9CEA46-A226-477E-90BC-F7C3A696CD4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examination.Shared", "src\BuildingBlocks\Examination.Shared\Examination.Shared.csproj", "{7D9CEA46-A226-477E-90BC-F7C3A696CD4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Admin", "src\Services\Identity\IdentityServer.Admin\IdentityServer.Admin.csproj", "{3B81718B-B346-4BC8-9636-559BE06B6DDB}"
 EndProject
