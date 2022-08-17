@@ -108,6 +108,8 @@ builder.Services.AddTransient<IExamRepository, ExamRepository>();
 builder.Services.AddTransient<IExamResultRepository, ExamResultRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IQuestionRepository, QuestionRepository>();
+
 
 builder.Services.AddHealthChecks()
     .AddCheck("self", () => HealthCheckResult.Healthy())

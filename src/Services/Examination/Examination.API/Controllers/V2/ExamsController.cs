@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Examination.API.Controllers.V2;
-
-[ApiVersion("2.0")]
 public class ExamsController : BaseController
 {
     private readonly IMediator _mediator;
