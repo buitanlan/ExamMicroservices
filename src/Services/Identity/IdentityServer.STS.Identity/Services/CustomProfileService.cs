@@ -36,9 +36,9 @@ public class CustomProfileService : IProfileService
         var roles = await _userManager.GetRolesAsync(user);
         var claims = new List<Claim>
         {
-            new Claim("role", string.Join(";",roles)),
-            new Claim("username", user.UserName),
-            new Claim("email", user.Email),
+            new("role", string.Join(";",roles)),
+            new("username", user.UserName),
+            new("email", user.Email),
 
         };
         claims.AddRange(claimsFromDb);

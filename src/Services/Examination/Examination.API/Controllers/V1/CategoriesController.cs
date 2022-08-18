@@ -11,10 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Examination.API.Controllers.V1;
 
-[Route("api/v{version:apiVersion}/[controller]")]
-[ApiController]
-[ApiVersion("1.0")]
-public class CategoriesController : ControllerBase
+public class CategoriesController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly ILogger<CategoriesController> _logger;

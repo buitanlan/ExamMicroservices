@@ -7,7 +7,7 @@ namespace Examination.Domain.AggregateModels.QuestionAggregate;
 public sealed class Question: Entity, IAggregateRoot
 {
     public Question(string id, string content, QuestionType questionType, Level level, string categoryId,
-        IEnumerable<Answer> answers, string explain, string ownerUserId = null)
+        List<Answer> answers, string explain, string ownerUserId = null)
     {
         if (answers == null && !answers.Any())
             throw new ArgumentNullException($"{nameof(answers)} can not be null.");
