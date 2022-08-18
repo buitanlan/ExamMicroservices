@@ -11,17 +11,17 @@ namespace Examination.Application.Queries.V1.Questions.GetQuestionsPaging;
 public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQuery, PagedList<QuestionDto>>
 {
 
-    private readonly IQuestionRepository _QuestionRepository;
+    private readonly IQuestionRepository _questionRepository;
     private readonly IClientSessionHandle _clientSessionHandle;
     private readonly IMapper _mapper;
 
     public GetQuestionsPagingQueryHandler(
-        IQuestionRepository QuestionRepository,
+        IQuestionRepository questionRepository,
         IMapper mapper,
         IClientSessionHandle clientSessionHandle
     )
     {
-        _QuestionRepository = QuestionRepository ?? throw new ArgumentNullException(nameof(QuestionRepository));
+        _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
         _clientSessionHandle = clientSessionHandle ?? throw new ArgumentNullException(nameof(_clientSessionHandle));
         _mapper = mapper;
 
@@ -31,10 +31,14 @@ public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQ
     {
         Log.Information("BEGIN: GetHomeExamListQueryHandler");
 
-        var result = await _QuestionRepository.GetQuestionsPagingAsync(request.SearchKeyword, request.PageIndex, request.PageSize);
-        var items = _mapper.Map<List<QuestionDto>>(result.Item1);
+        var result = await _questionRepository.GetQuestionsPagingAsync(request.CategoryId, 
+            request.SearchKeyword,
+            request.PageIndex,
+            request.PageSize);
+
+        var items = _mapper.Map<List<QuestionDto>>(result.Items);
 
         Log.Information("END: GetHomeExamListQueryHandler");
-        return new PagedList<QuestionDto>(items, result.Item2, request.PageIndex, request.PageSize);
+        return new PagedList<QuestionDto>(items, result.MetaData.TotalCount, request.PageIndex, request.PageSize);
     }
 }
