@@ -65,6 +65,10 @@
         <Folder Include="Dtos\Key\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="package-lock.json" />
+    </ItemGroup>
+
 </Project>
 
 
