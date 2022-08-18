@@ -19,7 +19,6 @@
 
     <ItemGroup>
         <Folder Include="Commands\V1\Exams" />
-        <Folder Include="Commands\V1\Questions\UpdateQuestion" />
         <Folder Include="Queries\V1\Exams" />
     </ItemGroup>
 
