@@ -4,6 +4,7 @@ using IdentityModel;
 using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace IdentityServer.STS.Identity.Services;
 
@@ -28,11 +29,11 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         var signInResult = await _signInManager.PasswordSignInAsync(context.UserName, context.Password, false, false);
         if (signInResult.Succeeded)
         {
-            _logger.LogError("Login from Resource Owner Password is success");
+            Log.Fatal("Login from Resource Owner Password is success");
 
             var user = await _userManager.FindByNameAsync(context.UserName);
             context.Result = new GrantValidationResult(user.Id, OidcConstants.AuthenticationMethods.Password);
         }
-        _logger.LogError("Login from Resource Owner Password is failed");
+        Log.Fatal("Login from Resource Owner Password is failed");
     }
 }

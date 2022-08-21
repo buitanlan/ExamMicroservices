@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Shared.Questions;
+using Examination.Shared.SeedWork;
 using MediatR;
 using MongoDB.Bson;
 using Serilog;
 
 namespace Examination.Application.Commands.V1.Questions.CreateQuestion;
 
-public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, QuestionDto>
+public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, ApiResult<QuestionDto>>
 {
     private readonly IQuestionRepository _questionRepository;
     private readonly IMapper _mapper;
@@ -22,7 +23,7 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
 
     }
 
-    public async Task<QuestionDto> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResult<QuestionDto>> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
     {
         var itemToAdd = await _questionRepository.GetQuestionsByIdAsync(request.Content);
         if (itemToAdd != null)
@@ -40,15 +41,9 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
             request.CategoryId,
             answers,
             request.Explain, null);
-        try
-        {
-            await _questionRepository.InsertAsync(itemToAdd);
-            return _mapper.Map<Question, QuestionDto>(itemToAdd);
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex.Message);
-            throw;
-        }
+    
+        await _questionRepository.InsertAsync(itemToAdd);
+        var result = _mapper.Map<Question, QuestionDto>(itemToAdd);
+        return new ApiSuccessResult<QuestionDto>(result);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Examination.Domain.AggregateModels.CategoryAggregate;
 using Examination.Infrastructure.SeedWork;
+using Examination.Shared.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -29,7 +30,7 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
         return await Collection.Find(filter).FirstOrDefaultAsync();
     }
 
-    public async Task<Tuple<List<Category>, long>> GetCategoriesPagingAsync(string searchKeyword, int pageIndex, int pageSize)
+    public async Task<PagedList<Category>> GetCategoriesPagingAsync(string searchKeyword, int pageIndex, int pageSize)
     {
         var filter = Builders<Category>.Filter.Empty;
         if (!string.IsNullOrEmpty(searchKeyword))
@@ -41,6 +42,14 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
             .Limit(pageSize)
             .ToListAsync();
 
-        return new Tuple<List<Category>, long>(items, totalRow);
+        return new PagedList<Category>(items, totalRow, pageIndex, pageSize);
+    }
+
+    public async Task<List<Category>> GetAllCategoriesAsync()
+    {
+        var items = await Collection.AsQueryable()
+            .ToListAsync();
+
+        return items;
     }
 }

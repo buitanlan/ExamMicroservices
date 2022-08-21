@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -173,7 +174,7 @@ public class ManageController<TUser, TKey> : Controller
         }
 
         await _signInManager.RefreshSignInAsync(user);
-        _logger.LogInformation(_localizer["PasswordChangedLog", user.UserName]);
+        Log.Information(_localizer["PasswordChangedLog", user.UserName]);
 
         StatusMessage = _localizer["PasswordChanged"];
 
@@ -250,7 +251,7 @@ public class ManageController<TUser, TKey> : Controller
             return NotFound(_localizer["UserNotFound", _userManager.GetUserId(User)]);
         }
 
-        _logger.LogInformation(_localizer["AskForPersonalDataLog"], _userManager.GetUserId(User));
+        Log.Information(_localizer["AskForPersonalDataLog"], _userManager.GetUserId(User));
 
         var personalDataProps = typeof(TUser).GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
         var personalData = personalDataProps.ToDictionary(p => p.Name, p => p.GetValue(user)?.ToString() ?? "null");
@@ -305,7 +306,7 @@ public class ManageController<TUser, TKey> : Controller
 
         await _signInManager.SignOutAsync();
 
-        _logger.LogInformation(_localizer["DeletePersonalData"], userId);
+        Log.Information(_localizer["DeletePersonalData"], userId);
 
         return Redirect("~/");
     }
@@ -417,7 +418,7 @@ public class ManageController<TUser, TKey> : Controller
 
         var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
 
-        _logger.LogInformation(_localizer["UserGenerated2FACodes", user.Id]);
+        Log.Information(_localizer["UserGenerated2FACodes", user.Id]);
 
         var model = new ShowRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
 
@@ -507,7 +508,7 @@ public class ManageController<TUser, TKey> : Controller
             throw new ApplicationException(_localizer["ErrorDisable2FA", user.Id]);
         }
 
-        _logger.LogInformation(_localizer["SuccessDisabled2FA", user.Id]);
+        Log.Information(_localizer["SuccessDisabled2FA", user.Id]);
 
         return RedirectToAction(nameof(TwoFactorAuthentication));
     }
@@ -524,7 +525,7 @@ public class ManageController<TUser, TKey> : Controller
 
         await _userManager.SetTwoFactorEnabledAsync(user, false);
         await _userManager.ResetAuthenticatorKeyAsync(user);
-        _logger.LogInformation(_localizer["SuccessResetAuthenticationKey", user.Id]);
+        Log.Information(_localizer["SuccessResetAuthenticationKey", user.Id]);
 
         return RedirectToAction(nameof(EnableAuthenticator));
     }
@@ -581,7 +582,7 @@ public class ManageController<TUser, TKey> : Controller
         await _userManager.SetTwoFactorEnabledAsync(user, true);
         var userId = await _userManager.GetUserIdAsync(user);
 
-        _logger.LogInformation(_localizer["SuccessUserEnabled2FA"], userId);
+        Log.Information(_localizer["SuccessUserEnabled2FA"], userId);
 
         StatusMessage = _localizer["AuthenticatorVerified"];
 

@@ -2,37 +2,37 @@
 using Examination.Application.Commands.V1.Categories.CreateCategory;
 using Examination.Application.Commands.V1.Categories.DeleteCategory;
 using Examination.Application.Commands.V1.Categories.UpdateCategory;
+using Examination.Application.Queries.V1.Categories.GetAllCategories;
 using Examination.Application.Queries.V1.Categories.GetCategoriesPaging;
 using Examination.Application.Queries.V1.Categories.GetCategoryById;
 using Examination.Shared.Categories;
 using Examination.Shared.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Examination.API.Controllers.V1;
 
 public class CategoriesController : BaseController
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(IMediator mediator, ILogger<CategoriesController> logger)
+        public CategoriesController(IMediator mediator)
         {
             _mediator = mediator;
-            _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("paging")]
         [ProducesResponseType(typeof(PagedList<CategoryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCategoriesPagingAsync([FromQuery] GetCategoriesPagingQuery query)
         {
-            _logger.LogInformation("BEGIN: GetCategoriesPagingAsync");
+            Log.Information("BEGIN: GetCategoriesPagingAsync");
 
-            var queryResult = await _mediator.Send(query);
+            var result  = await _mediator.Send(query);
 
-            _logger.LogInformation("END: GetCategoriesPagingAsync");
+            Log.Information("END: GetCategoriesPagingAsync");
 
-            return Ok(queryResult);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -40,12 +40,12 @@ public class CategoriesController : BaseController
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCategoriesByIdAsync(string id)
         {
-            _logger.LogInformation("BEGIN: GetCategoriesByIdAsync");
+            Log.Information("BEGIN: GetCategoriesByIdAsync");
 
-            var queryResult = await _mediator.Send(new GetCategoryByIdQuery(id));
+            var result = await _mediator.Send(new GetCategoryByIdQuery(id));
 
-            _logger.LogInformation("END: GetCategoriesByIdAsync");
-            return Ok(queryResult);
+            Log.Information("END: GetCategoriesByIdAsync");
+            return Ok(result);
         }
 
         [HttpPut]
@@ -53,17 +53,17 @@ public class CategoriesController : BaseController
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateCategoryRequest request)
         {
-            _logger.LogInformation("BEGIN: UpdateCategoryAsync");
+            Log.Information("BEGIN: UpdateCategoryAsync");
 
-            var queryResult = await _mediator.Send(new UpdateCategoryCommand()
+            var result = await _mediator.Send(new UpdateCategoryCommand()
             {
                 Id = request.Id,
                 Name = request.Name,
                 UrlPath = request.UrlPath
             });
 
-            _logger.LogInformation("END: UpdateCategoryAsync");
-            return Ok(queryResult);
+            Log.Information("END: UpdateCategoryAsync");
+            return Ok(result);
         }
 
         [HttpPost]
@@ -71,18 +71,19 @@ public class CategoriesController : BaseController
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateCategoryAsync([FromBody] CreateCategoryRequest request)
         {
-            _logger.LogInformation("BEGIN: CreateCategoryAsync");
+            Log.Information("BEGIN: CreateCategoryAsync");
 
-            var queryResult = await _mediator.Send(new CreateCategoryCommand()
+            var result = await _mediator.Send(new CreateCategoryCommand
             {
                 Name = request.Name,
                 UrlPath = request.UrlPath
             });
-            if (queryResult == null)
+            if (result is null)
+            {
                 return BadRequest();
-
-            _logger.LogInformation("END: CreateCategoryAsync");
-            return Ok(queryResult);
+            }
+            Log.Information("END: CreateCategoryAsync");
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
@@ -90,11 +91,24 @@ public class CategoriesController : BaseController
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> DeleteCategoryAsync(string id)
         {
-            _logger.LogInformation("BEGIN: GetExamList");
+            Log.Information("BEGIN: GetExamList");
 
-            var queryResult = await _mediator.Send(new DeleteCategoryCommand(id));
+            var result = await _mediator.Send(new DeleteCategoryCommand(id));
 
-            _logger.LogInformation("END: GetExamList");
-            return Ok(queryResult);
+            Log.Information("END: GetExamList");
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [ProducesResponseType(typeof(ApiSuccessResult<List<CategoryDto>>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAllCategoriesAsync()
+        {
+            Log.Information("BEGIN: GetAllCategoriesAsync");
+
+            var result = await _mediator.Send(new GetAllCategoriesQuery());
+
+            Log.Information("END: GetAllCategoriesAsync");
+
+            return Ok(result);
         }
     }

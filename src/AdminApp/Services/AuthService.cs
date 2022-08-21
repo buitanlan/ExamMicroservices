@@ -5,6 +5,7 @@ using AdminApp.Services.Interfaces;
 using Blazored.SessionStorage;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Components.Authorization;
+using Serilog;
 
 namespace AdminApp.Services
 {
@@ -56,7 +57,7 @@ namespace AdminApp.Services
 
         private async Task<TokenResponse> RequestTokenAsync(string user, string password)
         {
-            _logger.LogInformation("begin RequestTokenAsync");
+            Log.Information("begin RequestTokenAsync");
             var response = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = _disco.TokenEndpoint,

@@ -1,10 +1,11 @@
 ﻿using Examination.Domain.AggregateModels.CategoryAggregate;
+using Examination.Shared.SeedWork;
 using MediatR;
 using Serilog;
 
 namespace Examination.Application.Commands.V1.Categories.UpdateCategory;
 
-public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand, bool>
+public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand, ApiResult<bool>>
 {
     private readonly ICategoryRepository _categoryRepository;
 
@@ -14,28 +15,21 @@ public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand
 
     }
 
-    public async Task<bool> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResult<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         var itemToUpdate = await _categoryRepository.GetCategoriesByIdAsync(request.Id);
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
-            return false;
+            return new ApiErrorResult<bool>($"Item is not found {request.Id}");
         }
 
         itemToUpdate.Name = request.Name;
         itemToUpdate.UrlPath = request.UrlPath;
-        try
-        {
-            await _categoryRepository.UpdateAsync(itemToUpdate);
-        }
-        catch (Exception ex)
-        {
+      
+        await _categoryRepository.UpdateAsync(itemToUpdate);
+       
 
-            Log.Fatal(ex.Message);
-            throw;
-        }
-
-        return true;
+        return new ApiSuccessResult<bool>(true, "Update successful");
     }
 }

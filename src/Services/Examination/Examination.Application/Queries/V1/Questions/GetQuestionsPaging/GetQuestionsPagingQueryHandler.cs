@@ -8,7 +8,7 @@ using Serilog;
 
 namespace Examination.Application.Queries.V1.Questions.GetQuestionsPaging;
 
-public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQuery, PagedList<QuestionDto>>
+public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQuery, ApiResult<PagedList<QuestionDto>>>
 {
 
     private readonly IQuestionRepository _questionRepository;
@@ -27,7 +27,7 @@ public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQ
 
     }
 
-    public async Task<PagedList<QuestionDto>> Handle(GetQuestionsPagingQuery request, CancellationToken cancellationToken)
+    public async Task<ApiResult<PagedList<QuestionDto>>> Handle(GetQuestionsPagingQuery request, CancellationToken cancellationToken)
     {
         Log.Information("BEGIN: GetHomeExamListQueryHandler");
 
@@ -35,10 +35,11 @@ public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQ
             request.SearchKeyword,
             request.PageIndex,
             request.PageSize);
-
         var items = _mapper.Map<List<QuestionDto>>(result.Items);
 
+        var pagedItems = new PagedList<QuestionDto>(items, result.MetaData.TotalCount, request.PageIndex, request.PageSize);
+
         Log.Information("END: GetHomeExamListQueryHandler");
-        return new PagedList<QuestionDto>(items, result.MetaData.TotalCount, request.PageIndex, request.PageSize);
+        return new ApiSuccessResult<PagedList<QuestionDto>>(pagedItems);
     }
 }

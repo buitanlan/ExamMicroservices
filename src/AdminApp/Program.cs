@@ -8,6 +8,8 @@ using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
+using Serilog;
+using Serilog.Core;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -19,6 +21,13 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 
+var levelSwitch = new LoggingLevelSwitch();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.ControlledBy(levelSwitch)
+    .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
+    .CreateLogger();
+
+builder.Logging.AddSerilog();
 builder.Services.AddScoped(_ => new HttpClient
 {
     BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])

@@ -29,6 +29,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -294,7 +295,7 @@ public class AccountController<TUser, TKey> : Controller
                     catch (Exception ex)
                     {
                         // in case of multiple users with the same email this method would throw and reveal that the email is registered
-                        _logger.LogError("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
+                        Log.Fatal("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
                         user = null;
                     }
                     break;
@@ -305,7 +306,7 @@ public class AccountController<TUser, TKey> : Controller
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
+                        Log.Fatal("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
                         user = null;
                     }
                     break;
