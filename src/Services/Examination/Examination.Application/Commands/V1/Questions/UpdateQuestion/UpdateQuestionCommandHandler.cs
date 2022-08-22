@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Shared.Questions;
+using Examination.Shared.SeedWork;
 using MediatR;
 using Serilog;
 
 namespace Examination.Application.Commands.V1.Questions.UpdateQuestion;
 
-public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionCommand, bool>
+public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionCommand, ApiResult<bool>>
 {
     private readonly IQuestionRepository _questionRepository;
     private readonly IMapper _mapper;
@@ -18,13 +19,13 @@ public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionComman
 
     }
 
-    public async Task<bool> Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResult<bool>> Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
     {
         var itemToUpdate = await _questionRepository.GetQuestionsByIdAsync(request.Id);
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
-            return false;
+            return new ApiErrorResult<bool>($"Item is not found {request.Id}");
         }
 
         itemToUpdate.Content = request.Content;
@@ -35,19 +36,8 @@ public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionComman
         itemToUpdate.Answers = answers;
 
         itemToUpdate.Explain = request.Explain;
-
-
-        try
-        {
-            await _questionRepository.UpdateAsync(itemToUpdate);
-        }
-        catch (Exception ex)
-        {
-
-            Log.Fatal(ex.Message);
-            throw;
-        }
-
-        return true;
+        
+        await _questionRepository.UpdateAsync(itemToUpdate);
+        return new ApiSuccessResult<bool>(true, "Delete successful");
     }
 }

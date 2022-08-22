@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using System.Text.Json;
+using Examination.API.Extensions;
 using Examination.API.Filters;
 using Examination.Application.Commands.V1.Exams.StartExam;
 using Examination.Application.Mapping;
@@ -39,6 +40,7 @@ builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongodbConnecti
 builder.Services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
 builder.Services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); });
 builder.Services.AddMediatR(typeof(StartExamCommandHandler).Assembly);
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API V1", Version = "v1" });
@@ -150,6 +152,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
     });
 }
+
+app.UseErrorWrapping();
 
 app.UseHttpsRedirection();
 

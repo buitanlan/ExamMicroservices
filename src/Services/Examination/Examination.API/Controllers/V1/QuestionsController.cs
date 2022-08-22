@@ -8,6 +8,7 @@ using Examination.Shared.Questions;
 using Examination.Shared.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Examination.API.Controllers.V1;
 
@@ -27,11 +28,11 @@ public class QuestionsController : BaseController
     [ProducesResponseType(typeof(PagedList<QuestionDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetQuestionsPagingAsync([FromQuery] GetQuestionsPagingQuery query)
     {
-        _logger.LogInformation("BEGIN: GetQuestionsPagingAsync");
+        Log.Information("BEGIN: GetQuestionsPagingAsync");
 
         var queryResult = await _mediator.Send(query);
 
-        _logger.LogInformation("END: GetQuestionsPagingAsync");
+        Log.Information("END: GetQuestionsPagingAsync");
 
         return Ok(queryResult);
     }
@@ -41,11 +42,11 @@ public class QuestionsController : BaseController
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetQuestionsByIdAsync(string id)
     {
-        _logger.LogInformation("BEGIN: GetQuestionsByIdAsync");
+        Log.Information("BEGIN: GetQuestionsByIdAsync");
 
         var queryResult = await _mediator.Send(new GetQuestionByIdQuery(id));
 
-        _logger.LogInformation("END: GetQuestionsByIdAsync");
+        Log.Information("END: GetQuestionsByIdAsync");
         return Ok(queryResult);
     }
 
@@ -54,7 +55,7 @@ public class QuestionsController : BaseController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> UpdateQuestionAsync([FromBody] UpdateQuestionRequest request)
     {
-        _logger.LogInformation("BEGIN: UpdateQuestionAsync");
+        Log.Information("BEGIN: UpdateQuestionAsync");
         var queryResult = await _mediator.Send(new UpdateQuestionCommand()
         {
             Id = request.Id,
@@ -66,7 +67,7 @@ public class QuestionsController : BaseController
             Explain = request.Explain
         });
 
-        _logger.LogInformation("END: UpdateQuestionAsync");
+        Log.Information("END: UpdateQuestionAsync");
         return Ok(queryResult);
     }
 
@@ -75,7 +76,7 @@ public class QuestionsController : BaseController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> CreateQuestionAsync([FromBody] CreateQuestionRequest request)
     {
-        _logger.LogInformation("BEGIN: CreateQuestionAsync");
+        Log.Information("BEGIN: CreateQuestionAsync");
 
         var queryResult = await _mediator.Send(new CreateQuestionCommand()
         {
@@ -89,7 +90,7 @@ public class QuestionsController : BaseController
         if (queryResult == null)
             return BadRequest();
 
-        _logger.LogInformation("END: CreateQuestionAsync");
+        Log.Information("END: CreateQuestionAsync");
         return Ok(queryResult);
     }
 
@@ -98,11 +99,11 @@ public class QuestionsController : BaseController
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteQuestionAsync(string id)
     {
-        _logger.LogInformation("BEGIN: GetExamList");
+        Log.Information("BEGIN: GetExamList");
 
         var queryResult = await _mediator.Send(new DeleteQuestionCommand(id));
 
-        _logger.LogInformation("END: GetExamList");
+        Log.Information("END: GetExamList");
         return Ok(queryResult);
     }
 }

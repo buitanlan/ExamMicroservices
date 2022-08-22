@@ -17,8 +17,8 @@ public class ExamsController : BaseController
     public async Task<IActionResult> GetExamList()
     {
         var query = new GetHomeExamListQuery();
-        var queryResult = await _mediator.Send(query);
-        return Ok(queryResult);
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 
 }

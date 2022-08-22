@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -31,7 +32,6 @@ public class ConsentController : Controller
 {
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
-    private readonly ILogger<ConsentController> _logger;
 
     public ConsentController(
         IIdentityServerInteractionService interaction,
@@ -40,7 +40,6 @@ public class ConsentController : Controller
     {
         _interaction = interaction;
         _events = events;
-        _logger = logger;
     }
 
     /// <summary>
@@ -173,10 +172,8 @@ public class ConsentController : Controller
         {
             return CreateConsentViewModel(model, returnUrl, request);
         }
-        else
-        {
-            _logger.LogError("No consent request matching request: {0}", returnUrl);
-        }
+
+        Log.Fatal("No consent request matching request: {0}", returnUrl);
 
         return null;
     }
