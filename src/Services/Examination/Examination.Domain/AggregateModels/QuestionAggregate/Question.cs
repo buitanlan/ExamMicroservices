@@ -4,10 +4,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Examination.Domain.AggregateModels.QuestionAggregate;
 
-public sealed class Question: Entity, IAggregateRoot
+public sealed class Question : Entity, IAggregateRoot
 {
     public Question(string id, string content, QuestionType questionType, Level level, string categoryId,
-        List<Answer> answers, string explain, string ownerUserId = null)
+        List<Answer> answers, string explain, string ownerUserId = null, string categoryName = null)
     {
         if (answers == null && !answers.Any())
             throw new ArgumentNullException($"{nameof(answers)} can not be null.");
@@ -19,30 +19,21 @@ public sealed class Question: Entity, IAggregateRoot
             questionType, level, categoryId, answers, explain, DateTime.UtcNow, ownerUserId);
     }
 
-    [BsonElement("content")]
-    public string Content { get; set; }
+    [BsonElement("content")] public string Content { get; set; }
 
-    [BsonElement("questionType")]
-    public QuestionType QuestionType { get; set; }
+    [BsonElement("questionType")] public QuestionType QuestionType { get; set; }
 
-    [BsonElement("level")]
-    public Level Level { set; get; }
+    [BsonElement("level")] public Level Level { set; get; }
 
-    [BsonElement("categoryId")]
-    public string CategoryId { get; set; }
-    
-    [BsonElement("categoryName")]
-    public string CategoryName { get; set; }
+    [BsonElement("categoryId")] public string CategoryId { get; set; }
 
-    [BsonElement("answers")]
-    public IEnumerable<Answer> Answers { set; get; }
+    [BsonElement("categoryName")] public string CategoryName { get; set; }
 
-    [BsonElement("explain")]
-    public string Explain { get; set; }
+    [BsonElement("answers")] public IEnumerable<Answer> Answers { set; get; }
 
-    [BsonElement("dateCreated")]
-    public DateTime DateCreated { get; set; }
+    [BsonElement("explain")] public string Explain { get; set; }
 
-    [BsonElement("ownerUserId")]
-    public string OwnerUserId { get; set; }
+    [BsonElement("dateCreated")] public DateTime DateCreated { get; set; }
+
+    [BsonElement("ownerUserId")] public string OwnerUserId { get; set; }
 }

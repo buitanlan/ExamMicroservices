@@ -28,13 +28,19 @@ public class CategoryService : ICategoryService
         return result.IsSuccessStatusCode;
     }
 
-    public async Task<CategoryDto> GetCategoryByIdAsync(string id)
+    public async Task<ApiResult<List<CategoryDto>>> GetAllCategoriesAsync()
     {
-        var result = await _httpClient.GetFromJsonAsync<CategoryDto>($"/api/v1/categories/{id}");
+        var result = await _httpClient.GetFromJsonAsync<ApiSuccessResult<List<CategoryDto>>>($"/api/v1/categories");
         return result;
     }
 
-    public async Task<PagedList<CategoryDto>> GetCategoriesPagingAsync(CategorySearch searchInput)
+    public async Task<ApiResult<CategoryDto>> GetCategoryByIdAsync(string id)
+    {
+        var result = await _httpClient.GetFromJsonAsync<ApiResult<CategoryDto>>($"/api/v1/categories/{id}");
+        return result;
+    }
+
+    public async Task<ApiResult<PagedList<CategoryDto>>> GetCategoriesPagingAsync(CategorySearch searchInput)
     {
         var queryStringParam = new Dictionary<string, string>
         {
@@ -46,9 +52,9 @@ public class CategoryService : ICategoryService
             queryStringParam.Add("searchKeyword", searchInput.Name);
 
 
-        string url = QueryHelpers.AddQueryString("/api/v1/categories", queryStringParam);
+        string url = QueryHelpers.AddQueryString("/api/v1/categories/paging", queryStringParam);
 
-        var result = await _httpClient.GetFromJsonAsync<PagedList<CategoryDto>>(url);
+        var result = await _httpClient.GetFromJsonAsync<ApiSuccessResult<PagedList<CategoryDto>>>(url);
         return result;
     }
 
