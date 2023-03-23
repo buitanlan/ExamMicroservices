@@ -42,7 +42,7 @@
     bool loading = false;
     [Parameter]
     public string Id { set; get; }
-    UpdateCategoryRequest model = new UpdateCategoryRequest();
+    UpdateCategoryRequest model = new();
     protected override async Task OnInitializedAsync()
     {
         await LoadItemDetails(Id);

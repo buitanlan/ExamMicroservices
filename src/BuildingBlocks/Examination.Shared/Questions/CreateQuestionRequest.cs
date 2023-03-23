@@ -18,7 +18,7 @@ public class CreateQuestionRequest
     public string CategoryId { get; set; }
 
     [Required]
-    public List<AnswerDto> Answers { set; get; } = new List<AnswerDto>();
+    public List<AnswerDto> Answers { set; get; } = new();
 
     public string Explain { get; set; }
 }

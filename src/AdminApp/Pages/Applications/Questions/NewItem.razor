@@ -84,9 +84,9 @@
     bool loading = false;
     [Parameter]
     public string Id { set; get; }
-    CreateQuestionRequest model = new CreateQuestionRequest();
-    List<CategoryDto> categories = new List<CategoryDto>();
-    List<AnswerDto> answers = new List<AnswerDto>();
+    CreateQuestionRequest model = new();
+    List<CategoryDto> categories = new();
+    List<AnswerDto> answers = new();
 
     protected async override Task OnInitializedAsync()
     {
