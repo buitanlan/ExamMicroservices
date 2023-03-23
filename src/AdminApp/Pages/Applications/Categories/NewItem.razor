@@ -40,7 +40,7 @@
     bool loading = false;
     [Parameter]
     public string Id { set; get; }
-    CreateCategoryRequest model = new CreateCategoryRequest();
+    CreateCategoryRequest model = new();
 
     private async Task OnValidSubmit(EditContext context)
     {

@@ -29,7 +29,7 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 
             operation.Security = new List<OpenApiSecurityRequirement>
             {
-                new OpenApiSecurityRequirement
+                new()
                 {
                     [
                         new OpenApiSecurityScheme {Reference = new OpenApiReference
