@@ -45,10 +45,7 @@
         <ProjectReference Include="..\IdentityServer.Admin.EntityFramework.PostgreSQL\IdentityServer.Admin.EntityFramework.PostgreSQL.csproj" />
         <ProjectReference Include="..\IdentityServer.Shared\IdentityServer.Shared.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Helpers\" />
-    </ItemGroup>
+    
 
 </Project>
 
