@@ -4,22 +4,21 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
-using IdentityServer.STS.Identity.Configuration;
-using IdentityServer.STS.Identity.Helpers;
-using IdentityServer.STS.Identity.ViewModels.Consent;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Serilog;
+using IdentityServer.STS.Identity.Configuration;
+using IdentityServer.STS.Identity.Helpers;
+using IdentityServer.STS.Identity.ViewModels.Consent;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -32,6 +31,7 @@ public class ConsentController : Controller
 {
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
+    private readonly ILogger<ConsentController> _logger;
 
     public ConsentController(
         IIdentityServerInteractionService interaction,
@@ -40,6 +40,7 @@ public class ConsentController : Controller
     {
         _interaction = interaction;
         _events = events;
+        _logger = logger;
     }
 
     /// <summary>
@@ -172,8 +173,10 @@ public class ConsentController : Controller
         {
             return CreateConsentViewModel(model, returnUrl, request);
         }
-
-        Log.Fatal("No consent request matching request: {0}", returnUrl);
+        else
+        {
+            _logger.LogError("No consent request matching request: {0}", returnUrl);
+        }
 
         return null;
     }

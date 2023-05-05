@@ -7,5 +7,5 @@ namespace IdentityServer.Shared.Dtos.Identity;
 
 public class IdentityRoleClaimsDto : RoleClaimsDto<IdentityRoleClaimDto, string>
 {
-
+        
 }

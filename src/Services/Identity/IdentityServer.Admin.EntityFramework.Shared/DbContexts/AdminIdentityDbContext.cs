@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using IdentityServer.Admin.EntityFramework.Shared.Constants;
-using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using IdentityServer.Admin.EntityFramework.Shared.Constants;
+using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
 
 namespace IdentityServer.Admin.EntityFramework.Shared.DbContexts;
 
@@ -12,7 +12,7 @@ public class AdminIdentityDbContext : IdentityDbContext<UserIdentity, UserIdenti
 {
     public AdminIdentityDbContext(DbContextOptions<AdminIdentityDbContext> options) : base(options)
     {
-
+            
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

@@ -4,6 +4,12 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
@@ -11,10 +17,6 @@ using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
 using IdentityModel;
-using IdentityServer.STS.Identity.Configuration;
-using IdentityServer.STS.Identity.Helpers;
-using IdentityServer.STS.Identity.Helpers.Localization;
-using IdentityServer.STS.Identity.ViewModels.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +25,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
-using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Serilog;
+using IdentityServer.STS.Identity.Configuration;
+using IdentityServer.STS.Identity.Helpers;
+using IdentityServer.STS.Identity.Helpers.Localization;
+using IdentityServer.STS.Identity.ViewModels.Account;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -52,6 +51,7 @@ public class AccountController<TUser, TKey> : Controller
     private readonly RegisterConfiguration _registerConfiguration;
     private readonly IdentityOptions _identityOptions;
     private readonly ILogger<AccountController<TUser, TKey>> _logger;
+    private readonly IIdentityProviderStore _identityProviderStore;
 
     public AccountController(
         UserResolver<TUser> userResolver,
@@ -66,7 +66,8 @@ public class AccountController<TUser, TKey> : Controller
         LoginConfiguration loginConfiguration,
         RegisterConfiguration registerConfiguration,
         IdentityOptions identityOptions,
-        ILogger<AccountController<TUser, TKey>> logger)
+        ILogger<AccountController<TUser, TKey>> logger,
+        IIdentityProviderStore identityProviderStore)
     {
         _userResolver = userResolver;
         _userManager = userManager;
@@ -81,6 +82,7 @@ public class AccountController<TUser, TKey> : Controller
         _registerConfiguration = registerConfiguration;
         _identityOptions = identityOptions;
         _logger = logger;
+        _identityProviderStore = identityProviderStore;
     }
 
     /// <summary>
@@ -295,7 +297,7 @@ public class AccountController<TUser, TKey> : Controller
                     catch (Exception ex)
                     {
                         // in case of multiple users with the same email this method would throw and reveal that the email is registered
-                        Log.Fatal("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
+                        _logger.LogError("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
                         user = null;
                     }
                     break;
@@ -306,7 +308,7 @@ public class AccountController<TUser, TKey> : Controller
                     }
                     catch (Exception ex)
                     {
-                        Log.Fatal("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
+                        _logger.LogError("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
                         user = null;
                     }
                     break;
@@ -486,7 +488,7 @@ public class AccountController<TUser, TKey> : Controller
             throw new InvalidOperationException(_localizer["Unable2FA"]);
         }
 
-        var model = new LoginWithRecoveryCodeViewModel
+        var model = new LoginWithRecoveryCodeViewModel()
         {
             ReturnUrl = returnUrl
         };
@@ -540,7 +542,7 @@ public class AccountController<TUser, TKey> : Controller
             throw new InvalidOperationException(_localizer["Unable2FA"]);
         }
 
-        var model = new LoginWith2faViewModel
+        var model = new LoginWith2faViewModel()
         {
             ReturnUrl = returnUrl,
             RememberMe = rememberMe
@@ -728,6 +730,16 @@ public class AccountController<TUser, TKey> : Controller
                 DisplayName = x.DisplayName ?? x.Name,
                 AuthenticationScheme = x.Name
             }).ToList();
+
+        var dynamicSchemes = (await _identityProviderStore.GetAllSchemeNamesAsync())
+            .Where(x => x.Enabled)
+            .Select(x => new ExternalProvider
+            {
+                AuthenticationScheme = x.Scheme,
+                DisplayName = x.DisplayName
+            });
+
+        providers.AddRange(dynamicSchemes);
 
         var allowLocal = true;
         if (context?.Client.ClientId != null)

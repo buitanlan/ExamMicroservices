@@ -1,19 +1,19 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
-using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
-using IdentityServer.Admin.EntityFramework.Shared.Helpers;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
+using IdentityServer.Admin.EntityFramework.Shared.DbContexts;
+using IdentityServer.Admin.EntityFramework.Shared.Entities.Identity;
+using IdentityServer.Admin.EntityFramework.Shared.Helpers;
 using Skoruba.Duende.IdentityServer.Shared.Configuration.Helpers;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IdentityServer.Admin;
 
@@ -138,7 +138,8 @@ public class Program
                 configApp.AddCommandLine(args);
             })
             .ConfigureWebHostDefaults(webBuilder =>
-            {
+            { 
+                webBuilder.UseStaticWebAssets();
                 webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
                 webBuilder.UseStartup<Startup>();
             })

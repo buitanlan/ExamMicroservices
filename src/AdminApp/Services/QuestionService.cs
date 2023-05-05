@@ -4,58 +4,57 @@ using Examination.Shared.Questions;
 using Examination.Shared.SeedWork;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace AdminApp.Services
+namespace AdminApp.Services;
+
+public class QuestionService : IQuestionService
 {
-    public class QuestionService : IQuestionService
+    private readonly HttpClient _httpClient;
+
+    public QuestionService(HttpClient httpClient)
     {
-        private readonly HttpClient _httpClient;
+        _httpClient = httpClient;
+    }
 
-        public QuestionService(HttpClient httpClient)
+    public async Task<bool> CreateAsync(CreateQuestionRequest request)
+    {
+        var result = await _httpClient.PostAsJsonAsync("/api/v1/Questions", request);
+        return result.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> DeleteAsync(string id)
+    {
+        var result = await _httpClient.DeleteAsync($"/api/v1/Questions/{id}");
+        return result.IsSuccessStatusCode;
+    }
+
+    public async Task<ApiResult<QuestionDto>> GetQuestionByIdAsync(string id)
+    {
+        var result = await _httpClient.GetFromJsonAsync<ApiResult<QuestionDto>>($"/api/v1/Questions/{id}");
+        return result;
+    }
+
+    public async Task<ApiResult<PagedList<QuestionDto>>> GetQuestionsPagingAsync(QuestionSearch searchInput)        {
+        var queryStringParam = new Dictionary<string, string>
         {
-            _httpClient = httpClient;
-        }
+            ["pageIndex"] = searchInput.PageNumber.ToString(),
+            ["pageSize"] = searchInput.PageSize.ToString()
+        };
 
-        public async Task<bool> CreateAsync(CreateQuestionRequest request)
-        {
-            var result = await _httpClient.PostAsJsonAsync("/api/v1/Questions", request);
-            return result.IsSuccessStatusCode;
-        }
+        if (!string.IsNullOrEmpty(searchInput.Name))
+            queryStringParam.Add("searchKeyword", searchInput.Name);
 
-        public async Task<bool> DeleteAsync(string id)
-        {
-            var result = await _httpClient.DeleteAsync($"/api/v1/Questions/{id}");
-            return result.IsSuccessStatusCode;
-        }
+        if(!string.IsNullOrEmpty(searchInput.CategoryId))
+            queryStringParam.Add("categoryId", searchInput.CategoryId);
 
-        public async Task<ApiResult<QuestionDto>> GetQuestionByIdAsync(string id)
-        {
-            var result = await _httpClient.GetFromJsonAsync<ApiResult<QuestionDto>>($"/api/v1/Questions/{id}");
-            return result;
-        }
+        string url = QueryHelpers.AddQueryString("/api/v1/Questions/paging", queryStringParam);
 
-        public async Task<ApiResult<PagedList<QuestionDto>>> GetQuestionsPagingAsync(QuestionSearch searchInput)        {
-            var queryStringParam = new Dictionary<string, string>
-            {
-                ["pageIndex"] = searchInput.PageNumber.ToString(),
-                ["pageSize"] = searchInput.PageSize.ToString()
-            };
+        var result = await _httpClient.GetFromJsonAsync<ApiResult<PagedList<QuestionDto>>>(url);
+        return result;
+    }
 
-            if (!string.IsNullOrEmpty(searchInput.Name))
-                queryStringParam.Add("searchKeyword", searchInput.Name);
-
-            if(!string.IsNullOrEmpty(searchInput.CategoryId))
-                queryStringParam.Add("categoryId", searchInput.CategoryId);
-
-            string url = QueryHelpers.AddQueryString("/api/v1/Questions/paging", queryStringParam);
-
-            var result = await _httpClient.GetFromJsonAsync<ApiResult<PagedList<QuestionDto>>>(url);
-            return result;
-        }
-
-        public async Task<bool> UpdateAsync(UpdateQuestionRequest request)
-        {
-            var result = await _httpClient.PutAsJsonAsync($"/api/v1/Questions", request);
-            return result.IsSuccessStatusCode;
-        }
+    public async Task<bool> UpdateAsync(UpdateQuestionRequest request)
+    {
+        var result = await _httpClient.PutAsJsonAsync($"/api/v1/Questions", request);
+        return result.IsSuccessStatusCode;
     }
 }

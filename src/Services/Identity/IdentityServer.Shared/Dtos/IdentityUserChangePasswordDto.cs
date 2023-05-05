@@ -7,5 +7,5 @@ namespace IdentityServer.Shared.Dtos;
 
 public class IdentityUserChangePasswordDto : UserChangePasswordDto<string>
 {
-
+        
 }

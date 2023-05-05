@@ -1,20 +1,20 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using IdentityServer.Admin.Api.Configuration.Constants;
 using IdentityServer.Admin.Api.Dtos.Roles;
 using IdentityServer.Admin.Api.ExceptionHandling;
 using IdentityServer.Admin.Api.Helpers.Localization;
 using IdentityServer.Admin.Api.Resources;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace IdentityServer.Admin.Api.Controllers;
 
@@ -89,13 +89,13 @@ public class RolesController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<TRoleDto>> Post([FromBody] TRoleDto role)
+    public async Task<ActionResult<TRoleDto>> Post([FromBody]TRoleDto role)
     {
         if (!EqualityComparer<TKey>.Default.Equals(role.Id, default))
         {
             return BadRequest(_errorResources.CannotSetId());
         }
-
+ 
         var (identityResult, roleId) = await _identityService.CreateRoleAsync(role);
         var createdRole = await _identityService.GetRoleAsync(roleId.ToString());
 
@@ -103,7 +103,7 @@ public class RolesController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put([FromBody] TRoleDto role)
+    public async Task<IActionResult> Put([FromBody]TRoleDto role)
     {
         await _identityService.GetRoleAsync(role.Id.ToString());
         await _identityService.UpdateRoleAsync(role);
@@ -140,7 +140,7 @@ public class RolesController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPost("Claims")]
-    public async Task<IActionResult> PostRoleClaims([FromBody] RoleClaimApiDto<TKey> roleClaims)
+    public async Task<IActionResult> PostRoleClaims([FromBody]RoleClaimApiDto<TKey> roleClaims)
     {
         var roleClaimsDto = _mapper.Map<TRoleClaimsDto>(roleClaims);
 
@@ -155,7 +155,7 @@ public class RolesController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPut("Claims")]
-    public async Task<IActionResult> PutRoleClaims([FromBody] RoleClaimApiDto<TKey> roleClaims)
+    public async Task<IActionResult> PutRoleClaims([FromBody]RoleClaimApiDto<TKey> roleClaims)
     {
         var roleClaimsDto = _mapper.Map<TRoleClaimsDto>(roleClaims);
 
