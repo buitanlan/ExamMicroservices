@@ -7,5 +7,5 @@ namespace IdentityServer.Shared.Dtos.Identity;
 
 public class IdentityUserProvidersDto : UserProvidersDto<IdentityUserProviderDto, string>
 {
-
+        
 }

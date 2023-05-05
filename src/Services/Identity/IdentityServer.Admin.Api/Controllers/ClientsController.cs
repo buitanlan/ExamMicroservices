@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using IdentityServer.Admin.Api.Configuration.Constants;
 using IdentityServer.Admin.Api.Dtos.Clients;
 using IdentityServer.Admin.Api.ExceptionHandling;
 using IdentityServer.Admin.Api.Mappers;
 using IdentityServer.Admin.Api.Resources;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.Configuration;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace IdentityServer.Admin.Api.Controllers;
 
@@ -51,7 +51,7 @@ public class ClientsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Post([FromBody] ClientApiDto client)
+    public async Task<IActionResult> Post([FromBody]ClientApiDto client)
     {
         var clientDto = client.ToClientApiModel<ClientDto>();
 
@@ -67,7 +67,7 @@ public class ClientsController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put([FromBody] ClientApiDto client)
+    public async Task<IActionResult> Put([FromBody]ClientApiDto client)
     {
         var clientDto = client.ToClientApiModel<ClientDto>();
 
@@ -91,7 +91,7 @@ public class ClientsController : ControllerBase
     [HttpPost("Clone")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> PostClientClone([FromBody] ClientCloneApiDto client)
+    public async Task<IActionResult> PostClientClone([FromBody]ClientCloneApiDto client)
     {
         var clientCloneDto = client.ToClientApiModel<ClientCloneDto>();
 
@@ -123,7 +123,7 @@ public class ClientsController : ControllerBase
     [HttpPost("{id}/Secrets")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> PostSecret(int id, [FromBody] ClientSecretApiDto clientSecretApi)
+    public async Task<IActionResult> PostSecret(int id, [FromBody]ClientSecretApiDto clientSecretApi)
     {
         var secretsDto = clientSecretApi.ToClientApiModel<ClientSecretsDto>();
         secretsDto.ClientId = id;
@@ -171,7 +171,7 @@ public class ClientsController : ControllerBase
     [HttpPost("{id}/Properties")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> PostProperty(int id, [FromBody] ClientPropertyApiDto clientPropertyApi)
+    public async Task<IActionResult> PostProperty(int id, [FromBody]ClientPropertyApiDto clientPropertyApi)
     {
         var clientPropertiesDto = clientPropertyApi.ToClientApiModel<ClientPropertiesDto>();
         clientPropertiesDto.ClientId = id;
@@ -219,7 +219,7 @@ public class ClientsController : ControllerBase
     [HttpPost("{id}/Claims")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> PostClaim(int id, [FromBody] ClientClaimApiDto clientClaimApiDto)
+    public async Task<IActionResult> PostClaim(int id, [FromBody]ClientClaimApiDto clientClaimApiDto)
     {
         var clientClaimsDto = clientClaimApiDto.ToClientApiModel<ClientClaimsDto>();
         clientClaimsDto.ClientId = id;

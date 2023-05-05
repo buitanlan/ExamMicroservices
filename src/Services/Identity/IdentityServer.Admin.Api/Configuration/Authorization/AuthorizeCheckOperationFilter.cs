@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace IdentityServer.Admin.Api.Configuration.Authorization;
 
@@ -29,7 +29,7 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 
             operation.Security = new List<OpenApiSecurityRequirement>
             {
-                new()
+                new OpenApiSecurityRequirement
                 {
                     [
                         new OpenApiSecurityScheme {Reference = new OpenApiReference

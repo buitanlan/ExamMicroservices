@@ -6,7 +6,7 @@ namespace IdentityServer.STS.Identity.Configuration.Constants;
 public class ConfigurationConsts
 {
     public const string AdminConnectionStringKey = "AdminConnection";
-
+        
     public const string ConfigurationDbConnectionStringKey = "ConfigurationDbConnection";
 
     public const string PersistedGrantDbConnectionStringKey = "PersistedGrantDbConnection";

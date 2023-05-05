@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.EntityFramework.Storage;
-using IdentityServer.STS.Identity.Configuration;
-using IdentityServer.STS.Identity.Configuration.ApplicationParts;
-using IdentityServer.STS.Identity.Configuration.Constants;
-using IdentityServer.STS.Identity.Configuration.Interfaces;
-using IdentityServer.STS.Identity.Helpers.Localization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
@@ -22,16 +21,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Tokens;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.Configuration;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Configuration.PostgreSQL;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Helpers;
 using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Interfaces;
 using Skoruba.Duende.IdentityServer.Shared.Configuration.Authentication;
 using Skoruba.Duende.IdentityServer.Shared.Configuration.Configuration.Identity;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using IdentityServer.STS.Identity.Configuration;
+using IdentityServer.STS.Identity.Configuration.ApplicationParts;
+using IdentityServer.STS.Identity.Configuration.Constants;
+using IdentityServer.STS.Identity.Configuration.Interfaces;
+using IdentityServer.STS.Identity.Helpers.Localization;
 using IdentityServer.STS.Identity.Services;
 
 namespace IdentityServer.STS.Identity.Helpers;
@@ -98,7 +99,7 @@ public static class StartupHelpers
     /// <param name="configuration"></param>
     public static void UseSecurityHeaders(this IApplicationBuilder app, IConfiguration configuration)
     {
-        var forwardingOptions = new ForwardedHeadersOptions
+        var forwardingOptions = new ForwardedHeadersOptions()
         {
             ForwardedHeaders = ForwardedHeaders.All
         };
@@ -288,6 +289,8 @@ public static class StartupHelpers
                 AuthenticationHelpers.CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
         });
 
+            
+
         services.Configure<IISOptions>(iis =>
         {
             iis.AuthenticationDisplayName = "Windows";
@@ -354,10 +357,18 @@ public static class StartupHelpers
 
         var identityServerOptions = configurationSection.Get<IdentityServerOptions>();
 
-        var builder = services.AddIdentityServer(options => configurationSection.Bind(options))
+        var builder = services.AddIdentityServer(options =>
+            {
+                configurationSection.Bind(options);
+
+                options.DynamicProviders.SignInScheme = IdentityConstants.ExternalScheme;
+                options.DynamicProviders.SignOutScheme = IdentityConstants.ApplicationScheme;
+            })
             .AddConfigurationStore<TConfigurationDbContext>()
             .AddOperationalStore<TPersistedGrantDbContext>()
             .AddAspNetIdentity<TUserIdentity>();
+
+        services.ConfigureOptions<OpenIdClaimsMappingConfig>();
 
         if (!identityServerOptions.KeyManagement.Enabled)
         {
@@ -366,7 +377,6 @@ public static class StartupHelpers
         }
 
         builder.AddExtensionGrantValidator<DelegationGrantValidator>();
-        builder.AddCustomUserStore();
 
         return builder;
     }

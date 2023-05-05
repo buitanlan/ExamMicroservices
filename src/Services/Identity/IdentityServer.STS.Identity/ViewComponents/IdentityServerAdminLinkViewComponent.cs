@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using IdentityServer.STS.Identity.Configuration.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using IdentityServer.STS.Identity.Configuration.Interfaces;
 
 namespace IdentityServer.STS.Identity.ViewComponents;
 

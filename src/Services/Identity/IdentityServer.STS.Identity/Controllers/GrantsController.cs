@@ -4,17 +4,17 @@
 // Original file: https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI
 // Modified by Jan Škoruba
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
-using IdentityServer.STS.Identity.Helpers;
-using IdentityServer.STS.Identity.ViewModels.Grants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using IdentityServer.STS.Identity.Helpers;
+using IdentityServer.STS.Identity.ViewModels.Grants;
 
 namespace IdentityServer.STS.Identity.Controllers;
 
@@ -75,7 +75,7 @@ public class GrantsController : Controller
             {
                 var resources = await _resources.FindResourcesByScopeAsync(grant.Scopes);
 
-                var item = new GrantViewModel
+                var item = new GrantViewModel()
                 {
                     ClientId = client.ClientId,
                     ClientName = client.ClientName ?? client.ClientId,

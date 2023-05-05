@@ -1,22 +1,22 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using IdentityServer.Admin.Api.Configuration.Constants;
 using IdentityServer.Admin.Api.Dtos.Roles;
 using IdentityServer.Admin.Api.Dtos.Users;
 using IdentityServer.Admin.Api.ExceptionHandling;
 using IdentityServer.Admin.Api.Helpers.Localization;
 using IdentityServer.Admin.Api.Resources;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace IdentityServer.Admin.Api.Controllers;
 
@@ -91,7 +91,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<TUserDto>> Post([FromBody] TUserDto user)
+    public async Task<ActionResult<TUserDto>> Post([FromBody]TUserDto user)
     {
         if (!EqualityComparer<TKey>.Default.Equals(user.Id, default))
         {
@@ -105,7 +105,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put([FromBody] TUserDto user)
+    public async Task<IActionResult> Put([FromBody]TUserDto user)
     {
         await _identityService.GetUserAsync(user.Id.ToString());
         await _identityService.UpdateUserAsync(user);
@@ -144,20 +144,20 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPost("Roles")]
-    public async Task<IActionResult> PostUserRoles([FromBody] UserRoleApiDto<TKey> role)
+    public async Task<IActionResult> PostUserRoles([FromBody]UserRoleApiDto<TKey> role)
     {
         var userRolesDto = _mapper.Map<TUserRolesDto>(role);
 
         await _identityService.GetUserAsync(userRolesDto.UserId.ToString());
         await _identityService.GetRoleAsync(userRolesDto.RoleId.ToString());
-
+            
         await _identityService.CreateUserRoleAsync(userRolesDto);
 
         return Ok();
     }
 
     [HttpDelete("Roles")]
-    public async Task<IActionResult> DeleteUserRoles([FromBody] UserRoleApiDto<TKey> role)
+    public async Task<IActionResult> DeleteUserRoles([FromBody]UserRoleApiDto<TKey> role)
     {
         var userRolesDto = _mapper.Map<TUserRolesDto>(role);
 
@@ -180,7 +180,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPost("Claims")]
-    public async Task<IActionResult> PostUserClaims([FromBody] UserClaimApiDto<TKey> claim)
+    public async Task<IActionResult> PostUserClaims([FromBody]UserClaimApiDto<TKey> claim)
     {
         var userClaimDto = _mapper.Map<TUserClaimsDto>(claim);
 
@@ -195,7 +195,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPut("Claims")]
-    public async Task<IActionResult> PutUserClaims([FromBody] UserClaimApiDto<TKey> claim)
+    public async Task<IActionResult> PutUserClaims([FromBody]UserClaimApiDto<TKey> claim)
     {
         var userClaimDto = _mapper.Map<TUserClaimsDto>(claim);
 
@@ -206,7 +206,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpDelete("{id}/Claims")]
-    public async Task<IActionResult> DeleteUserClaims([FromRoute] TKey id, int claimId)
+    public async Task<IActionResult> DeleteUserClaims([FromRoute]TKey id, int claimId)
     {
         var userClaimsDto = new TUserClaimsDto
         {
@@ -230,7 +230,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpDelete("Providers")]
-    public async Task<IActionResult> DeleteUserProviders([FromBody] UserProviderDeleteApiDto<TKey> provider)
+    public async Task<IActionResult> DeleteUserProviders([FromBody]UserProviderDeleteApiDto<TKey> provider)
     {
         var providerDto = _mapper.Map<TUserProviderDto>(provider);
 
@@ -241,7 +241,7 @@ public class UsersController<TUserDto, TRoleDto, TUser, TRole, TKey, TUserClaim,
     }
 
     [HttpPost("ChangePassword")]
-    public async Task<IActionResult> PostChangePassword([FromBody] UserChangePasswordApiDto<TKey> password)
+    public async Task<IActionResult> PostChangePassword([FromBody]UserChangePasswordApiDto<TKey> password)
     {
         var userChangePasswordDto = _mapper.Map<TUserChangePasswordDto>(password);
 

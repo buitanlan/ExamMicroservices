@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Jan Škoruba. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0.
 
-using IdentityModel;
-using IdentityServer.STS.Identity.Configuration.Constants;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using IdentityModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using IdentityServer.STS.Identity.Configuration.Constants;
 
 namespace IdentityServer.STS.Identity.Helpers;
 
@@ -178,7 +178,7 @@ public static class OpenIdClaimHelpers
     /// <param name="oldClaims"></param>
     /// <param name="newProfile"></param>
     /// <returns></returns>
-    public static IList<Tuple<Claim, Claim>> ExtractClaimsToReplace(IList<Claim> oldClaims, OpenIdProfile newProfile)
+    public static IList<Tuple<Claim,Claim>> ExtractClaimsToReplace(IList<Claim> oldClaims, OpenIdProfile newProfile)
     {
         var oldProfile = ExtractProfileInfo(oldClaims);
         var claimsToReplace = new List<Tuple<Claim, Claim>>();

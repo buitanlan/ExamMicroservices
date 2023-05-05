@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{2C19
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminApp", "src\AdminApp\AdminApp.csproj", "{EC9E5A35-95E5-4A0A-8071-8ADF26FD1150}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.API", "src\Services\Identity\IdentityServer.API\IdentityServer.API.csproj", "{ACDFE161-3F8E-4C8F-BCFA-D678B307F485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{EC9E5A35-95E5-4A0A-8071-8ADF26FD1150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC9E5A35-95E5-4A0A-8071-8ADF26FD1150}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC9E5A35-95E5-4A0A-8071-8ADF26FD1150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDFE161-3F8E-4C8F-BCFA-D678B307F485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDFE161-3F8E-4C8F-BCFA-D678B307F485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDFE161-3F8E-4C8F-BCFA-D678B307F485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDFE161-3F8E-4C8F-BCFA-D678B307F485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{1827172B-1AEF-44CE-B2F9-7C2657A65432} = {9D10A31A-97D4-4117-8CDC-ED14F6FDA98B}
 		{70DEBAC1-946D-4377-9213-F662E91CED23} = {9D10A31A-97D4-4117-8CDC-ED14F6FDA98B}
 		{EC9E5A35-95E5-4A0A-8071-8ADF26FD1150} = {2C191222-87B2-429C-B2E9-8674B7FF4A43}
+		{ACDFE161-3F8E-4C8F-BCFA-D678B307F485} = {9D10A31A-97D4-4117-8CDC-ED14F6FDA98B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E6CFDDC-0D95-4110-80A0-39505278BED9}
