@@ -2,11 +2,9 @@
 
 namespace Examination.Domain.Events;
 
-public class ExamStartedDomainEvent: INotification
+public class ExamStartedDomainEvent(string userId, string firstName, string lastName) : INotification
 {
-    public ExamStartedDomainEvent(string userId, string firstName, string lastName)
-        => (UserId, FirstName, LastName) = (userId, firstName, lastName);
-    public string UserId { set; get; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string UserId { set; get; } = userId;
+    public string FirstName { get; set; } = firstName;
+    public string LastName { get; set; } = lastName;
 }

@@ -2,19 +2,13 @@
 
 namespace Examination.Domain.SeedWord;
 
-public abstract class Enumeration : IComparable
+public abstract class Enumeration(int id, string name) : IComparable
 {
-   public string Name { get; private set; }
+   public string Name { get; private set; } = name;
 
-        public int Id { get; private set; }
+   public int Id { get; private set; } = id;
 
-        protected Enumeration(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public override string ToString() => Name;
+   public override string ToString() => Name;
 
         public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {

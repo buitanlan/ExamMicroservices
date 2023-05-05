@@ -4,24 +4,17 @@ using MediatR;
 
 namespace Examination.Application.DomainEventHandlers.V1;
 
-public class SynchronizeUserWhenExamStartedDomainEventHandler : INotificationHandler<ExamStartedDomainEvent>
+public class SynchronizeUserWhenExamStartedDomainEventHandler(IUserRepository userRepository) : INotificationHandler<ExamStartedDomainEvent>
 {
-    private readonly IUserRepository _userRepository;
-    public SynchronizeUserWhenExamStartedDomainEventHandler(
-        IUserRepository userRepository)
-    {
-        _userRepository = userRepository;
-    }
-
     public async Task Handle(ExamStartedDomainEvent notification, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByIdAsync(notification.UserId);
-        if (user == null)
+        var user = await userRepository.GetUserByIdAsync(notification.UserId);
+        if (user is null)
         {
-            _userRepository.StartTransaction();
+            userRepository.StartTransaction();
             user = User.CreateNewUser(notification.UserId, notification.FirstName, notification.LastName);
-            await _userRepository.InsertAsync(user);
-            await _userRepository.CommitTransactionAsync(user, cancellationToken);
+            await userRepository.InsertAsync(user);
+            await userRepository.CommitTransactionAsync(user, cancellationToken);
         }
     }
 }

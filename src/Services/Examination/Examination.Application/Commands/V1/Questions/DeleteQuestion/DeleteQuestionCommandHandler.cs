@@ -5,28 +5,18 @@ using Serilog;
 
 namespace Examination.Application.Commands.V1.Questions.DeleteQuestion;
 
-public class DeleteQuestionCommandHandler: IRequestHandler<DeleteQuestionCommand, ApiResult<bool>>
+public class DeleteQuestionCommandHandler(IQuestionRepository QuestionRepository) : IRequestHandler<DeleteQuestionCommand, ApiResult<bool>>
 {
-    private readonly IQuestionRepository _questionRepository;
-
-    public DeleteQuestionCommandHandler(
-        IQuestionRepository QuestionRepository
-    )
-    {
-        _questionRepository = QuestionRepository;
-
-    }
-
     public async Task<ApiResult<bool>> Handle(DeleteQuestionCommand request, CancellationToken cancellationToken)
     {
-        var itemToUpdate = await _questionRepository.GetQuestionsByIdAsync(request.Id);
+        var itemToUpdate = await QuestionRepository.GetQuestionsByIdAsync(request.Id);
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
             return new ApiErrorResult<bool>($"Item is not found {request.Id}");
         }
 
-        await _questionRepository.DeleteAsync(request.Id);
+        await QuestionRepository.DeleteAsync(request.Id);
         return new ApiSuccessResult<bool>(true, "Delete successful");
    
     }

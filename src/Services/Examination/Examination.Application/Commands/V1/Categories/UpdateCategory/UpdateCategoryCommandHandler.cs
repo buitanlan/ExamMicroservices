@@ -5,19 +5,11 @@ using Serilog;
 
 namespace Examination.Application.Commands.V1.Categories.UpdateCategory;
 
-public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand, ApiResult<bool>>
+public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<UpdateCategoryCommand, ApiResult<bool>>
 {
-    private readonly ICategoryRepository _categoryRepository;
-
-    public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository)
-    {
-        _categoryRepository = categoryRepository;
-
-    }
-
     public async Task<ApiResult<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var itemToUpdate = await _categoryRepository.GetCategoriesByIdAsync(request.Id);
+        var itemToUpdate = await categoryRepository.GetCategoriesByIdAsync(request.Id);
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
@@ -27,7 +19,7 @@ public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand
         itemToUpdate.Name = request.Name;
         itemToUpdate.UrlPath = request.UrlPath;
       
-        await _categoryRepository.UpdateAsync(itemToUpdate);
+        await categoryRepository.UpdateAsync(itemToUpdate);
        
 
         return new ApiSuccessResult<bool>(true, "Update successful");

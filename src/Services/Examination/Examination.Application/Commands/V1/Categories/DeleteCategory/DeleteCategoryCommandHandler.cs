@@ -5,18 +5,11 @@ using Serilog;
 
 namespace Examination.Application.Commands.V1.Categories.DeleteCategory;
 
-public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, ApiResult<bool>>
+public class DeleteCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<DeleteCategoryCommand, ApiResult<bool>>
 {
-    private readonly ICategoryRepository _categoryRepository;
-
-    public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
-    {
-        _categoryRepository = categoryRepository;
-    }
-
     public async Task<ApiResult<bool>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        var itemToUpdate = await _categoryRepository.GetCategoriesByIdAsync(request.Id);
+        var itemToUpdate = await categoryRepository.GetCategoriesByIdAsync(request.Id);
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
@@ -25,7 +18,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
         try
         {
-            await _categoryRepository.DeleteAsync(request.Id);
+            await categoryRepository.DeleteAsync(request.Id);
             return new ApiSuccessResult<bool>(true, "Delete successful");;
         }
         catch (Exception ex)

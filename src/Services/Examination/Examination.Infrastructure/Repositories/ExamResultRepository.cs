@@ -6,17 +6,14 @@ using MongoDB.Driver;
 
 namespace Examination.Infrastructure.Repositories;
 
-public class ExamResultRepository : BaseRepository<ExamResult>, IExamResultRepository
+public class ExamResultRepository(
+        IMongoClient mongoClient,
+        IClientSessionHandle clientSessionHandle,
+        IOptions<ExamSettings> settings,
+        IMediator mediator)
+    : BaseRepository<ExamResult>(mongoClient, clientSessionHandle, settings, mediator,
+        Constants.Collections.ExamResult), IExamResultRepository
 {
-    public ExamResultRepository(
-        IMongoClient mongoClient, 
-        IClientSessionHandle clientSessionHandle, 
-        IOptions<ExamSettings> settings, 
-        IMediator mediator) 
-        : base(mongoClient, clientSessionHandle, settings, mediator, Constants.Collections.ExamResult)
-    {
-    }
-
     public async Task<ExamResult> GetDetails(string userId, string examId)
     {
         var filter = Builders<ExamResult>.Filter.Where(s => s.ExamId == examId && s.UserId == userId);

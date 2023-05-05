@@ -6,26 +6,19 @@ using System.Text.Json;
 
 namespace AdminApp.Core.Authentication;
 
-public class ApiAuthenticationStateProvider : AuthenticationStateProvider
+public class ApiAuthenticationStateProvider(HttpClient httpClient, ISessionStorageService sessionStorage)
+    : AuthenticationStateProvider
 {
-    private readonly HttpClient _httpClient;
-    private readonly ISessionStorageService _sessionStorage;
-
-    public ApiAuthenticationStateProvider(HttpClient httpClient, ISessionStorageService sessionStorage)
-    {
-        _httpClient = httpClient;
-        _sessionStorage = sessionStorage;
-    }
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        var savedToken = await _sessionStorage.GetItemAsync<string>(KeyConstants.AccessToken);
+        var savedToken = await sessionStorage.GetItemAsync<string>(KeyConstants.AccessToken);
 
         if (string.IsNullOrEmpty(savedToken))
         {
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
 
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
     }
@@ -54,7 +47,7 @@ public class ApiAuthenticationStateProvider : AuthenticationStateProvider
         var jsonBytes = ParseBase64WithoutPadding(payload);
         var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
 
-        keyValuePairs.TryGetValue(ClaimTypes.Role, out object roles);
+        keyValuePairs.TryGetValue(ClaimTypes.Role, out var roles);
 
         if (roles != null)
         {

@@ -9,34 +9,21 @@ using Serilog;
 
 namespace AdminApp.Services;
 
-public class AuthService : IAuthService
-{
-    private readonly HttpClient _httpClient;
-    private readonly ISessionStorageService _sessionStorage;
-    private static DiscoveryDocumentResponse _disco;
-    private readonly IConfiguration _configuration;
-    private readonly ILogger<AuthService> _logger;
-    private readonly AuthenticationStateProvider _authenticationStateProvider;
-
-    public AuthService(
-        HttpClient httpClient,
+public class AuthService(HttpClient httpClient,
         ILogger<AuthService> logger,
         ISessionStorageService localStorage,
         AuthenticationStateProvider authenticationStateProvider,
         IConfiguration configuration)
-    {
-        _httpClient = httpClient;
-        _sessionStorage = localStorage;
-        _logger = logger;
-        _configuration = configuration;
-        _authenticationStateProvider = authenticationStateProvider;
+    : IAuthService
+{
+    private static DiscoveryDocumentResponse _disco;
+    private readonly ILogger<AuthService> _logger = logger;
 
-    }
     public async Task<TokenResponse> LoginAsync(LoginRequest loginRequest)
     {
         _disco = await HttpClientDiscoveryExtensions.GetDiscoveryDocumentAsync(
-            _httpClient,
-            _configuration["IdentityServerConfig:IdentityServerUrl"]);
+            httpClient,
+            configuration["IdentityServerConfig:IdentityServerUrl"]);
 
         if (_disco.IsError)
         {
@@ -46,9 +33,9 @@ public class AuthService : IAuthService
         var token = await RequestTokenAsync(loginRequest.UserName, loginRequest.Password);
         if (token.IsError == false)
         {
-            await _sessionStorage.SetItemAsync(KeyConstants.AccessToken, token.AccessToken);
-            await _sessionStorage.SetItemAsync(KeyConstants.RefreshToken, token.RefreshToken);
-            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginRequest.UserName);
+            await localStorage.SetItemAsync(KeyConstants.AccessToken, token.AccessToken);
+            await localStorage.SetItemAsync(KeyConstants.RefreshToken, token.RefreshToken);
+            ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginRequest.UserName);
 
         }
         return token;
@@ -58,12 +45,12 @@ public class AuthService : IAuthService
     private async Task<TokenResponse> RequestTokenAsync(string user, string password)
     {
         Log.Information("begin RequestTokenAsync");
-        var response = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
+        var response = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
         {
             Address = _disco.TokenEndpoint,
 
-            ClientId = _configuration["IdentityServerConfig:ClientId"],
-            ClientSecret = _configuration["IdentityServerConfig:ClientSecret"],
+            ClientId = configuration["IdentityServerConfig:ClientId"],
+            ClientSecret = configuration["IdentityServerConfig:ClientSecret"],
             Scope = "email openid roles profile offline_access",
 
             UserName = user,
@@ -75,9 +62,9 @@ public class AuthService : IAuthService
 
     public async Task LogoutAsync()
     {
-        await _sessionStorage.RemoveItemAsync(KeyConstants.AccessToken);
-        await _sessionStorage.RemoveItemAsync(KeyConstants.RefreshToken);
-        ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
-        _httpClient.DefaultRequestHeaders.Authorization = null;
+        await localStorage.RemoveItemAsync(KeyConstants.AccessToken);
+        await localStorage.RemoveItemAsync(KeyConstants.RefreshToken);
+        ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
+        httpClient.DefaultRequestHeaders.Authorization = null;
     }
 }

@@ -8,31 +8,21 @@ using Serilog;
 
 namespace Examination.Application.Queries.V1.Questions.GetQuestionById;
 
-public class GetQuestionByIdQueryHandler: IRequestHandler<GetQuestionByIdQuery, ApiResult<QuestionDto>>
+public class GetQuestionByIdQueryHandler(IQuestionRepository QuestionRepository,
+        IMapper mapper,
+        IClientSessionHandle clientSessionHandle)
+    : IRequestHandler<GetQuestionByIdQuery, ApiResult<QuestionDto>>
 {
 
-    private readonly IQuestionRepository _questionRepository;
-    private readonly IClientSessionHandle _clientSessionHandle;
-    private readonly IMapper _mapper;
-
-    public GetQuestionByIdQueryHandler(
-        IQuestionRepository QuestionRepository,
-        IMapper mapper,
-        IClientSessionHandle clientSessionHandle
-    )
-    {
-        _questionRepository = QuestionRepository ?? throw new ArgumentNullException(nameof(QuestionRepository));
-        _clientSessionHandle = clientSessionHandle ?? throw new ArgumentNullException(nameof(_clientSessionHandle));
-        _mapper = mapper;
-
-    }
+    private readonly IQuestionRepository _questionRepository = QuestionRepository ?? throw new ArgumentNullException(nameof(QuestionRepository));
+    private readonly IClientSessionHandle _clientSessionHandle = clientSessionHandle ?? throw new ArgumentNullException(nameof(_clientSessionHandle));
 
     public async Task<ApiResult<QuestionDto>> Handle(GetQuestionByIdQuery request, CancellationToken cancellationToken)
     {
         Log.Information("BEGIN: GetQuestionByIdQueryHandler");
 
         var result = await _questionRepository.GetQuestionsByIdAsync(request.Id);
-        var item = _mapper.Map<QuestionDto>(result);
+        var item = mapper.Map<QuestionDto>(result);
 
         Log.Information("END: GetQuestionByIdQueryHandler");
 

@@ -7,7 +7,4 @@ namespace Examination.API.Controllers.V1;
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]
-public class BaseController: ControllerBase
-{
-    
-}
+public class BaseController: ControllerBase;

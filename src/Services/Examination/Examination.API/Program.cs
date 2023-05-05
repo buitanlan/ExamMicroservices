@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using System.Reflection;
 using System.Text.Json;
 using Examination.API.Extensions;
 using Examination.API.Filters;
@@ -13,7 +14,6 @@ using Examination.Infrastructure;
 using Examination.Infrastructure.Repositories;
 using Examination.Infrastructure.SeedWork;
 using HealthChecks.UI.Client;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -39,7 +39,7 @@ var identityUrl = builder.Configuration.GetValue<string>("IdentityUrl");
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongodbConnectionString));
 builder.Services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
 builder.Services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); });
-builder.Services.AddMediatR(typeof(StartExamCommandHandler).Assembly);
+builder.Services.AddMediatR(cfg=> cfg.RegisterServicesFromAssemblies(typeof(StartExamCommandHandler).Assembly));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(c =>
 {

@@ -6,7 +6,4 @@ namespace Examination.API.Controllers.V2;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 [Authorize]
-public class BaseController: ControllerBase
-{
-    
-}
+public class BaseController: ControllerBase;

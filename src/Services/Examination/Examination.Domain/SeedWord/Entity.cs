@@ -47,7 +47,7 @@ public class Entity
         if (GetType() != obj.GetType())
             return false;
 
-        Entity item = (Entity)obj;
+        var item = (Entity)obj;
 
         if (item.IsTransient() || IsTransient())
             return false;

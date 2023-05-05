@@ -7,17 +7,14 @@ using MongoDB.Driver;
 
 namespace Examination.Infrastructure.Repositories;
 
-public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
-{
-    public CategoryRepository(
+public class CategoryRepository(
         IMongoClient mongoClient,
         IClientSessionHandle clientSessionHandle,
         IOptions<ExamSettings> settings,
         IMediator mediator)
-        : base(mongoClient, clientSessionHandle, settings, mediator, Constants.Collections.Exam)
-    {
-    }
-
+    : BaseRepository<Category>(mongoClient, clientSessionHandle, settings, mediator, Constants.Collections.Exam),
+        ICategoryRepository
+{
     public async Task<Category> GetCategoriesByIdAsync(string id)
     {
         var filter = Builders<Category>.Filter.Eq(s => s.Id, id);

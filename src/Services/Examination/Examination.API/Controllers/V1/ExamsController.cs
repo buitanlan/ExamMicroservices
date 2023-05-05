@@ -4,20 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Examination.API.Controllers.V1;
 
-public class ExamsController : BaseController
+public class ExamsController(IMediator mediator) : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public ExamsController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetExamList()
     {
         var query = new GetHomeExamListQuery();
-        var result = await _mediator.Send(query);
+        var result = await mediator.Send(query);
         return Ok(result);
     }
 
