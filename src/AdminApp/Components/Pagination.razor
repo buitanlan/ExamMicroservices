@@ -27,7 +27,7 @@
     {
         _links = new List<PagingLink>();
         _links.Add(new PagingLink(MetaData.CurrentPage - 1, MetaData.HasPrevious, "Previous"));
-        for (int i = 1; i <= MetaData.TotalPages; i++)
+        for (var i = 1; i <= MetaData.TotalPages; i++)
         {
             if (i >= MetaData.CurrentPage - Spread && i <= MetaData.CurrentPage + Spread)
             {

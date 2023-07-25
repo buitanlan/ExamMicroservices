@@ -3,22 +3,17 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Examination.Domain.AggregateModels.UserAggregate;
 
-public class User: Entity, IAggregateRoot
+public class User(string externalId, string firstName, string lastName) : Entity, IAggregateRoot
 {
-    public User(string externalId, string firstName, string lastName)
-    {
-        (ExternalId, FirstName, LastName) = (externalId, firstName, lastName);
-    }
-
     [BsonElement("externalId")]
-    public string ExternalId { get; set; }
+    public string ExternalId { get; set; } = externalId;
 
     [BsonElement("firstName")]
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = firstName;
 
     [BsonElement("lastName")]
 
-    public string LastName { get; set; }
+    public string LastName { get; set; } = lastName;
 
     public static User CreateNewUser(string externalId, string firstName, string lastName)
     {

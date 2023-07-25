@@ -4,6 +4,4 @@ using MediatR;
 
 namespace Examination.Application.Queries.V1.Categories.GetAllCategories;
 
-public class GetAllCategoriesQuery : IRequest<ApiResult<List<CategoryDto>>>
-{
-}
+public class GetAllCategoriesQuery : IRequest<ApiResult<List<CategoryDto>>>;

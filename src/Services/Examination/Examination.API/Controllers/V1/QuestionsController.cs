@@ -12,17 +12,9 @@ using Serilog;
 
 namespace Examination.API.Controllers.V1;
 
-public class QuestionsController : BaseController
+public class QuestionsController(IMediator mediator, ILogger<QuestionsController> logger) : BaseController
 {
-
-    private readonly IMediator _mediator;
-    private readonly ILogger<QuestionsController> _logger;
-
-    public QuestionsController(IMediator mediator, ILogger<QuestionsController> logger)
-    {
-        _mediator = mediator;
-        _logger = logger;
-    }
+    private readonly ILogger<QuestionsController> _logger = logger;
 
     [HttpGet]
     [ProducesResponseType(typeof(PagedList<QuestionDto>), (int)HttpStatusCode.OK)]
@@ -30,7 +22,7 @@ public class QuestionsController : BaseController
     {
         Log.Information("BEGIN: GetQuestionsPagingAsync");
 
-        var queryResult = await _mediator.Send(query);
+        var queryResult = await mediator.Send(query);
 
         Log.Information("END: GetQuestionsPagingAsync");
 
@@ -44,7 +36,7 @@ public class QuestionsController : BaseController
     {
         Log.Information("BEGIN: GetQuestionsByIdAsync");
 
-        var queryResult = await _mediator.Send(new GetQuestionByIdQuery(id));
+        var queryResult = await mediator.Send(new GetQuestionByIdQuery(id));
 
         Log.Information("END: GetQuestionsByIdAsync");
         return Ok(queryResult);
@@ -56,7 +48,7 @@ public class QuestionsController : BaseController
     public async Task<IActionResult> UpdateQuestionAsync([FromBody] UpdateQuestionRequest request)
     {
         Log.Information("BEGIN: UpdateQuestionAsync");
-        var queryResult = await _mediator.Send(new UpdateQuestionCommand()
+        var queryResult = await mediator.Send(new UpdateQuestionCommand()
         {
             Id = request.Id,
             Content = request.Content,
@@ -78,7 +70,7 @@ public class QuestionsController : BaseController
     {
         Log.Information("BEGIN: CreateQuestionAsync");
 
-        var queryResult = await _mediator.Send(new CreateQuestionCommand()
+        var queryResult = await mediator.Send(new CreateQuestionCommand()
         {
             Content = request.Content,
             QuestionType = request.QuestionType,
@@ -101,7 +93,7 @@ public class QuestionsController : BaseController
     {
         Log.Information("BEGIN: GetExamList");
 
-        var queryResult = await _mediator.Send(new DeleteQuestionCommand(id));
+        var queryResult = await mediator.Send(new DeleteQuestionCommand(id));
 
         Log.Information("END: GetExamList");
         return Ok(queryResult);

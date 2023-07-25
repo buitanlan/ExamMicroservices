@@ -8,24 +8,14 @@ using Serilog;
 
 namespace Examination.Application.Queries.V1.Questions.GetQuestionsPaging;
 
-public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQuery, ApiResult<PagedList<QuestionDto>>>
+public class GetQuestionsPagingQueryHandler(IQuestionRepository questionRepository,
+        IMapper mapper,
+        IClientSessionHandle clientSessionHandle)
+    : IRequestHandler<GetQuestionsPagingQuery, ApiResult<PagedList<QuestionDto>>>
 {
 
-    private readonly IQuestionRepository _questionRepository;
-    private readonly IClientSessionHandle _clientSessionHandle;
-    private readonly IMapper _mapper;
-
-    public GetQuestionsPagingQueryHandler(
-        IQuestionRepository questionRepository,
-        IMapper mapper,
-        IClientSessionHandle clientSessionHandle
-    )
-    {
-        _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
-        _clientSessionHandle = clientSessionHandle ?? throw new ArgumentNullException(nameof(_clientSessionHandle));
-        _mapper = mapper;
-
-    }
+    private readonly IQuestionRepository _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
+    private readonly IClientSessionHandle _clientSessionHandle = clientSessionHandle ?? throw new ArgumentNullException(nameof(_clientSessionHandle));
 
     public async Task<ApiResult<PagedList<QuestionDto>>> Handle(GetQuestionsPagingQuery request, CancellationToken cancellationToken)
     {
@@ -35,7 +25,7 @@ public class GetQuestionsPagingQueryHandler: IRequestHandler<GetQuestionsPagingQ
             request.SearchKeyword,
             request.PageIndex,
             request.PageSize);
-        var items = _mapper.Map<List<QuestionDto>>(result.Items);
+        var items = mapper.Map<List<QuestionDto>>(result.Items);
 
         var pagedItems = new PagedList<QuestionDto>(items, result.MetaData.TotalCount, request.PageIndex, request.PageSize);
 

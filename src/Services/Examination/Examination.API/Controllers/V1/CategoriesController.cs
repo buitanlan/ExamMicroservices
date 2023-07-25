@@ -13,22 +13,15 @@ using Serilog;
 
 namespace Examination.API.Controllers.V1;
 
-public class CategoriesController : BaseController
+public class CategoriesController(IMediator mediator) : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public CategoriesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet("paging")]
         [ProducesResponseType(typeof(PagedList<CategoryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCategoriesPagingAsync([FromQuery] GetCategoriesPagingQuery query)
         {
             Log.Information("BEGIN: GetCategoriesPagingAsync");
 
-            var result  = await _mediator.Send(query);
+            var result  = await mediator.Send(query);
 
             Log.Information("END: GetCategoriesPagingAsync");
 
@@ -42,7 +35,7 @@ public class CategoriesController : BaseController
         {
             Log.Information("BEGIN: GetCategoriesByIdAsync");
 
-            var result = await _mediator.Send(new GetCategoryByIdQuery(id));
+            var result = await mediator.Send(new GetCategoryByIdQuery(id));
 
             Log.Information("END: GetCategoriesByIdAsync");
             return Ok(result);
@@ -55,7 +48,7 @@ public class CategoriesController : BaseController
         {
             Log.Information("BEGIN: UpdateCategoryAsync");
 
-            var result = await _mediator.Send(new UpdateCategoryCommand()
+            var result = await mediator.Send(new UpdateCategoryCommand()
             {
                 Id = request.Id,
                 Name = request.Name,
@@ -73,7 +66,7 @@ public class CategoriesController : BaseController
         {
             Log.Information("BEGIN: CreateCategoryAsync");
 
-            var result = await _mediator.Send(new CreateCategoryCommand
+            var result = await mediator.Send(new CreateCategoryCommand
             {
                 Name = request.Name,
                 UrlPath = request.UrlPath
@@ -93,7 +86,7 @@ public class CategoriesController : BaseController
         {
             Log.Information("BEGIN: GetExamList");
 
-            var result = await _mediator.Send(new DeleteCategoryCommand(id));
+            var result = await mediator.Send(new DeleteCategoryCommand(id));
 
             Log.Information("END: GetExamList");
             return Ok(result);
@@ -105,7 +98,7 @@ public class CategoriesController : BaseController
         {
             Log.Information("BEGIN: GetAllCategoriesAsync");
 
-            var result = await _mediator.Send(new GetAllCategoriesQuery());
+            var result = await mediator.Send(new GetAllCategoriesQuery());
 
             Log.Information("END: GetAllCategoriesAsync");
 

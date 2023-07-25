@@ -7,14 +7,9 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AdminApp.Services;
 
-public class CategoryService : ICategoryService
+public class CategoryService(HttpClient httpClient) : ICategoryService
 {
-    public HttpClient _httpClient;
-
-    public CategoryService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
+    public HttpClient _httpClient = httpClient;
 
     public async Task<bool> CreateAsync(CreateCategoryRequest request)
     {
@@ -52,7 +47,7 @@ public class CategoryService : ICategoryService
             queryStringParam.Add("searchKeyword", searchInput.Name);
 
 
-        string url = QueryHelpers.AddQueryString("/api/v1/categories/paging", queryStringParam);
+        var url = QueryHelpers.AddQueryString("/api/v1/categories/paging", queryStringParam);
 
         var result = await _httpClient.GetFromJsonAsync<ApiSuccessResult<PagedList<CategoryDto>>>(url);
         return result;

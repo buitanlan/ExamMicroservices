@@ -6,30 +6,23 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AdminApp.Services;
 
-public class QuestionService : IQuestionService
+public class QuestionService(HttpClient httpClient) : IQuestionService
 {
-    private readonly HttpClient _httpClient;
-
-    public QuestionService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
     public async Task<bool> CreateAsync(CreateQuestionRequest request)
     {
-        var result = await _httpClient.PostAsJsonAsync("/api/v1/Questions", request);
+        var result = await httpClient.PostAsJsonAsync("/api/v1/Questions", request);
         return result.IsSuccessStatusCode;
     }
 
     public async Task<bool> DeleteAsync(string id)
     {
-        var result = await _httpClient.DeleteAsync($"/api/v1/Questions/{id}");
+        var result = await httpClient.DeleteAsync($"/api/v1/Questions/{id}");
         return result.IsSuccessStatusCode;
     }
 
     public async Task<ApiResult<QuestionDto>> GetQuestionByIdAsync(string id)
     {
-        var result = await _httpClient.GetFromJsonAsync<ApiResult<QuestionDto>>($"/api/v1/Questions/{id}");
+        var result = await httpClient.GetFromJsonAsync<ApiResult<QuestionDto>>($"/api/v1/Questions/{id}");
         return result;
     }
 
@@ -46,15 +39,15 @@ public class QuestionService : IQuestionService
         if(!string.IsNullOrEmpty(searchInput.CategoryId))
             queryStringParam.Add("categoryId", searchInput.CategoryId);
 
-        string url = QueryHelpers.AddQueryString("/api/v1/Questions/paging", queryStringParam);
+        var url = QueryHelpers.AddQueryString("/api/v1/Questions/paging", queryStringParam);
 
-        var result = await _httpClient.GetFromJsonAsync<ApiResult<PagedList<QuestionDto>>>(url);
+        var result = await httpClient.GetFromJsonAsync<ApiResult<PagedList<QuestionDto>>>(url);
         return result;
     }
 
     public async Task<bool> UpdateAsync(UpdateQuestionRequest request)
     {
-        var result = await _httpClient.PutAsJsonAsync($"/api/v1/Questions", request);
+        var result = await httpClient.PutAsJsonAsync($"/api/v1/Questions", request);
         return result.IsSuccessStatusCode;
     }
 }

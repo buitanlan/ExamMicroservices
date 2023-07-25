@@ -14,8 +14,7 @@ public static class HttpContextExtensions
 
     public static TId GetClaim<TId>(this ClaimsPrincipal principal, string type)
     {
-        if (principal == null || principal.Identity == null ||
-            !principal.Identity.IsAuthenticated)
+        if (principal?.Identity is not { IsAuthenticated: true })
         {
             throw new ArgumentNullException(nameof(principal));
         }

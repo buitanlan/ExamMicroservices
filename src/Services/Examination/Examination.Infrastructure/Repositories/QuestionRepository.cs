@@ -6,28 +6,24 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Examination.Infrastructure.Repositories;
-public class QuestionRepository : BaseRepository<Question>, IQuestionRepository
+public class QuestionRepository(
+        IMongoClient mongoClient,
+        IClientSessionHandle clientSessionHandle,
+        IOptions<ExamSettings> settings,
+        IMediator mediator)
+    : BaseRepository<Question>(mongoClient, clientSessionHandle, settings, mediator, Constants.Collections.Question),
+        IQuestionRepository
 {
-    public QuestionRepository(
-        IMongoClient mongoClient, 
-        IClientSessionHandle clientSessionHandle, 
-        IOptions<ExamSettings> settings, 
-        IMediator mediator
-        ) : base(mongoClient, clientSessionHandle, settings, mediator, Constants.Collections.Question)
-    {
-    }
-    
-
     public async Task<Question> GetQuestionsByIdAsync(string id)
     {
-        FilterDefinition<Question> filter = Builders<Question>.Filter.Eq(s => s.Id, id);
+        var filter = Builders<Question>.Filter.Eq(s => s.Id, id);
         return await Collection.Find(filter).FirstOrDefaultAsync();
     }
 
 
     public async Task<PagedList<Question>> GetQuestionsPagingAsync(string categoryId, string searchKeyword, int pageIndex, int pageSize)
     {
-        FilterDefinition<Question> filter = Builders<Question>.Filter.Empty;
+        var filter = Builders<Question>.Filter.Empty;
         if (!string.IsNullOrEmpty(searchKeyword))
             filter = Builders<Question>.Filter.Where(s => s.Content.Contains(searchKeyword));
 
