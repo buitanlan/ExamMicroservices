@@ -1,33 +1,37 @@
-﻿using Examination.Shared.Enums;
+﻿using System.ComponentModel.DataAnnotations;
 using Examination.Shared.Questions;
 
-namespace Examination.Shared.Exams;
+namespace Examination.Shared.Enums;
 
-public class ExamDto
+public class CreateExamRequest
 {
-    public string Id { get; set; }
+    [Required]
     public string Name { get; set; }
 
+    [Required]
     public string ShortDesc { get; set; }
 
     public string Content { get; set; }
 
+    [Required]
     public int NumberOfQuestions { get; set; }
 
-    public TimeSpan? Duration { get; set; }
     public int? DurationInMinutes { get; set; }
 
     public List<QuestionDto> Questions { get; set; }
 
+    [Required]
     public Level Level { get; set; }
 
-    public DateTime DateCreated { get; set; }
-
-    public string OwnerUserId { get; set; }
-
+    [Required]
     public int NumberOfQuestionCorrectForPass { get; set; }
 
+    [Required]
     public bool IsTimeRestricted { get; set; }
+
+    public bool AutoGenerateQuestion { set; get; }
+
+    [Required]
     public string CategoryId { get; set; }
-    public string CategoryName { get; set; }
+
 }
