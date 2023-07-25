@@ -5,7 +5,7 @@ services:
     image: mongo:latest
   
   postgres:
-    image: postgres:latest
+    image: postgres:15.3-bullseye
   
   seq:
     image: datalust/seq:latest

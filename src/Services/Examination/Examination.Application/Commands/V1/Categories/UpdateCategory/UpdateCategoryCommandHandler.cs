@@ -13,8 +13,7 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
-            return new ApiErrorResult<bool>($"Item is not found {request.Id}");
-        }
+            return new ApiErrorResult<bool>(400, $"Item is not found {request.Id}");        }
 
         itemToUpdate.Name = request.Name;
         itemToUpdate.UrlPath = request.UrlPath;
@@ -22,6 +21,5 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
         await categoryRepository.UpdateAsync(itemToUpdate);
        
 
-        return new ApiSuccessResult<bool>(true, "Update successful");
-    }
+        return new ApiSuccessResult<bool>(200, true, "Update successful");    }
 }

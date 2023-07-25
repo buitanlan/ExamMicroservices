@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Examination.API.Controllers.V1;
 
-public class ExamsController(IMediator mediator, ILogger<ExamsController> logger) : BaseController
+public class ExamsController(IMediator mediator, ILogger logger) : BaseController
 {
         [HttpGet]
         public async Task<IActionResult> GetAllExams()
