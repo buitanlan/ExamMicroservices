@@ -14,9 +14,7 @@ namespace Examination.API.Controllers.V1;
 
 public class QuestionsController(IMediator mediator, ILogger<QuestionsController> logger) : BaseController
 {
-    private readonly ILogger<QuestionsController> _logger = logger;
-
-    [HttpGet]
+    [HttpGet("paging")]
     [ProducesResponseType(typeof(PagedList<QuestionDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetQuestionsPagingAsync([FromQuery] GetQuestionsPagingQuery query)
     {

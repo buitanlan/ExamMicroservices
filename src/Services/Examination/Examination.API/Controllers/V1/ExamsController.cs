@@ -1,4 +1,10 @@
 ﻿using System.Net;
+using Examination.Application.Commands.V1.Exams.CreateExam;
+using Examination.Application.Commands.V1.Exams.DeleteExam;
+using Examination.Application.Commands.V1.Exams.UpdateExam;
+using Examination.Application.Queries.V1.Exams.GetAllExams;
+using Examination.Application.Queries.V1.Exams.GetExamById;
+using Examination.Application.Queries.V1.Exams.GetExamsPaging;
 using Examination.Shared.Enums;
 using Examination.Shared.Exams;
 using Examination.Shared.SeedWork;
@@ -7,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Examination.API.Controllers.V1;
 
-public class ExamsController(IMediator mediator, ILogger logger) : BaseController
+public class ExamsController(IMediator mediator, ILogger<ExamsController> logger) : BaseController
 {
         [HttpGet]
         public async Task<IActionResult> GetAllExams()

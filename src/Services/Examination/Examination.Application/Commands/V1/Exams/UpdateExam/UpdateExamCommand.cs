@@ -1,10 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Examination.Shared.Enums;
 using Examination.Shared.Questions;
+using Examination.Shared.SeedWork;
+using MediatR;
 
-namespace Examination.Shared.Enums;
+namespace Examination.Application.Commands.V1.Exams.UpdateExam;
 
-public class CreateExamRequest
+public class UpdateExamCommand : IRequest<ApiResult<bool>>
 {
+    [Required]
+    public string Id { get; set; }
+
     [Required]
     public string Name { get; set; }
 
@@ -33,5 +39,4 @@ public class CreateExamRequest
 
     [Required]
     public string CategoryId { get; set; }
-
 }

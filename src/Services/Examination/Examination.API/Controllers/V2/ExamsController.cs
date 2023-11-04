@@ -1,4 +1,4 @@
-﻿using Examination.Application.Queries.V1.Exams.GetHomeExamList;
+﻿using Examination.Application.Queries.V1.Exams.GetAllExams;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

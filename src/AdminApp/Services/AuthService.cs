@@ -17,7 +17,6 @@ public class AuthService(HttpClient httpClient,
     : IAuthService
 {
     private static DiscoveryDocumentResponse _disco;
-    private readonly ILogger<AuthService> _logger = logger;
 
     public async Task<TokenResponse> LoginAsync(LoginRequest loginRequest)
     {

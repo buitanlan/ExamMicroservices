@@ -89,7 +89,7 @@
     {
         var categoryResult = await CategoryService.GetAllCategoriesAsync();
         var questionResult = await QuestionService.GetQuestionByIdAsync(Id);
-        if (categoryResult.IsSuccessed && questionResult.IsSuccessed)
+        if (categoryResult.IsSucceed && questionResult.IsSucceed)
         {
             categories = categoryResult.ResultObj;
             var question = questionResult.ResultObj;
@@ -144,7 +144,7 @@
     {
         loading = true;
         var result = await QuestionService.GetQuestionByIdAsync(Id);
-        if (result.IsSuccessed)
+        if (result.IsSucceed)
         {
             model.Id = result.ResultObj.Id;
             model.Content = result.ResultObj.Content;

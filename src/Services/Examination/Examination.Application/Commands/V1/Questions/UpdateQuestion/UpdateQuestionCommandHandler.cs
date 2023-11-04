@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Shared.Questions;
 using Examination.Shared.SeedWork;
@@ -15,7 +16,7 @@ public class UpdateQuestionCommandHandler(IQuestionRepository questionRepository
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
-            return new ApiErrorResult<bool>($"Item is not found {request.Id}");
+            return new ApiErrorResult<bool>(HttpStatusCode.BadRequest,$"Item is not found {request.Id}");
         }
 
         itemToUpdate.Content = request.Content;
@@ -28,6 +29,6 @@ public class UpdateQuestionCommandHandler(IQuestionRepository questionRepository
         itemToUpdate.Explain = request.Explain;
         
         await questionRepository.UpdateAsync(itemToUpdate);
-        return new ApiSuccessResult<bool>(true, "Delete successful");
+        return new ApiSuccessResult<bool>(HttpStatusCode.OK,true, "Delete successful");
     }
 }

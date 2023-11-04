@@ -5,7 +5,6 @@ namespace Examination.API.Middlewares;
 
 public class ErrorWrappingMiddleware(RequestDelegate next, ILogger<ErrorWrappingMiddleware> logger)
 {
-
     public async Task Invoke(HttpContext context)
     {
         var errorMsg = string.Empty;

@@ -112,7 +112,7 @@
         try
         {
             var pagingResponse = await QuestionService.GetQuestionsPagingAsync(ListSearch);
-            if (pagingResponse.IsSuccessed)
+            if (pagingResponse.IsSucceed)
             {
                 Elements = pagingResponse.ResultObj.Items;
                 MetaData = pagingResponse.ResultObj.MetaData;

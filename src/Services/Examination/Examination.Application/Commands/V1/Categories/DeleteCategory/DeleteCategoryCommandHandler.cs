@@ -5,7 +5,8 @@ using Serilog;
 
 namespace Examination.Application.Commands.V1.Categories.DeleteCategory;
 
-public class DeleteCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<DeleteCategoryCommand, ApiResult<bool>>
+public class DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
+    : IRequestHandler<DeleteCategoryCommand, ApiResult<bool>>
 {
     public async Task<ApiResult<bool>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {

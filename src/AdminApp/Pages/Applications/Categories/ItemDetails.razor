@@ -68,7 +68,7 @@
     {
         loading = true;
         var result = await CategoryService.GetCategoryByIdAsync(Id);
-        if (result.IsSuccessed)
+        if (result.IsSucceed)
         {
             var category = result.ResultObj;
             model.Id = category.Id;

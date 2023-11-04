@@ -1,5 +1,4 @@
 using System.Net.Mime;
-using System.Reflection;
 using System.Text.Json;
 using Examination.API.Extensions;
 using Examination.API.Filters;

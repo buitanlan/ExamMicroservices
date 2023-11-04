@@ -18,3 +18,4 @@ public class SynchronizeUserWhenExamStartedDomainEventHandler(IUserRepository us
         }
     }
 }
+

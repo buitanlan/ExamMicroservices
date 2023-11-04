@@ -1,4 +1,5 @@
-﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
+﻿using System.Net;
+using Examination.Domain.AggregateModels.ExamResultAggregate;
 using Examination.Shared.SeedWork;
 using MediatR;
 
@@ -24,5 +25,5 @@ public class StartExamCommandHandler(IExamResultRepository examResultRepository)
             await examResultRepository.InsertAsync(examResult);
         }
         await examResultRepository.CommitTransactionAsync(examResult, cancellationToken);
-        return new ApiSuccessResult<bool>(200, true);    }
+        return new ApiSuccessResult<bool>(HttpStatusCode.OK, true);    }
 }
