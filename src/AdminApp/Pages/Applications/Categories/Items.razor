@@ -138,7 +138,7 @@
     private async Task FillCategories()
     {
         var categoryResult = await CategoryService.GetAllCategoriesAsync();
-        if (categoryResult.IsSuccessed)
+        if (categoryResult.IsSucceed)
         {
             Categories = categoryResult.ResultObj;
         }
@@ -150,7 +150,7 @@
         try
         {
             var pagingResponse = await QuestionService.GetQuestionsPagingAsync(SearchModel);
-            if (pagingResponse.IsSuccessed)
+            if (pagingResponse.IsSucceed)
             {
                 Elements = pagingResponse.ResultObj.Items;
                 MetaData = pagingResponse.ResultObj.MetaData;

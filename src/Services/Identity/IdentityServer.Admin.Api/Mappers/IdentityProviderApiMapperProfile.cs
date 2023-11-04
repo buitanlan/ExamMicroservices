@@ -3,15 +3,10 @@
 
 // Modified by Jan Škoruba
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Duende.IdentityServer.EntityFramework.Entities;
 using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Dtos.IdentityProvider;
-using Skoruba.Duende.IdentityServer.Admin.EntityFramework.Extensions.Common;
-using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using IdentityServer.Admin.Api.Dtos.IdentityProvider;
 
 namespace IdentityServer.Admin.Api.Mappers;

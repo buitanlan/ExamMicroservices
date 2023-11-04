@@ -56,26 +56,30 @@ public static class ExamMongoDbSeeding
 
     private static List<Exam> GetPredefinedExams(string categoryId1)
     {
-        return new List<Exam>
+        return new List<Exam>()
         {
-            new("Exam 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            new Exam("Exam 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                 "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>",
                 5,
-                TimeSpan.FromMinutes(10),
-                GetPredefinedQuestions(categoryId1).Take(5),
+                10,
+                GetPredefinedQuestions(categoryId1).Take(5).ToList(),
                 Level.Easy,
                 null,
                 4,
-                true),
-            new("Exam 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                true,
+                null,
+                null),
+            new Exam("Exam 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                 "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>",
                 5,
-                TimeSpan.FromMinutes(5),
-                GetPredefinedQuestions(categoryId1).Skip(5).Take(5),
+                5,
+                GetPredefinedQuestions(categoryId1).Skip(5).Take(5).ToList(),
                 Level.Medium,
                 null,
                 4,
-                true),
+                true,
+                null,
+                null),
         };
     }
 

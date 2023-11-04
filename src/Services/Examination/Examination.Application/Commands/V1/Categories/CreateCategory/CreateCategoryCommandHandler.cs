@@ -8,13 +8,13 @@ using Serilog;
 
 namespace Examination.Application.Commands.V1.Categories.CreateCategory;
 
-public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository,
-    IMapper mapper) : IRequestHandler<CreateCategoryCommand, ApiResult<CategoryDto>>
+public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper)
+    : IRequestHandler<CreateCategoryCommand, ApiResult<CategoryDto>>
 {
     public async Task<ApiResult<CategoryDto>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var itemToAdd = await categoryRepository.GetCategoriesByNameAsync(request.Name);
-        if (itemToAdd != null)
+        if (itemToAdd is not null)
         {
             Log.Fatal($"Item name existed: {request.Name}");
             return null;
@@ -23,7 +23,6 @@ public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository
        
         await categoryRepository.InsertAsync(itemToAdd);
         var result = mapper.Map<Category, CategoryDto>(itemToAdd);
-        return new ApiSuccessResult<CategoryDto>(result);
-    
+        return new ApiSuccessResult<CategoryDto>(200, result);
     }
 }

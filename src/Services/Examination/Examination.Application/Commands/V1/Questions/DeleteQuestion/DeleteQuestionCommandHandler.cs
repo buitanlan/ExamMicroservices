@@ -1,4 +1,5 @@
-﻿using Examination.Domain.AggregateModels.QuestionAggregate;
+﻿using System.Net;
+using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Shared.SeedWork;
 using MediatR;
 using Serilog;
@@ -13,11 +14,11 @@ public class DeleteQuestionCommandHandler(IQuestionRepository QuestionRepository
         if (itemToUpdate == null)
         {
             Log.Fatal($"Item is not found {request.Id}");
-            return new ApiErrorResult<bool>($"Item is not found {request.Id}");
+            return new ApiErrorResult<bool>(HttpStatusCode.BadRequest,$"Item is not found {request.Id}");
         }
 
         await QuestionRepository.DeleteAsync(request.Id);
-        return new ApiSuccessResult<bool>(true, "Delete successful");
+        return new ApiSuccessResult<bool>(HttpStatusCode.OK,true, "Delete successful");
    
     }
 }

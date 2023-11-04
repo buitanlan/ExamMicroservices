@@ -1,24 +1,43 @@
-﻿namespace Examination.Shared.SeedWork;
+﻿using System.Net;
+
+namespace Examination.Shared.SeedWork;
 
 public class ApiResult<T>
 {
-    public bool IsSuccessed { get; set; }
+    public bool IsSucceed { get; set; }
     public string Message { get; set; }
     public T ResultObj { get; set; }
-
+    public int StatusCode { set; get; }
     public ApiResult()
     {
     }
-    public ApiResult(bool isSuccessed, string message = null)
+    public ApiResult(HttpStatusCode statusCode, bool isSucceed , string message = null)
     {
         Message = message;
-        IsSuccessed = isSuccessed;
+        IsSucceed = isSucceed ;
+        StatusCode = (int)statusCode;
     }
 
-    public ApiResult(bool isSuccessed, T resultObj, string message = null)
+    public ApiResult(int statusCode, bool isSucceed , string message = null)
+    {
+        Message = message;
+        IsSucceed = isSucceed ;
+        StatusCode = statusCode;
+    }
+
+    public ApiResult(HttpStatusCode statusCode, bool isSucceed, T resultObj, string message = null)
     {
         ResultObj = resultObj;
         Message = message;
-        IsSuccessed = isSuccessed;
+        IsSucceed = isSucceed;
+        StatusCode = (int)statusCode;
+    }
+
+    public ApiResult(int statusCode, bool isSucceed, T resultObj, string message = null)
+    {
+        ResultObj = resultObj;
+        Message = message;
+        IsSucceed = isSucceed;
+        StatusCode = statusCode;
     }
 }

@@ -5,7 +5,6 @@ namespace Examination.API.Middlewares;
 
 public class ErrorWrappingMiddleware(RequestDelegate next, ILogger<ErrorWrappingMiddleware> logger)
 {
-
     public async Task Invoke(HttpContext context)
     {
         var errorMsg = string.Empty;
@@ -24,8 +23,7 @@ public class ErrorWrappingMiddleware(RequestDelegate next, ILogger<ErrorWrapping
         {
             context.Response.ContentType = "application/json";
 
-            var response = new ApiErrorResult<bool>(errorMsg);
-
+            var response = new ApiErrorResult<bool>(500, errorMsg);
             var json = JsonSerializer.Serialize(response);
 
             await context.Response.WriteAsync(json);

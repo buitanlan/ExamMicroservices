@@ -22,12 +22,10 @@ public class BaseRepository<T> : IRepositoryBase<T> where T : Entity, IAggregate
         string collection)
     {
         _settings = settings.Value;
-        (_mongoClient, _clientSessionHandle, _collection) = (mongoClient, clientSessionHandle, collection);
+        (_mongoClient, _clientSessionHandle, _collection, _mediator) = (mongoClient, clientSessionHandle, collection, mediator);
 
         if (!_mongoClient.GetDatabase(_settings.DatabaseSettings.DatabaseName).ListCollectionNames().ToList().Contains(collection))
             _mongoClient.GetDatabase(_settings.DatabaseSettings.DatabaseName).CreateCollection(collection);
-
-        _mediator = mediator;
     }
     protected virtual IMongoCollection<T> Collection =>
         _mongoClient.GetDatabase(_settings.DatabaseSettings.DatabaseName).GetCollection<T>(_collection);

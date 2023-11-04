@@ -91,7 +91,7 @@
     protected async override Task OnInitializedAsync()
     {
         var result = await CategoryService.GetAllCategoriesAsync();
-        if (result.IsSuccessed)
+        if (result.IsSucceed)
         {
             categories = result.ResultObj;
         }

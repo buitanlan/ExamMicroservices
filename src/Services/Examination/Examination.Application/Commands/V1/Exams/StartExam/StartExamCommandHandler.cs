@@ -1,4 +1,5 @@
-﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
+﻿using System.Net;
+using Examination.Domain.AggregateModels.ExamResultAggregate;
 using Examination.Shared.SeedWork;
 using MediatR;
 
@@ -6,7 +7,7 @@ namespace Examination.Application.Commands.V1.Exams.StartExam;
 
 public class StartExamCommandHandler(IExamResultRepository examResultRepository) : IRequestHandler<StartExamCommand, ApiResult<bool>>
 {
-    public async Task<ApiResult<bool>> Handle(StartExam.StartExamCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResult<bool>> Handle(StartExamCommand request, CancellationToken cancellationToken)
     {
         var examResult = await examResultRepository.GetDetails(request.UserId, request.ExamId);
 
@@ -24,6 +25,5 @@ public class StartExamCommandHandler(IExamResultRepository examResultRepository)
             await examResultRepository.InsertAsync(examResult);
         }
         await examResultRepository.CommitTransactionAsync(examResult, cancellationToken);
-        return new ApiSuccessResult<bool>(true);
-    }
+        return new ApiSuccessResult<bool>(HttpStatusCode.OK, true);    }
 }

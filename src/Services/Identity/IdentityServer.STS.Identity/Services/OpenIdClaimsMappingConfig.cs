@@ -1,13 +1,7 @@
-﻿using System;
-using System.Linq;
-using Duende.IdentityServer.Hosting.DynamicProviders;
+﻿using Duende.IdentityServer.Hosting.DynamicProviders;
 using Duende.IdentityServer.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
-using IdentityServer.STS.Identity.Helpers;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer.STS.Identity.Services;
 
