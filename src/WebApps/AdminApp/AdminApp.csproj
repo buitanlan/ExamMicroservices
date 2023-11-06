@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BuildingBlocks\Examination.Shared\Examination.Shared.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\Examination.Shared\Examination.Shared.csproj" />
     </ItemGroup>
     
 </Project>
