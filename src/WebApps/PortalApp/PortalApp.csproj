@@ -17,4 +17,8 @@
       <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0-rc.2.23480.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\Examination.Shared\Examination.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
