@@ -1,4 +1,5 @@
 using Microsoft.IdentityModel.Logging;
+using PortalApp;
 using PortalApp.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,14 @@ builder.Services.AddAuthentication(options =>
         options.RequireHttpsMetadata = false;
         options.SaveTokens = true;
     });
+
+builder.Services.AddHttpClient("BackendApi", options =>
+    {
+        options.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiUrl"));
+    });
+
+builder.Services.RegisterCustomServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
