@@ -6,6 +6,7 @@ namespace Examination.Shared.Exams;
 public class ExamDto
 {
     public string Id { get; set; }
+
     public string Name { get; set; }
 
     public string ShortDesc { get; set; }
@@ -14,7 +15,8 @@ public class ExamDto
 
     public int NumberOfQuestions { get; set; }
 
-    public TimeSpan? Duration { get; set; }
+    public int? Duration { get; set; }
+
     public int? DurationInMinutes { get; set; }
 
     public List<QuestionDto> Questions { get; set; }
@@ -28,6 +30,8 @@ public class ExamDto
     public int NumberOfQuestionCorrectForPass { get; set; }
 
     public bool IsTimeRestricted { get; set; }
+
     public string CategoryId { get; set; }
+
     public string CategoryName { get; set; }
 }
