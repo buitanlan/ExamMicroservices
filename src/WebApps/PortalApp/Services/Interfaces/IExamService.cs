@@ -1,4 +1,5 @@
-﻿using Examination.Shared.Exams;
+﻿using Examination.Shared.ExamResults;
+using Examination.Shared.Exams;
 using Examination.Shared.SeedWork;
 
 namespace PortalApp.Services.Interfaces;

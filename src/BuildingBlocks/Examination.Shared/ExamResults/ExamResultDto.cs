@@ -4,6 +4,7 @@ public class ExamResultDto
 {
     public string Id { set; get; }
     public string ExamId { get; set; }
+    public string ExamTitle { get; set; }
 
     public string UserId { set; get; }
 

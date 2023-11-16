@@ -4,6 +4,7 @@ using Examination.Application.Commands.V1.ExamResults.SkipExam;
 using Examination.Application.Commands.V1.ExamResults.StartExam;
 using Examination.Application.Commands.V1.ExamResults.SubmitQuestion;
 using Examination.Application.Queries.V1.ExamResults;
+using Examination.Application.Queries.V1.ExamResults.GetExamResultsByUserIdPaging;
 using Examination.Shared.ExamResults;
 using Examination.Shared.SeedWork;
 using MediatR;
@@ -82,6 +83,19 @@ namespace Examination.API.Controllers.V1;
             });
 
             logger.LogInformation("END: StartExamAsync");
+            return StatusCode(result.StatusCode, result);
+        }
+
+        //api/v1/examResults/user/{id}
+        [HttpGet("user")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetExamResultsByUserIdPagingAsync([FromQuery] GetExamResultsByUserIdPagingQuery request)
+        {
+            logger.LogInformation("BEGIN: GetExamResultsByUserIdPagingAsync");
+            var result = await mediator.Send(request);
+
+            logger.LogInformation("END: GetExamResultsByUserIdPagingAsync");
             return StatusCode(result.StatusCode, result);
         }
     }
