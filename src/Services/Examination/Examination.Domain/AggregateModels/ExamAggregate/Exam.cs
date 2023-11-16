@@ -12,7 +12,7 @@ public class Exam : Entity, IAggregateRoot
         string shortDesc,
         string content,
         int numberOfQuestions,
-        int? durationInMinutes,
+        string duration,
         List<Question> questions,
         Level level,
         string ownerUserId,
@@ -32,9 +32,9 @@ public class Exam : Entity, IAggregateRoot
             throw new ArgumentNullException($"{nameof(numberOfQuestionCorrectForPass)} is invalid.");
 
 
-        (Name, ShortDesc, Content, NumberOfQuestions, DurationInMinutes, Questions, Level, DateCreated, OwnerUserId,
+        (Name, ShortDesc, Content, NumberOfQuestions, Duration, Questions, Level, DateCreated, OwnerUserId,
                 NumberOfQuestionCorrectForPass, IsTimeRestricted, CategoryId, CategoryName)
-            = (name, shortDesc, content, numberOfQuestions, durationInMinutes, questions, level, DateTime.UtcNow,
+            = (name, shortDesc, content, numberOfQuestions, duration, questions, level, DateTime.UtcNow,
                 ownerUserId, numberOfQuestionCorrectForPass, isTimeRestricted, categoryId, categoryName);
     }
 
@@ -52,30 +52,42 @@ public class Exam : Entity, IAggregateRoot
         IsTimeRestricted = isTimeRestricted;
     }
 
-    [BsonElement("name")] public string Name { get; set; }
+    [BsonElement("name")]
+    public string Name { get; set; }
 
-    [BsonElement("shortDesc")] public string ShortDesc { get; set; }
+    [BsonElement("shortDesc")]
+    public string ShortDesc { get; set; }
 
-    [BsonElement("content")] public string Content { get; set; }
+    [BsonElement("content")]
+    public string Content { get; set; }
 
-    [BsonElement("numberOfQuestions")] public int NumberOfQuestions { get; set; }
+    [BsonElement("numberOfQuestions")]
+    public int NumberOfQuestions { get; set; }
 
-    [BsonElement("durationInMinutes")] public int? DurationInMinutes { get; set; }
+    [BsonElement("duration")]
+    public string Duration { get; set; }
 
-    [BsonElement("questions")] public List<Question> Questions { get; set; }
+    [BsonElement("questions")]
+    public List<Question> Questions { get; set; }
 
-    [BsonElement("level")] public Level Level { get; set; }
+    [BsonElement("level")]
+    public Level Level { get; set; }
 
-    [BsonElement("dateCreated")] public DateTime DateCreated { get; set; }
+    [BsonElement("dateCreated")]
+    public DateTime DateCreated { get; set; }
 
-    [BsonElement("ownerUserId")] public string OwnerUserId { get; set; }
+    [BsonElement("ownerUserId")]
+    public string OwnerUserId { get; set; }
 
     [BsonElement("numberOfQuestionCorrectForPass")]
     public int NumberOfQuestionCorrectForPass { get; set; }
 
-    [BsonElement("isTimeRestricted")] public bool IsTimeRestricted { get; set; }
+    [BsonElement("isTimeRestricted")]
+    public bool IsTimeRestricted { get; set; }
 
-    [BsonElement("categoryId")] public string CategoryId { get; set; }
+    [BsonElement("categoryId")]
+    public string CategoryId { get; set; }
 
-    [BsonElement("categoryName")] public string CategoryName { get; set; }
+    [BsonElement("categoryName")]
+    public string CategoryName { get; set; }
 }

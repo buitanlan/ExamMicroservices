@@ -42,7 +42,7 @@ public class CreateExamCommandHandler(
             request.ShortDesc,
             request.Content,
             request.NumberOfQuestions,
-            request.DurationInMinutes,
+            request.Duration,
             questions,
             request.Level,
             currentUserId,

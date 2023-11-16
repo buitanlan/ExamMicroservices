@@ -2,7 +2,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using Examination.API.Extensions;
 using Examination.API.Filters;
-using Examination.Application.Commands.V1.Exams.StartExam;
+using Examination.Application.Commands.V1.ExamResults.StartExam;
 using Examination.Application.Mapping;
 using Examination.Domain.AggregateModels.CategoryAggregate;
 using Examination.Domain.AggregateModels.ExamAggregate;

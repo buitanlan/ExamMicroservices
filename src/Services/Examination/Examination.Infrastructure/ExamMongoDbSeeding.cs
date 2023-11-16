@@ -25,8 +25,7 @@ public static class ExamMongoDbSeeding
             var categoryId2 = ObjectId.GenerateNewId().ToString();
             var categoryId3 = ObjectId.GenerateNewId().ToString();
             var categoryId4 = ObjectId.GenerateNewId().ToString();
-            if (await database.GetCollection<Category>(Constants.Collections.Category).EstimatedDocumentCountAsync() ==
-                0)
+            if (await database.GetCollection<Category>(Constants.Collections.Category).EstimatedDocumentCountAsync() == 0)
             {
                 await database.GetCollection<Category>(Constants.Collections.Category)
                     .InsertManyAsync(new List<Category>
@@ -38,15 +37,13 @@ public static class ExamMongoDbSeeding
                     });
             }
 
-            if (await database.GetCollection<Question>(Constants.Collections.Question).EstimatedDocumentCountAsync() ==
-                0)
+            if (await database.GetCollection<Question>(Constants.Collections.Question).EstimatedDocumentCountAsync() == 0)
             {
                 await database.GetCollection<Question>(Constants.Collections.Question)
                     .InsertManyAsync(GetPredefinedQuestions(categoryId1));
             }
 
-            if (await database.GetCollection<Exam>(Constants.Collections.Exam).EstimatedDocumentCountAsync() ==
-                0)
+            if (await database.GetCollection<Exam>(Constants.Collections.Exam).EstimatedDocumentCountAsync() == 0)
             {
                 await database.GetCollection<Exam>(Constants.Collections.Exam)
                     .InsertManyAsync(GetPredefinedExams(categoryId1));
@@ -58,10 +55,10 @@ public static class ExamMongoDbSeeding
     {
         return new List<Exam>()
         {
-            new Exam("Exam 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            new("Exam 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                 "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>",
                 5,
-                10,
+                "10:00",
                 GetPredefinedQuestions(categoryId1).Take(5).ToList(),
                 Level.Easy,
                 null,
@@ -69,10 +66,10 @@ public static class ExamMongoDbSeeding
                 true,
                 null,
                 null),
-            new Exam("Exam 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            new("Exam 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                 "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>",
                 5,
-                5,
+                "05:00",
                 GetPredefinedQuestions(categoryId1).Skip(5).Take(5).ToList(),
                 Level.Medium,
                 null,

@@ -9,5 +9,6 @@ public static class ServicesRegister
     {
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IExamService, ExamService>();
+        services.AddTransient<IExamResultService, ExamResultService>();
     }
 }

@@ -57,7 +57,7 @@ public class UpdateExamCommandHandler(
         itemToUpdate.Name = request.Name;
         itemToUpdate.ShortDesc = request.ShortDesc;
         itemToUpdate.Content = request.Content;
-        itemToUpdate.DurationInMinutes = request.DurationInMinutes;
+        itemToUpdate.Duration = request.Duration;
         itemToUpdate.Level = request.Level;
         itemToUpdate.IsTimeRestricted = request.IsTimeRestricted;
         itemToUpdate.NumberOfQuestionCorrectForPass = request.NumberOfQuestionCorrectForPass;
