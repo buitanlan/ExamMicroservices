@@ -1,4 +1,5 @@
-﻿using Examination.Shared.Exams;
+﻿using Examination.Shared.ExamResults;
+using Examination.Shared.Exams;
 using Examination.Shared.SeedWork;
 using Microsoft.AspNetCore.WebUtilities;
 using PortalApp.Services.Interfaces;
@@ -30,6 +31,19 @@ public class ExamService(IHttpClientFactory httpClientFactory, IHttpContextAcces
         string url = QueryHelpers.AddQueryString("/api/v1/Exams/paging", queryStringParam);
 
         var result = await GetAsync<PagedList<ExamDto>>(url, true);
+        return result;
+    }
+
+    public async Task<ApiResult<PagedList<ExamResultDto>>> GetExamResultsByUserIdPagingAsync(PagingParameters request)
+    {
+        var queryStringParam = new Dictionary<string, string>
+        {
+            ["pageIndex"] = request.PageNumber.ToString(),
+            ["pageSize"] = request.PageSize.ToString()
+        };
+        string url = QueryHelpers.AddQueryString("/api/v1/ExamResults/user", queryStringParam);
+
+        var result = await GetAsync<PagedList<ExamResultDto>>(url, true);
         return result;
     }
 }
