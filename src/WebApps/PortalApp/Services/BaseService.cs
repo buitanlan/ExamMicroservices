@@ -8,6 +8,8 @@ namespace PortalApp.Services;
 
 public class BaseService(IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor)
 {
+    private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
+
     public async Task<ApiResult<T>> GetAsync<T>(string url, bool isSecuredServie = false)
     {
         using var client = httpClientFactory.CreateClient("BackendApi");
@@ -17,7 +19,7 @@ public class BaseService(IHttpClientFactory httpClientFactory, IHttpContextAcces
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        return await client.GetFromJsonAsync<ApiResult<T>>(url);
+        return await client.GetFromJsonAsync<ApiResult<T>>(url, _options);
     }
 
     public async Task<ApiResult<TResponse>> PostAsync<TRequest, TResponse>(string url, TRequest requestContent,
@@ -42,7 +44,7 @@ public class BaseService(IHttpClientFactory httpClientFactory, IHttpContextAcces
 
         if (response.IsSuccessStatusCode)
         {
-            return JsonSerializer.Deserialize<ApiResult<TResponse>>(body);
+            return JsonSerializer.Deserialize<ApiResult<TResponse>>(body, _options);
         }
 
         throw new Exception(body);
@@ -68,7 +70,6 @@ public class BaseService(IHttpClientFactory httpClientFactory, IHttpContextAcces
         var response = await client.PutAsJsonAsync(url, httpContent);
         var body = await response.Content.ReadAsStringAsync();
 
-        return JsonSerializer.Deserialize<ApiResult<bool>>(body,
-            new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return JsonSerializer.Deserialize<ApiResult<bool>>(body, _options);
     }
 }

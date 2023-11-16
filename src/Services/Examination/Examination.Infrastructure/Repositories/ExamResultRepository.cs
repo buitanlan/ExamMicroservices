@@ -14,9 +14,9 @@ public class ExamResultRepository(
     : BaseRepository<ExamResult>(mongoClient, clientSessionHandle, settings, mediator,
         Constants.Collections.ExamResult), IExamResultRepository
 {
-    public async Task<ExamResult> GetDetails(string userId, string examId)
+    public async Task<ExamResult> GetDetails(string id)
     {
-        var filter = Builders<ExamResult>.Filter.Where(s => s.ExamId == examId && s.UserId == userId);
+        var filter = Builders<ExamResult>.Filter.Where(s => s.Id == id);
         return await Collection.Find(filter).FirstOrDefaultAsync();
     }
 }
