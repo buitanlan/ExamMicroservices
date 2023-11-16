@@ -34,7 +34,7 @@ public class StartExamCommandHandler(
                 x.Content,
                 x.QuestionType,
                 x.Level,
-                x.Answers.Select(a => new AnswerResult(a.Id, a.Content, null)).ToList(),
+                x.Answers.Select(a => new AnswerResult(a.Id, a.Content, null, a.IsCorrect)).ToList(),
                 x.Explain,
                 null))
             .ToList(); ;

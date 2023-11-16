@@ -8,12 +8,15 @@ public class AnswerResult : Entity
 {
     public AnswerResult() {}
 
-    public AnswerResult(string id, string content, bool? userChosen)
-       =>  (Id, Content, UserChosen) = (id, content, userChosen);
+    public AnswerResult(string id, string content, bool? userChosen, bool isCorrect)
+       =>  (Id, Content, UserChosen, IsCorrect) = (id, content, userChosen, isCorrect);
 
     [BsonElement("content")]
     public string Content { get; set; }
 
     [BsonElement("userChosen")]
     public bool? UserChosen { get; set; }
+
+    [BsonElement("isCorrect")]
+    public bool IsCorrect { get; set; }
 }
