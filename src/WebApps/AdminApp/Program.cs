@@ -22,6 +22,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddScoped<IExamService, ExamService>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IExamResultService, ExamResultService>();
+
 
 var levelSwitch = new LoggingLevelSwitch();
 Log.Logger = new LoggerConfiguration()
