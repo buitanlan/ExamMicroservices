@@ -81,23 +81,23 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "IdentityServer.API", Version = "v1" });
 });
-builder.Services.AddHealthChecks()
-    .AddCheck("self", () => HealthCheckResult.Healthy())
-    .AddNpgSql(
-        connectionString,
-        name: "IdentityDB-check",
-        tags: new[] { "identitydb" });
-
-
-builder.Services.AddHealthChecksUI(opt =>
-{
-    opt.SetEvaluationTimeInSeconds(15); //time in seconds between check
-    opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
-    opt.SetApiMaxActiveRequests(1); //api requests concurrency
-
-    opt.AddHealthCheckEndpoint("Identity API", "/hc"); //map health check api
-})
-.AddInMemoryStorage();
+// builder.Services.AddHealthChecks()
+//     .AddCheck("self", () => HealthCheckResult.Healthy())
+//     .AddNpgSql(
+//         connectionString,
+//         name: "IdentityDB-check",
+//         tags: new[] { "identitydb" });
+//
+//
+// builder.Services.AddHealthChecksUI(opt =>
+// {
+//     opt.SetEvaluationTimeInSeconds(15); //time in seconds between check
+//     opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
+//     opt.SetApiMaxActiveRequests(1); //api requests concurrency
+//
+//     opt.AddHealthCheckEndpoint("Identity API", "/hc"); //map health check api
+// })
+// .AddInMemoryStorage();
 
 
 
@@ -147,35 +147,35 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 
-app.MapHealthChecks("/hc", new HealthCheckOptions()
-{
-    Predicate = _ => true,
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
+// app.MapHealthChecks("/hc", new HealthCheckOptions()
+// {
+//     Predicate = _ => true,
+//     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+// });
+//
+// app.MapHealthChecksUI(options => options.UIPath = "/hc-ui");
+//
+// app.MapHealthChecks("/liveness", new HealthCheckOptions
+// {
+//     Predicate = r => r.Name.Contains("self")
+// });
 
-app.MapHealthChecksUI(options => options.UIPath = "/hc-ui");
-
-app.MapHealthChecks("/liveness", new HealthCheckOptions
-{
-    Predicate = r => r.Name.Contains("self")
-});
-
-app.MapHealthChecks("/hc-details",
-    new HealthCheckOptions
-    {
-        ResponseWriter = async (context, report) =>
-        {
-            var result = JsonSerializer.Serialize(
-                new
-                {
-                    status = report.Status.ToString(),
-                    monitors = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
-                });
-            context.Response.ContentType = MediaTypeNames.Application.Json;
-            await context.Response.WriteAsync(result);
-        }
-    }
-);
+// app.MapHealthChecks("/hc-details",
+//     new HealthCheckOptions
+//     {
+//         ResponseWriter = async (context, report) =>
+//         {
+//             var result = JsonSerializer.Serialize(
+//                 new
+//                 {
+//                     status = report.Status.ToString(),
+//                     monitors = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
+//                 });
+//             context.Response.ContentType = MediaTypeNames.Application.Json;
+//             await context.Response.WriteAsync(result);
+//         }
+//     }
+// );
 
 app.MapControllers();
 
