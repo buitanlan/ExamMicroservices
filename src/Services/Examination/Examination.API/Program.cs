@@ -37,7 +37,7 @@ var identityUrl = builder.Configuration.GetValue<string>("IdentityUrl");
 
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongodbConnectionString));
 builder.Services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
-builder.Services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); });
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddMediatR(cfg=> cfg.RegisterServicesFromAssemblies(typeof(StartExamCommandHandler).Assembly));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(c =>
