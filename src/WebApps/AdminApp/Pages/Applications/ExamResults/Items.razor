@@ -84,10 +84,10 @@
     public bool loading = false;
 
     private string DeleteId { set; get; }
-    private List<ExamResultDto> Elements = new List<ExamResultDto>();
-    public MetaData MetaData { get; set; } = new MetaData();
+    private List<ExamResultDto> Elements = new();
+    public MetaData MetaData { get; set; } = new();
 
-    private ExamResultSearch SearchModel = new ExamResultSearch();
+    private ExamResultSearch SearchModel = new();
 
 
     protected override async Task OnInitializedAsync()

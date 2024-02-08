@@ -5,7 +5,4 @@ using Skoruba.Duende.IdentityServer.Admin.BusinessLogic.Identity.Dtos.Identity;
 
 namespace IdentityServer.Shared.Dtos.Identity;
 
-public class IdentityUserClaimDto : UserClaimDto<string>
-{
-        
-}
+public class IdentityUserClaimDto : UserClaimDto<string>;

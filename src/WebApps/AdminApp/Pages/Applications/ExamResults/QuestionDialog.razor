@@ -45,7 +45,7 @@
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-    [Parameter] public List<QuestionResultDto> Questions { get; set; } = new List<QuestionResultDto>();
+    [Parameter] public List<QuestionResultDto> Questions { get; set; } = new();
 
     private void Cancel()
     {

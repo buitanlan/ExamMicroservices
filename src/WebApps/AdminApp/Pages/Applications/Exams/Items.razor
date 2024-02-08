@@ -94,11 +94,11 @@
     public bool loading = false;
 
     private string DeleteId { set; get; }
-    private List<ExamDto> Elements = new List<ExamDto>();
-    public MetaData MetaData { get; set; } = new MetaData();
+    private List<ExamDto> Elements = new();
+    public MetaData MetaData { get; set; } = new();
 
-    private ExamSearch SearchModel = new ExamSearch();
-    private List<CategoryDto> Categories = new List<CategoryDto>();
+    private ExamSearch SearchModel = new();
+    private List<CategoryDto> Categories = new();
 
 
     protected override async Task OnInitializedAsync()
@@ -116,10 +116,12 @@
     public async Task OnDeleteTask(string deleteId)
     {
         DeleteId = deleteId;
-        var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
-        parameters.Add("ButtonText", "Delete");
-        parameters.Add("Color", Color.Error);
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Do you really want to delete these records? This process cannot be undone." },
+            { "ButtonText", "Delete" },
+            { "Color", Color.Error }
+        };
 
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
 

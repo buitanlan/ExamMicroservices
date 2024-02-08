@@ -34,7 +34,7 @@ public class IdentityProviderApiMapperProfile : Profile
         IValueConverter<Dictionary<int, IdentityProviderPropertyDto>, Dictionary<string, string>>,
         IValueConverter<Dictionary<string, string>, Dictionary<int, IdentityProviderPropertyDto>>
     {
-        public static PropertiesConverter Converter = new PropertiesConverter();
+        public static PropertiesConverter Converter = new();
 
         public Dictionary<string, string> Convert(Dictionary<int, IdentityProviderPropertyDto> sourceMember, ResolutionContext context)
         {

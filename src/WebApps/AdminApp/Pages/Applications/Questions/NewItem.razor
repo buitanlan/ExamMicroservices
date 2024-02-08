@@ -33,7 +33,7 @@
                 </MudRadioGroup>
 
                 <MudSelect Label="Category" @bind-Value="model.CategoryId" Required="true" RequiredError="Category is required"
-                           OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Category" AdornmentColor="Color.Primary">
+                           AnchorOrigin="Origin.BottomCenter" AdornmentIcon="@Icons.Material.Filled.Category" AdornmentColor="Color.Primary">
                     @foreach (var item in categories)
                     {
                         <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
@@ -88,7 +88,7 @@
     List<CategoryDto> categories = new();
     List<AnswerDto> answers = new();
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         var result = await CategoryService.GetAllCategoriesAsync();
         if (result.IsSucceed)
@@ -137,10 +137,12 @@
 
     public async Task OnDelete(Guid clientId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
-        parameters.Add("ButtonText", "Delete");
-        parameters.Add("Color", Color.Error);
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Do you really want to delete these records? This process cannot be undone." },
+            { "ButtonText", "Delete" },
+            { "Color", Color.Error }
+        };
 
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
 

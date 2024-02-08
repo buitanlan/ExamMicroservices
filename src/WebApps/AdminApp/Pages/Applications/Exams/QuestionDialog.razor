@@ -84,16 +84,16 @@
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-    [Parameter] public List<QuestionDto> Questions { get; set; } = new List<QuestionDto>();
+    [Parameter] public List<QuestionDto> Questions { get; set; } = new();
     [Parameter] public HashSet<QuestionDto> SelectedQuestions { get; set; }
 
-    public MetaData MetaData { get; set; } = new MetaData();
-    private List<CategoryDto> Categories = new List<CategoryDto>();
+    public MetaData MetaData { get; set; } = new();
+    private List<CategoryDto> Categories = new();
 
-    public QuestionSearch QuestionSearch = new QuestionSearch();
+    public QuestionSearch QuestionSearch = new();
     public bool loading = false;
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         await FillCategories();
         await FillData();

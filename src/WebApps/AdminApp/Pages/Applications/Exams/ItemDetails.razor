@@ -3,10 +3,8 @@
 @using Examination.Shared.Exams
 @using Examination.Shared.Categories
 @using Examination.Shared.Enums
-@using Microsoft.Extensions.Logging
 @inject IExamService ExamService
 @inject ICategoryService CategoryService
-@inject ILogger<NewItem> Logger
 @inject ISnackbar Snackbar
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
@@ -49,7 +47,7 @@
                 </MudRadioGroup>
 
                 <MudSelect Label="Category" @bind-Value="model.CategoryId" Required="true" RequiredError="Category is required"
-                           OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Category" AdornmentColor="Color.Primary">
+                           AnchorOrigin="Origin.BottomCenter" AdornmentIcon="@Icons.Material.Filled.Category" AdornmentColor="Color.Primary">
                     @foreach (var item in categories)
                     {
                         <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
@@ -96,11 +94,11 @@
     bool loading = false;
     [Parameter]
     public string Id { set; get; }
-    UpdateExamRequest model = new UpdateExamRequest();
-    List<CategoryDto> categories = new List<CategoryDto>();
-    HashSet<QuestionDto> questions = new HashSet<QuestionDto>();
+    UpdateExamRequest model = new();
+    List<CategoryDto> categories = new();
+    HashSet<QuestionDto> questions = new();
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         var categoryResult = await CategoryService.GetAllCategoriesAsync();
         var examResult = await ExamService.GetExamByIdAsync(Id);
@@ -160,10 +158,12 @@
 
     public async Task OnDelete(string id)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
-        parameters.Add("ButtonText", "Delete");
-        parameters.Add("Color", Color.Error);
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Do you really want to delete these records? This process cannot be undone." },
+            { "ButtonText", "Delete" },
+            { "Color", Color.Error }
+        };
 
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
 
